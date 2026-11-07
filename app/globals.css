@@ -298,3 +298,6 @@ input[type="range"].ks-range::-webkit-slider-thumb { width: var(--thumb, 20px); 
 html:has(#landing) { scroll-snap-type: y proximity; }
 @media (min-width: 1024px) { html:has(#landing) { scroll-snap-type: y mandatory; } }
 html:has(#landing) body { overflow-x: hidden; }
+/* Header hides its lockup while the intro plays, so the flying lockup lands on it */
+html[data-intro="playing"] #site-header { opacity: 0; transition: opacity 400ms var(--ease-out); }
+html[data-intro="done"] #site-header, #site-header { opacity: 1; transition: opacity 400ms var(--ease-out); }

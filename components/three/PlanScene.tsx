@@ -5,6 +5,7 @@
  * components invalidate while they animate. Night = moonlight + warm window light + lamp cones.
  */
 import { useEffect, useMemo, useRef, useState, type RefObject } from 'react';
+import './quiet';
 import * as THREE from 'three';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, Line } from '@react-three/drei';
@@ -35,14 +36,6 @@ export type PlanSceneProps = {
 };
 
 const UP = new THREE.Object3D();
-
-// R3F 9 still constructs a THREE.Clock internally; three r187 logs a deprecation on construction.
-// Keep the console clean without touching R3F: drop that one message only.
-if (typeof window !== 'undefined' && !(window as unknown as { __ksWarnPatched?: boolean }).__ksWarnPatched) {
-  (window as unknown as { __ksWarnPatched?: boolean }).__ksWarnPatched = true;
-  const orig = console.warn.bind(console);
-  console.warn = (...args: unknown[]) => { if (typeof args[0] === 'string' && args[0].startsWith('THREE.Clock: This module has been deprecated')) return; orig(...args); };
-}
 const tmpColor = new THREE.Color();
 
 export function PlanScene(props: PlanSceneProps) {
