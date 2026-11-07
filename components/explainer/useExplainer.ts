@@ -11,12 +11,12 @@ export type ExplainerPhase = 'idle' | 'playing' | 'done';
  * - `replay()` restarts from idle (bump `key` to remount animated children).
  * - Returning to a finished scene shows the finished state (phase stays done).
  */
-export function useExplainer({ active, durationMs, onDone }: { active: boolean; durationMs: number; onDone?: () => void }) {
-  const [phase, setPhase] = useState<ExplainerPhase>('idle');
-  const [fast, setFast] = useState(false);
+export function useExplainer({ active, durationMs, onDone, startDone = false }: { active: boolean; durationMs: number; onDone?: () => void; startDone?: boolean }) {
+  const [phase, setPhase] = useState<ExplainerPhase>(startDone ? 'done' : 'idle');
+  const [fast, setFast] = useState(startDone);
   const [key, setKey] = useState(0);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const started = useRef(false);
+  const started = useRef(startDone);
   const onDoneRef = useRef(onDone);
   onDoneRef.current = onDone;
 
@@ -33,7 +33,12 @@ export function useExplainer({ active, durationMs, onDone }: { active: boolean; 
     if (active && !started.current) {
       started.current = true;
       // small beat so the section transition lands first
-      timer.current = setTimeout(start, 350);
+      const pending = setTimeout(() => { timer.current = null; start(); }, 350);
+      timer.current = pending;
+      return () => {
+        // cancelled before it started (StrictMode double-mount, or the section left early): allow a restart
+        if (timer.current === pending) { clearTimeout(pending); timer.current = null; started.current = false; }
+      };
     }
     return clear;
   }, [active, start]);

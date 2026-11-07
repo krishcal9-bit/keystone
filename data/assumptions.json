@@ -22,7 +22,7 @@
     "stories": 3,
     "landSqftPerUnit": 750,
     "capOverMinimum": 1.1,
-    "note": "Stacked flats: three stories of 850 sq ft units; ~750 sq ft of land per unit (about 58 homes per acre). Practical count is capped at 1.1\u00d7 the SB 4 minimum to keep projects at Habitat scale."
+    "note": "Stacked flats: three stories of 850 sq ft units; ~750 sq ft of land per unit (about 58 homes per acre). Practical count is capped at 1.1× the SB 4 minimum to keep projects at Habitat scale."
   },
   "peoplePerHousehold": {
     "value": 3.4,
@@ -54,7 +54,7 @@
     "ownershipDeedYears": 45,
     "rentalDeedYears": 55,
     "extraStoriesAllowed": 1,
-    "note": "Objective standards from Gov. Code \u00a7 65913.16 as summarized in the HCD SB 4 fact sheet."
+    "note": "Objective standards from Gov. Code § 65913.16 as summarized in the HCD SB 4 fact sheet."
   },
   "brief": {
     "source": "Claude Impact Lab challenge brief",
@@ -128,6 +128,33 @@
     "partnerLandPerHome": {
       "value": 0,
       "note": "Partner land via ground lease or donation: the congregation keeps ownership; Habitat does not buy at market."
+    }
+  },
+  "comparison": {
+    "_note": "Inputs for the \"Searching vs. waiting\" comparison (lib/comparison.ts). Estimates are labelled as such in the UI and editable by the user.",
+    "cityOffersPerYear": {
+      "value": 1,
+      "source": "Habitat OC estimate"
+    },
+    "manualVetDays": {
+      "value": 3,
+      "source": "estimate: pull parcel records, zoning, aerials, eligibility by hand"
+    },
+    "marketLandPerAcre": {
+      "value": 3000000,
+      "source": "illustrative assumption; OC land prices vary widely by site"
+    },
+    "sb4HomesPerAcre": {
+      "value": 30,
+      "source": "SB 4 minimum density in a metropolitan county (HCD SB 4 fact sheet)"
+    },
+    "defaultVetMinutes": {
+      "value": 3,
+      "source": "default until the app measures a real Site Detail to brief timing"
+    },
+    "rand": {
+      "text": "California projects take over 4 years from start to finish, and approvals take about twice as long as in Texas (RAND, 2025). SB 4 sites skip discretionary review and CEQA.",
+      "source": "RAND Corporation, 2025"
     }
   }
 }

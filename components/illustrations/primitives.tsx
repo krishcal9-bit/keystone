@@ -1,4 +1,3 @@
-'use client';
 /**
  * Illustration primitives. Every primitive draws in local coordinates with the ground line at y = 0
  * and grows upward (negative y). Light comes from the top-left: left/top faces are light, right faces are shaded.

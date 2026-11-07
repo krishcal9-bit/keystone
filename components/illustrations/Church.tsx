@@ -1,4 +1,3 @@
-'use client';
 import { palette as P, shade } from '@/lib/illustrationPalette';
 import { Window, Door, Facade, GableRoof, ContactShadow, Bush } from './primitives';
 

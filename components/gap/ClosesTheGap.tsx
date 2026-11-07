@@ -3,7 +3,7 @@
  * "Closes the gap" panel: per-home cost stack for this site, today vs with Keystone, against what the
  * family can pay plus other sources. Every figure is an illustrative assumption (data/assumptions.json).
  */
-import { useMemo, useState } from 'react';
+import { memo, useMemo, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import type { Parcel } from '@/lib/sb4';
 import { gapModel, fmtMoney, type Stack } from '@/lib/gap';
@@ -15,7 +15,7 @@ import { AnimatedNumber } from '@/components/ui/AnimatedNumber';
 
 const COLORS: Record<string, string> = { land: 'var(--pine)', design: '#8FA39A', permits: 'var(--brass)', build: '#3C4A52' };
 
-export function ClosesTheGap({ parcel, keepSpaces, homes, compact = false }: { parcel: Parcel; keepSpaces: number; homes?: number; compact?: boolean }) {
+function ClosesTheGapInner({ parcel, keepSpaces, homes, compact = false }: { parcel: Parcel; keepSpaces: number; homes?: number; compact?: boolean }) {
   const { t } = useT();
   const reduced = useReducedMotion();
   const tiers = assumptions.gap.habitatTiers;
@@ -97,3 +97,5 @@ function Bar({ label, stack, max, tr, t, accent = false, closes, gap }: { label:
     </div>
   );
 }
+
+export const ClosesTheGap = memo(ClosesTheGapInner);

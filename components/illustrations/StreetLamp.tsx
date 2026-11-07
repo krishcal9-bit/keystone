@@ -1,4 +1,3 @@
-'use client';
 import { palette as P } from '@/lib/illustrationPalette';
 import { ContactShadow, T } from './primitives';
 
@@ -14,7 +13,7 @@ export function StreetLamp({ x = 0, y = 0, scale = 1, on = false, index = 0, fli
     <g transform={`translate(${x} ${y}) scale(${scale})`} data-lamp data-on={on ? 'true' : 'false'}>
       <ContactShadow w={14} h={3.5} />
       {/* light cone */}
-      <g className={T} style={{ opacity: on ? 1 : 0, transitionDelay: `${delay}ms`, animation: on && flicker ? 'ks-flicker 420ms steps(1) 1' : undefined }}>
+      <g className={`${T} ${on ? 'lamp-on' : ''}`} style={{ opacity: on ? 1 : 0, transitionDelay: `${delay}ms`, ['--d' as string]: `${delay}ms`, animation: on && flicker ? `ks-flicker 420ms steps(1) 1 ${delay}ms` : undefined }}>
         <path d={`M-4 ${-height + 4} L-54 0 L54 0 L4 ${-height + 4} Z`} fill="url(#ks-lamp-cone)" />
         <ellipse cx={0} cy={0} rx={54} ry={9} fill={P.windowLit} opacity={0.22} />
       </g>

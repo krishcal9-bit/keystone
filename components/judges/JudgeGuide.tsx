@@ -13,6 +13,7 @@ import { startTour } from '@/lib/tour';
 import { AnimatedNumber } from '@/components/ui/AnimatedNumber';
 import { Button, ButtonLink } from '@/components/ui/Button';
 import { LaneHero } from './LaneHero';
+import { ComparisonCompact } from '@/components/comparison/ComparisonCompact';
 
 type Row = { id: string; c: DictKey; f: DictKey; href: string };
 const ROWS: Row[] = [
@@ -85,6 +86,12 @@ export function JudgeGuide() {
               label={t('judges.stat.pay')} answer={t('judges.answer.pay')} answerLabel={t('judges.keystoneAnswer')} />
           </dl>
           <p className="mt-6 text-[13px] leading-[18px] text-ink-2">{BRIEF_SOURCE}</p>
+        </motion.section>
+
+        {/* searching vs. waiting */}
+        <motion.section {...rise(4)} className="mt-12 border-t border-line pt-8" aria-labelledby="judges-cmp" data-testid="judges-comparison">
+          <h2 id="judges-cmp" className="font-sans text-[15px] leading-[22px] font-semibold text-ink-2 tracking-normal">{t('cmp.title')}</h2>
+          <ComparisonCompact className="mt-4" />
         </motion.section>
 
         {/* challenge → feature table */}

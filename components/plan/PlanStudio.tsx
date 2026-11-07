@@ -1,14 +1,14 @@
 'use client';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
+import { TransitionLink } from '@/components/ui/TransitionLink';
 import { motion, useReducedMotion } from 'motion/react';
 import type { Parcel, UnitType } from '@/lib/sb4';
 import { defaultKeepSpaces, unitCapacity, buildableArea } from '@/lib/sb4';
 import { buildPlanModel, type PlanOptions } from '@/lib/planModel';
 import { useT } from '@/lib/i18n';
 import { useTheme } from '@/lib/theme';
-import { spring, ease, dur } from '@/lib/motion';
+import { ease, dur } from '@/lib/motion';
 import { Button } from '@/components/ui/Button';
 import { Segmented } from '@/components/ui/Segmented';
 import { Switch } from '@/components/ui/Switch';
@@ -43,8 +43,19 @@ export function PlanStudio({ parcel, initialKeep }: { parcel: Parcel; initialKee
   const model = useMemo(() => buildPlanModel(parcel, opts), [parcel, opts]);
   const draftCap = useMemo(() => unitCapacity(buildableArea(parcel, draft.keepSpaces).acres, parcel, draft.unitType), [parcel, draft]);
   const [fine, setFine] = useState(false);
+  const [onScreen, setOnScreen] = useState(true);
+  const viewportRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { setGl(webglOk() && !reduced); setFine(window.matchMedia('(hover: hover) and (pointer: fine)').matches); }, [reduced]);
+  // Render frames only while the viewport is on screen and the tab is visible (one WebGL context, no idle rAF off screen)
+  useEffect(() => {
+    const el = viewportRef.current; if (!el) return;
+    const io = new IntersectionObserver(([e]) => setOnScreen(e.isIntersecting && document.visibilityState === 'visible'), { threshold: 0.05 });
+    io.observe(el);
+    const vis = () => setOnScreen(document.visibilityState === 'visible' && (el.getBoundingClientRect().bottom > 0));
+    document.addEventListener('visibilitychange', vis);
+    return () => { io.disconnect(); document.removeEventListener('visibilitychange', vis); };
+  }, []);
 
   const generate = useCallback(() => {
     setOpts({ ...draft, targetUnits: draft.targetUnits });
@@ -98,82 +109,85 @@ export function PlanStudio({ parcel, initialKeep }: { parcel: Parcel; initialKee
   const densityOk = model.meetsMinimum;
 
   return (
-    <div className="pt-16 min-h-svh flex flex-col">
-      <div className="mx-auto w-full max-w-[1440px] px-5 md:px-10 lg:px-20 pt-6 pb-10 flex-1 flex flex-col gap-4">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <nav aria-label="Breadcrumb" className="text-[13px] text-ink-2 mb-1"><Link href="/sites" className="hover:text-ink">{t('sites.title')}</Link> <span className="mx-1">/</span> <Link href={`/sites/${parcel.id}`} className="hover:text-ink">{parcel.displayName}</Link></nav>
-            <div className="flex items-center gap-3"><h1 className="headline-md">{t('plan.title')}</h1><SampleDataLabel /></div>
-            <p className="text-[14px] text-pine font-medium mt-1" data-testid="lane-line">{t('lane.plan')}</p>
+    <div className="relative pt-16 min-h-svh" data-testid="plan-page">
+      {/* the 3D scene fills the page */}
+      <div ref={viewportRef} className="absolute inset-x-0 top-16 bottom-0 overflow-hidden vt-site-focus" data-testid="plan-viewport">
+        <div className={`absolute inset-0 transition-opacity duration-[400ms] ${fuse ? 'opacity-80' : 'opacity-100'}`} style={{ background: night ? 'linear-gradient(#0E1A2B, #223650 70%, #13201A)' : 'linear-gradient(#DCE8EE, #F6F7F5 60%, #C9D7CC)' }}>
+          {gl === true && (
+            <PlanScene model={model} showPlan={showPlan} sunHour={sun} night={night} view={view} buildKey={buildKey} onBuildEnd={() => setBuilding(false)} interactive cursorLight={fine} frameloop={onScreen ? 'always' : 'never'} onCanvas={(el) => { canvas.current = el; }} />
+          )}
+          {gl === false && (
+            <div className="absolute inset-0 p-6 lg:pl-[440px] flex flex-col">
+              <PlanDiagram2D model={model} night={night} showPlan={showPlan} className="flex-1" />
+              <p className="text-[12px] text-ink-2 mt-2">{t('plan.webgl')}</p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* floating paper panels */}
+      <div className="relative mx-auto w-full max-w-[1440px] px-5 md:px-10 lg:px-20 pt-5 pb-6 min-h-[calc(100svh-64px)] flex flex-col pointer-events-none">
+        <div className="flex flex-wrap items-start justify-between gap-3 pointer-events-auto">
+          <div className="paper px-4 py-3">
+            <nav aria-label="Breadcrumb" className="text-[13px] text-ink-2 mb-0.5"><TransitionLink href="/sites" dir="back" className="hover:text-ink">{t('sites.title')}</TransitionLink> <span className="mx-1">/</span> <TransitionLink href={`/sites/${parcel.id}`} dir="back" className="hover:text-ink">{parcel.displayName}</TransitionLink></nav>
+            <div className="flex items-center gap-3"><h1 className="headline-md !text-[32px]">{t('plan.title')}</h1><SampleDataLabel /></div>
+            <p className="text-[13px] text-pine font-medium mt-0.5" data-testid="lane-line">{t('lane.plan')}</p>
           </div>
-          <div className="flex items-center gap-2">
-            <Button variant="secondary" size="sm" onClick={savePlan}>{t('plan.savePlan')}</Button>
-            <Button variant="secondary" size="sm" onClick={exportPng}>{t('plan.exportPng')}</Button>
-            <Button variant="secondary" size="sm" onClick={exportPdf}>{t('plan.exportPdf')}</Button>
+          <div className="flex items-center gap-2 paper p-1.5">
+            <Button variant="ghost" size="sm" onClick={savePlan}>{t('plan.savePlan')}</Button>
+            <Button variant="ghost" size="sm" onClick={exportPng}>{t('plan.exportPng')}</Button>
+            <Button variant="ghost" size="sm" onClick={exportPdf}>{t('plan.exportPdf')}</Button>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-4 flex-1 min-h-0">
-          {/* viewport */}
-          <div className="panel relative overflow-hidden min-h-[420px] lg:min-h-[640px] bg-paper" data-testid="plan-viewport">
-            <div className={`absolute inset-0 transition-[filter] duration-[400ms] ${fuse ? 'blur-[3px]' : 'blur-0'}`} style={{ background: night ? 'linear-gradient(#0E1A2B, #223650 70%, #13201A)' : 'linear-gradient(#DCE8EE, #F6F7F5 60%, #C9D7CC)' }}>
-              {gl === true && (
-                <PlanScene model={model} showPlan={showPlan} sunHour={sun} night={night} view={view} buildKey={buildKey} onBuildEnd={() => setBuilding(false)} interactive cursorLight={fine} onCanvas={(el) => { canvas.current = el; }} />
-              )}
-              {gl === false && (
-                <div className="absolute inset-0 p-4 flex flex-col">
-                  <PlanDiagram2D model={model} night={night} showPlan={showPlan} className="flex-1" />
-                  <p className="text-[12px] text-ink-2 mt-2">{t('plan.webgl')}</p>
-                </div>
-              )}
-            </div>
-            {/* overlays */}
-            <div className="absolute top-3 left-3 flex items-center gap-2">
-              <Segmented ariaLabel={t('plan.before')} size="sm" value={showPlan ? 'after' : 'before'} onChange={(v) => toggleBefore(v)} options={[{ value: 'before', label: t('plan.before') }, { value: 'after', label: t('plan.after') }]} />
-            </div>
-            <div className="absolute top-3 right-3">
-              <Segmented ariaLabel={t('plan.view')} size="sm" value={view} onChange={setView} options={[{ value: 'aerial', label: t('plan.aerial') }, { value: 'threeQuarter', label: t('plan.threeQuarter') }, { value: 'street', label: t('plan.street') }]} />
-            </div>
-            <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-4 pointer-events-none">
-              <div className="pointer-events-auto panel px-3 py-2 flex items-center gap-3 min-w-[260px]">
-                <SunIcon hour={sun} />
-                <label className="flex-1 flex flex-col">
-                  <span className="text-[12px] text-ink-2 flex justify-between"><span>{t('plan.sun')}</span><span className="tabular-nums text-ink">{fmtHour(sun)}</span></span>
-                  <input type="range" className="ks-range !h-8" min={6} max={20} step={0.25} value={sun} onChange={(e) => setSun(Number(e.target.value))} style={{ ['--fill' as string]: `${((sun - 6) / 14) * 100}%` }} aria-label={t('plan.sun')} data-testid="sun-slider" />
-                </label>
-              </div>
-              <motion.div layout className="pointer-events-auto panel px-3 py-2 text-right" transition={spring.snappy} data-testid="plan-status">
-                <div className="text-[22px] font-semibold tabular-nums leading-7 text-ink"><AnimatedNumber value={model.placed} /> <span className="text-[13px] font-medium text-ink-2">{t('plan.unitsPlaced').toLowerCase()}</span></div>
-                <div className={`text-[12px] ${densityOk ? 'text-pine' : 'text-signal-amber'}`}>{densityOk ? t('plan.meets') : t('plan.short', { n: model.shortfall })} · {t('plan.minimum')} {model.minimumUnits}</div>
-              </motion.div>
-            </div>
-          </div>
+        <div className="mt-3 flex items-center justify-between gap-2 pointer-events-auto">
+          <Segmented ariaLabel={t('plan.before')} size="sm" value={showPlan ? 'after' : 'before'} onChange={(v) => toggleBefore(v)} options={[{ value: 'before', label: t('plan.before') }, { value: 'after', label: t('plan.after') }]} />
+          <Segmented ariaLabel={t('plan.view')} size="sm" value={view} onChange={setView} options={[{ value: 'aerial', label: t('plan.aerial') }, { value: 'threeQuarter', label: t('plan.threeQuarter') }, { value: 'street', label: t('plan.street') }]} />
+        </div>
 
+        <div className="mt-auto pt-4 grid grid-cols-1 lg:grid-cols-[360px_1fr_340px] gap-3 items-end">
           {/* controls */}
-          <aside className="panel p-4 flex flex-col gap-4" data-testid="plan-controls">
+          <aside className="paper p-4 flex flex-col gap-3 pointer-events-auto" data-testid="plan-controls">
             <div>
               <span className="text-[13px] font-medium text-ink-2 block mb-1.5">{t('plan.unitType')}</span>
-              <Segmented ariaLabel={t('plan.unitType')} value={draft.unitType} onChange={(v: UnitType) => setDraft((d) => ({ ...d, unitType: v, targetUnits: undefined }))} options={[{ value: 'townhome', label: t('plan.townhomes') }, { value: 'flat', label: t('plan.flats') }]} className="w-full [&>button]:flex-1" />
+              <Segmented ariaLabel={t('plan.unitType')} size="sm" value={draft.unitType} onChange={(v: UnitType) => setDraft((d) => ({ ...d, unitType: v, targetUnits: undefined }))} options={[{ value: 'townhome', label: t('plan.townhomes') }, { value: 'flat', label: t('plan.flats') }]} className="w-full [&>button]:flex-1" />
             </div>
             <Range label={t('plan.targetUnits')} value={draft.targetUnits ?? draftCap.practicalUnits} min={1} max={Math.max(2, Math.ceil(draftCap.practicalUnits * 1.6))} onChange={(v) => setDraft((d) => ({ ...d, targetUnits: v }))} testId="target-units" />
             <Range label={t('plan.parkingKept')} value={draft.keepSpaces} min={0} max={parcel.parkingSpaces} onChange={(v) => setDraft((d) => ({ ...d, keepSpaces: v }))} suffix={` / ${parcel.parkingSpaces}`} testId="keep-spaces" />
-            <Switch checked={draft.garden} onChange={(v) => setDraft((d) => ({ ...d, garden: v }))} label={t('plan.garden')} />
-            <Button onClick={generate} loading={building && !reduced && gl === true} data-testid="generate">{buildKey > 1 ? t('plan.regenerate') : t('plan.generate')}</Button>
-            <div className="border-t border-line pt-3 grid grid-cols-2 gap-y-3 gap-x-3">
+            <div className="flex items-center justify-between gap-3">
+              <Switch checked={draft.garden} onChange={(v) => setDraft((d) => ({ ...d, garden: v }))} label={t('plan.garden')} />
+              <Button size="sm" onClick={generate} loading={building && !reduced && gl === true} data-testid="generate">{buildKey > 1 ? t('plan.regenerate') : t('plan.generate')}</Button>
+            </div>
+          </aside>
+
+          {/* sun */}
+          <div className="paper px-3 py-2 flex items-center gap-3 pointer-events-auto lg:max-w-[320px] lg:justify-self-center">
+            <SunIcon hour={sun} />
+            <label className="flex-1 flex flex-col">
+              <span className="text-[12px] text-ink-2 flex justify-between"><span>{t('plan.sun')}</span><span className="tabular-nums text-ink">{fmtHour(sun)}</span></span>
+              <input type="range" className="ks-range !h-8" min={6} max={20} step={0.25} value={sun} onChange={(e) => setSun(Number(e.target.value))} style={{ ['--fill' as string]: `${((sun - 6) / 14) * 100}%` }} aria-label={t('plan.sun')} data-testid="sun-slider" />
+            </label>
+          </div>
+
+          {/* status */}
+          <div className="paper p-4 pointer-events-auto" data-testid="plan-status">
+            <div className="text-[26px] font-semibold tabular-nums leading-8 text-ink"><AnimatedNumber value={model.placed} /> <span className="text-[13px] font-medium text-ink-2">{t('plan.unitsPlaced').toLowerCase()}</span></div>
+            <div className={`text-[12px] ${densityOk ? 'text-pine' : 'text-signal-amber'}`}>{densityOk ? t('plan.meets') : t('plan.short', { n: model.shortfall })} · {t('plan.minimum')} {model.minimumUnits}</div>
+            <div className="mt-2 grid grid-cols-2 gap-y-2 gap-x-3 border-t border-line pt-2">
               <Num label={t('site.buildable')} value={model.buildable.acres} digits={2} />
-              <Num label={t('plan.minimum')} value={model.minimumUnits} />
-              <Num label={t('plan.unitsPlaced')} value={model.placed} accent />
               <Num label={t('site.people')} value={model.people} />
             </div>
-            <div className="flex flex-wrap gap-1.5 text-[12px]">
-              <Pill tone="neutral">{model.layout.rows} {t('plan.townhomes').toLowerCase() === 'townhomes' ? 'rows' : 'filas'}</Pill>
+            <div className="flex flex-wrap gap-1.5 text-[12px] mt-2">
               <Pill tone="neutral">{model.buildable.keptSpaces} {t('common.spaces')}</Pill>
               {model.layout.green && <Pill tone="pine">{t('plan.green')}</Pill>}
               {model.layout.garden && <Pill tone="brass">{t('plan.garden')}</Pill>}
             </div>
-            <p className="text-[12px] text-ink-2 mt-auto">{t('common.notLegal')}</p>
-          </aside>
+            <p className="text-[11px] text-ink-2 mt-2">{t('common.notLegal')}</p>
+          </div>
         </div>
+      </div>
+
+      <div className="relative mx-auto w-full max-w-[1440px] px-5 md:px-10 lg:px-20 pb-10">
         <ClosesTheGap parcel={parcel} keepSpaces={opts.keepSpaces} homes={model.placed} compact />
       </div>
     </div>
@@ -191,7 +205,7 @@ function Range({ label, value, min, max, onChange, suffix = '', testId }: { labe
 function Num({ label, value, digits = 0, accent = false }: { label: string; value: number; digits?: number; accent?: boolean }) {
   return (
     <div className="flex flex-col">
-      <span className={`text-[22px] leading-7 font-semibold tabular-nums ${accent ? 'text-pine' : 'text-ink'}`}><AnimatedNumber value={value} format={{ maximumFractionDigits: digits, minimumFractionDigits: digits }} /></span>
+      <span className={`text-[20px] leading-6 font-semibold tabular-nums ${accent ? 'text-pine' : 'text-ink'}`}><AnimatedNumber value={value} format={{ maximumFractionDigits: digits, minimumFractionDigits: digits }} /></span>
       <span className="text-[12px] text-ink-2">{label}</span>
     </div>
   );

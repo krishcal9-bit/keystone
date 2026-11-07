@@ -72,7 +72,15 @@ export type Warning = { id: string; label: string; detail: string };
 export type Eligibility = { eligible: boolean; reasons: Reason[]; warnings: Warning[] };
 
 const toDate = (d: string | Date) => (d instanceof Date ? d : new Date(d + (d.length === 10 ? 'T12:00:00Z' : '')));
-const fmtDate = (d: string) => new Date(d + 'T12:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+// One formatter, memoised per date: Intl is the slowest thing in the engine (≈0.4 ms a call), and the same
+// handful of dates is formatted for every parcel.
+const dateFmt = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+const fmtCache = new Map<string, string>();
+const fmtDate = (d: string) => {
+  let v = fmtCache.get(d);
+  if (v === undefined) { v = dateFmt.format(new Date(d + 'T12:00:00Z')); fmtCache.set(d, v); }
+  return v;
+};
 
 export function checkEligibility(parcel: Parcel, today: string | Date = new Date()): Eligibility {
   const now = toDate(today);

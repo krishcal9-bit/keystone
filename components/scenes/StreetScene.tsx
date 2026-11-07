@@ -1,10 +1,8 @@
-'use client';
 /**
  * Hero street scene: dusk Orange County street, edge to edge. Back: sky + hills + the mini OC map in the sky.
  * Mid: a church on the corner lot (its empty parking lot subtly highlighted) and six distinct homes with trees.
  * Front: sidewalk, street, lamps, cars, people. Ambient: one cloud drifts, trees sway (only while active).
  */
-import { motion } from 'motion/react';
 import type { SceneProps } from './types';
 import { palette as P } from '@/lib/illustrationPalette';
 import { Sky } from '@/components/illustrations/Sky';
@@ -18,9 +16,9 @@ import { Person } from '@/components/illustrations/Person';
 import { Fence } from '@/components/illustrations/primitives';
 import { COUNTY_PATH, COAST_PATH } from '@/components/map/ocGeo';
 import { parcels } from '@/lib/data';
-import { spring } from '@/lib/motion';
 
-export function StreetScene({ night, active, showMap = true, mapDelay = 0.2 }: SceneProps & { showMap?: boolean; mapDelay?: number }) {
+/** Hook-free so it can be server-rendered as static markup (see HeroStatic). */
+export function StreetScene({ night, active, showMap = true, mapDelay = 0.2 }: Pick<SceneProps, 'night' | 'active'> & { showMap?: boolean; mapDelay?: number }) {
   const W = 1440, H = 900;
   const ground = 548; // in the scaled layer (×1.35 → 740 px)
   const S = 1.35;
@@ -35,10 +33,10 @@ export function StreetScene({ night, active, showMap = true, mapDelay = 0.2 }: S
             <path d={COUNTY_PATH} fill={night ? '#1C2A25' : '#FFFFFF'} fillOpacity={night ? 0.7 : 0.55} stroke={night ? '#4FA585' : P.pine} strokeWidth={2} strokeOpacity={0.5} className="ks-t" />
             <path d={COAST_PATH} fill="none" stroke={night ? '#5F8AA6' : '#8FB4C7'} strokeWidth={4} strokeLinecap="round" />
             {parcels.map((p, i) => (
-              <motion.g key={p.id} initial={{ opacity: 0, scale: 0.6 }} animate={active ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.6 }} transition={{ ...spring.settle, delay: active ? mapDelay + i * 0.04 : 0 }} style={{ transformOrigin: `${p.mapX}px ${p.mapY}px` }}>
+              <g key={p.id} className="hero-mk" style={{ ['--d' as string]: `${(mapDelay + i * 0.04).toFixed(2)}s`, transformOrigin: `${p.mapX}px ${p.mapY}px` }}>
                 <circle cx={p.mapX} cy={p.mapY} r={16} fill={P.brassLight} opacity={0.25} />
                 <circle cx={p.mapX} cy={p.mapY} r={7} fill={p.ownerType === 'congregation' || p.ownerType === 'college' ? P.brass : P.stone} stroke={night ? '#0F1513' : '#FFFFFF'} strokeWidth={2} />
-              </motion.g>
+              </g>
             ))}
           </g>
         )}
@@ -55,8 +53,7 @@ export function StreetScene({ night, active, showMap = true, mapDelay = 0.2 }: S
         <g transform={`translate(470 ${ground})`}>
           <rect x={170} y={-14} width={230} height={14} fill={night ? P.asphaltDeep : P.asphalt} className="ks-t" />
           {[0, 1, 2, 3, 4, 5].map((i) => <rect key={i} x={180 + i * 38} y={-12} width={1.5} height={10} fill={P.paint} opacity={0.7} />)}
-          <motion.rect x={170} y={-18} width={230} height={20} rx={3} fill="none" stroke={P.brass} strokeWidth={2.5} strokeDasharray="8 6"
-            animate={active ? { opacity: [0.35, 0.9, 0.35] } : { opacity: 0.35 }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }} />
+          <rect x={170} y={-18} width={230} height={20} rx={3} fill="none" stroke={P.brass} strokeWidth={2.5} strokeDasharray="8 6" className="hero-lot-glow" />
           <Church x={0} y={0} night={night} scale={1} tower="steeple" />
         </g>
         <Tree x={880} y={ground + 2} kind="palm" scale={1.3} sway={active} seed={1} />

@@ -31,7 +31,7 @@ test.describe('landing', () => {
   test('Down arrow visits every section with no blank frames; header stays on top', async ({ page }) => {
     await gotoSkipIntro(page);
     const count = await page.locator('[data-section]').count();
-    expect(count).toBeGreaterThanOrEqual(9);
+    expect(count).toBeGreaterThanOrEqual(11);
     for (let i = 1; i < count; i++) {
       // a press during an auto-play sequence completes it; the next press moves on
       for (let attempt = 0; attempt < 3; attempt++) {
@@ -54,7 +54,8 @@ test.describe('landing', () => {
   test('auto-play section ends with labels visible; Down mid-sequence completes it', async ({ page }) => {
     await gotoSkipIntro(page);
     await page.keyboard.press('ArrowDown'); // section 1 explainer starts
-    await page.waitForTimeout(1200);
+    await expect(page.locator('[data-section="1"]')).toHaveAttribute('data-phase', 'playing', { timeout: 15_000 });
+    await page.waitForTimeout(600);
     await page.keyboard.press('ArrowDown'); // mid-sequence: completes instead of moving on
     await page.waitForTimeout(600);
     await expect(page.locator('[data-section="1"]')).toHaveAttribute('data-active', 'true');

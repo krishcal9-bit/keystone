@@ -157,6 +157,15 @@ input, textarea { caret-color: var(--pine); }
   border: 1px solid var(--line);
   border-radius: var(--radius-panel);
 }
+/* Floating paper over an illustrated scene: translucent surface, blur only on the panel itself. */
+.paper,
+[data-scene] .panel {
+  background: color-mix(in srgb, var(--surface) 84%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-panel);
+}
 .hairline { border-color: var(--line); }
 
 /* Press feedback (CSS fallback for non-motion elements) */
@@ -259,11 +268,6 @@ input[type="range"].ks-range:active::-moz-range-thumb { transform: scale(1.2); }
 }
 
 /* View transitions */
-@view-transition { navigation: auto; }
-::view-transition-old(root) { animation: 220ms var(--ease-out) both vt-fade-out; }
-::view-transition-new(root) { animation: 300ms var(--ease-out) both vt-fade-in; }
-@keyframes vt-fade-out { to { opacity: 0; } }
-@keyframes vt-fade-in { from { opacity: 0; } }
 .vt-lockup { view-transition-name: lockup; }
 ::view-transition-group(lockup) { animation-duration: 0s; }
 
@@ -289,10 +293,9 @@ input[type="range"].ks-range:active::-moz-range-thumb { transform: scale(1.2); }
 [data-ambient="off"] .ks-drift, [data-ambient="off"] [style*="ks-sway"], [data-ambient="off"] .ks-sprinkler { animation-play-state: paused; }
 
 /* ---------- Landing scene layers (parallax + section transitions) ---------- */
-.scene-layer-back, .scene-layer-mid, .scene-layer-front { will-change: transform; transition: transform 800ms var(--ease-in-out); }
-.scene-layer-back { transform: translate3d(calc(var(--px, 0px) * 0.15), calc(var(--py, 0px) * 0.15 + var(--shift, 0px) * 0.15), 0); }
-.scene-layer-mid { transform: translate3d(calc(var(--px, 0px) * 0.4), calc(var(--py, 0px) * 0.4 + var(--shift, 0px) * 0.4), 0); }
-.scene-layer-front { transform: translate3d(calc(var(--px, 0px) * 1), calc(var(--py, 0px) * 1 + var(--shift, 0px) * 1), 0); }
+/* The whole scene moves as one composited layer (SVG groups cannot be composited, so no per-group transforms). */
+.scene-shift { transform: translate3d(calc(var(--px, 0px) * 0.4), calc(var(--py, 0px) * 0.4 + var(--shift, 0px) * 0.6), 0); transition: transform 800ms var(--ease-in-out); will-change: transform; }
+section[data-active="false"] .scene-shift { will-change: auto; }
 .scene-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 input[type="range"].ks-range::-webkit-slider-thumb { width: var(--thumb, 20px); height: var(--thumb, 20px); margin-top: calc((4px - var(--thumb, 20px)) / 2); }
 html:has(#landing) { scroll-snap-type: y proximity; }
@@ -304,5 +307,36 @@ html[data-intro="done"] #site-header, #site-header { opacity: 1; transition: opa
 
 /* Entrance that runs at first paint (no JS dependency, keeps LCP early) */
 @keyframes ks-rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-.rise-in { animation: ks-rise 320ms var(--ease-out) both; }
+/* `backwards`, not `both`: a persisting transform would turn this wrapper into the containing block for every fixed child (the Site Finder map, the plan viewport). */
+.rise-in { animation: ks-rise 320ms var(--ease-out) backwards; }
 @media (prefers-reduced-motion: reduce) { .rise-in { animation: none; } }
+
+/* ---------- View Transitions: 300 ms, direction-aware, shared elements ---------- */
+::view-transition-old(root) { animation: 220ms var(--ease-out) both vt-out-fwd; }
+::view-transition-new(root) { animation: 300ms var(--ease-out) both vt-in-fwd; }
+html[data-nav-dir="back"]::view-transition-old(root) { animation-name: vt-out-back; }
+html[data-nav-dir="back"]::view-transition-new(root) { animation-name: vt-in-back; }
+@keyframes vt-out-fwd { to { opacity: 0; transform: translateX(-12px); } }
+@keyframes vt-in-fwd { from { opacity: 0; transform: translateX(12px); } }
+@keyframes vt-out-back { to { opacity: 0; transform: translateX(12px); } }
+@keyframes vt-in-back { from { opacity: 0; transform: translateX(-12px); } }
+::view-transition-group(site-focus) { animation-duration: 320ms; animation-timing-function: var(--ease-in-out); }
+::view-transition-old(site-focus), ::view-transition-new(site-focus) { animation-duration: 320ms; mix-blend-mode: normal; }
+.vt-site-focus { view-transition-name: site-focus; }
+@media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
+
+/* ---------- Static hero (server-rendered day + night) ---------- */
+.hero-static-night { display: none; }
+html[data-theme="dark"] .hero-static-day { display: none; }
+html[data-theme="dark"] .hero-static-night { display: block; }
+@keyframes hero-mk-in { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
+/* The closing scene (client-rendered StreetScene) keeps its CSS-driven markers, glow and lamps here. */
+.hero-mk { transform-box: fill-box; transform-origin: center; animation: hero-mk-in 520ms cubic-bezier(0.23,1,0.32,1) both; animation-delay: var(--d, 0s); }
+.hero-lot-glow { animation: hero-glow 4s ease-in-out infinite; }
+@keyframes hero-glow { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.9; } }
+.lamp-on { animation: lamp-on 600ms ease-out both; animation-delay: var(--d, 0ms); }
+@keyframes lamp-on { from { opacity: 0; } to { opacity: 1; } }
+[data-ambient="off"] .hero-lot-glow { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .hero-mk, .lamp-on, .hero-lot-glow { animation: none !important; opacity: 1; } }
+.intro-mk { opacity: 0; transform: scale(0.5); }
+[data-on="true"] .intro-mk { animation: hero-mk-in 450ms cubic-bezier(0.34,1.3,0.64,1) both; animation-delay: var(--d, 0ms); }

@@ -40,7 +40,7 @@ export function PlanMiniScene(props: SceneProps) {
       </svg>
       <div className="scene-layer-mid absolute inset-y-0 right-0 w-full lg:w-[64%]">
         {gl === true && playing && (
-          <PlanScene model={model} showPlan buildKey={buildKey} sunHour={10} night={props.night} view="threeQuarter" zoom={1.75} interactive={false} autoSunSweep speed={props.reduced ? 10 : ex.fast ? 3 : 1} onBuildEnd={() => setBuilt(model.placed)} />
+          <PlanScene model={model} showPlan buildKey={buildKey} sunHour={10} night={props.night} view="threeQuarter" zoom={1.75} interactive={false} frameloop={props.active && ex.phase === 'playing' ? 'always' : props.active ? 'demand' : 'never'} autoSunSweep speed={props.reduced ? 10 : ex.fast ? 3 : 1} onBuildEnd={() => setBuilt(model.placed)} />
         )}
         {gl === false && (
           <div className="absolute inset-0 p-10 lg:p-20 flex items-center"><div className="w-full aspect-[4/3] panel p-3 overflow-hidden"><PlanDiagram2D model={model} night={props.night} /></div></div>

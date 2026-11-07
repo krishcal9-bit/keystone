@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { PageShell } from '@/components/layout/PageShell';
 import { AerialBackdrop } from '@/components/scenes/AerialBackdrop';
+import { LightTable } from '@/components/scenes/LightTable';
 import { Button } from '@/components/ui/Button';
 import { Field, Input, Checkbox } from '@/components/ui/Field';
 import { Segmented } from '@/components/ui/Segmented';
@@ -187,18 +188,24 @@ export function ScanClient({ parcel }: { parcel: Parcel | null }) {
   const planHref = `/plan/${parcel?.id ?? 'oakfield-community-church'}`;
 
   return (
-    <PageShell title={t('scan.title')} lane={t('lane.scan')} subtitle={t('scan.subtitle')} backdrop={<AerialBackdrop night={theme === 'dark'} />} titleId="scan-title">
+    <PageShell title={t('scan.title')} lane={t('lane.scan')} subtitle={t('scan.subtitle')} backdrop={<AerialBackdrop night={theme === 'dark'} opacity={0.25} />} titleId="scan-title">
       <div data-testid="scan-page" className="contents" />
       <div className="grid gap-8 lg:grid-cols-12 lg:gap-10 items-start">
         <div className="lg:col-span-7 flex flex-col gap-5 min-w-0">
-          {image ? (
-            <ScanCanvas
-              image={image} polygons={polygons} onChange={setPolygons} scanning={phase === 'scanning' && beam}
-              revealKey={revealKey} showOverlay={phase === 'result'} flying={flying} run={run} metersAcross={metersAcross} manual={manual} locale={locale}
-            />
-          ) : (
-            <Dropzone onFile={loadFile} error={fileError} busy={busyFile} />
-          )}
+          {/* The image sits on a survey sheet over a light table; the sheet is purely decorative. */}
+          <div className="relative rounded-[14px] p-7 sm:p-9" data-testid="light-table">
+            <LightTable night={theme === 'dark'} />
+            <div className="relative">
+              {image ? (
+                <ScanCanvas
+                  image={image} polygons={polygons} onChange={setPolygons} scanning={phase === 'scanning' && beam}
+                  revealKey={revealKey} showOverlay={phase === 'result'} flying={flying} run={run} metersAcross={metersAcross} manual={manual} locale={locale}
+                />
+              ) : (
+                <Dropzone onFile={loadFile} error={fileError} busy={busyFile} />
+              )}
+            </div>
+          </div>
 
           {/* Scale + actions */}
           {image && (

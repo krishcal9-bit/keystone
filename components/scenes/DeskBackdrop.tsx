@@ -1,106 +1,119 @@
 'use client';
 /**
- * Pitch Kit backdrop: a warm desk seen from a chair. Wood desk edge, a brass-shaded lamp, two sheets of
- * paper, a mug and a pen. Rendered blurred (6px) at ~35% along the bottom of the page. The lamp's light
- * cone flickers on once at load (ks-flicker from globals.css) and glows stronger at night. This is the
- * only ambient motion on the page.
+ * Pitch Kit backdrop: a warm desk seen from the chair, filling the page. Wall across the top ~30 %,
+ * wood desk surface across the lower ~70 %, a brass-shaded lamp at top-right with a warm cone, a plant,
+ * a mug, a stack of paper and a pen. ~40 % opacity with a radial mask so edges fade. The lamp cone
+ * flickers on once at load (ks-flicker) and glows stronger at night: the only motion on the page.
+ * The letter (PaperSheet) stays the brightest object; nothing here is lighter than its paper.
  */
 import { palette as P, shade } from '@/lib/illustrationPalette';
 
 const T = 'ks-t';
+const W = 1440, H = 900, DESK = 270, FRONT = 830;
 
-export function DeskBackdrop({ night = false }: { night?: boolean }) {
+export function DeskBackdrop({ night = false, opacity = 0.4 }: { night?: boolean; opacity?: number }) {
   const wall = night ? P.nightHorizon : P.wallWarm;
   const wallLow = night ? shade(P.nightHorizon, 0.25) : P.wallWarmShade;
-  const deskTop = night ? shade(P.trunkLight, 0.35) : P.trunkLight;
-  const deskEdge = night ? shade(P.trunk, 0.3) : P.trunk;
-  const deskFront = night ? shade(P.trunk, 0.5) : shade(P.trunk, 0.18);
-  const coneOpacity = night ? 1 : 0.55;
-  const poolOpacity = night ? 0.55 : 0.28;
+  const deskTop = night ? shade(P.trunkLight, 0.4) : P.trunkLight;
+  const deskHi = night ? shade(P.trunkLight, 0.28) : '#9A7A5C';
+  const deskEdge = night ? shade(P.trunk, 0.35) : P.trunk;
+  const deskFront = night ? shade(P.trunk, 0.55) : shade(P.trunk, 0.18);
+  const paper = night ? P.wallShade : P.wall;
+  const paperShade = night ? P.wallDeep : P.wallShade;
+  const coneOpacity = night ? 1 : 0.5;
+  const poolOpacity = night ? 0.6 : 0.3;
+  const mask = 'radial-gradient(ellipse 74% 70% at 50% 52%, #000 40%, transparent 100%)';
 
   return (
     <div
-      className="absolute inset-x-0 bottom-0 h-[46%] min-h-[260px]"
-      style={{ filter: 'blur(6px)', opacity: 0.35, maskImage: 'linear-gradient(to bottom, transparent, #000 35%)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, #000 35%)' }}
+      className="absolute inset-0 pointer-events-none select-none"
+      style={{ opacity, maskImage: mask, WebkitMaskImage: mask }}
       aria-hidden
       data-backdrop="desk"
     >
-      <svg viewBox="0 0 1440 460" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" style={{ display: 'block' }}>
-        {/* wall + baseboard */}
-        <rect x="0" y="0" width="1440" height="300" fill={wall} className={T} />
-        <rect x="0" y="280" width="1440" height="20" fill={wallLow} className={T} />
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice" style={{ display: 'block' }}>
+        {/* wall, chair rail, baseboard */}
+        <rect x={0} y={0} width={W} height={DESK} fill={wall} className={T} />
+        <rect x={0} y={DESK - 36} width={W} height={36} fill={wallLow} className={T} />
+        <rect x={0} y={DESK - 38} width={W} height={4} fill={night ? shade(P.wallWarm, 0.5) : P.wall} opacity={0.8} className={T} />
+        {/* lamp glow on the wall */}
+        <ellipse cx={1110} cy={DESK} rx={330} ry={150} fill={P.honeyGlow} opacity={poolOpacity * 0.45} className={T} />
 
-        {/* lamp light pool on the wall and desk (behind objects) */}
-        <ellipse cx="1120" cy="300" rx="300" ry="120" fill={P.honeyGlow} opacity={poolOpacity * 0.5} className={T} />
-
-        {/* desk: top surface, front edge, front face, highlight */}
-        <rect x="0" y="300" width="1440" height="74" fill={deskTop} className={T} />
-        <rect x="0" y="300" width="1440" height="3" fill={night ? shade(P.trunkLight, 0.1) : '#A08462'} opacity="0.8" className={T} />
-        <rect x="0" y="374" width="1440" height="10" fill={deskEdge} className={T} />
-        <rect x="0" y="384" width="1440" height="76" fill={deskFront} className={T} />
-        {/* wood grain */}
-        {[318, 334, 352, 366].map((y, i) => (
-          <path key={y} d={`M0 ${y} C 300 ${y - 3 + i}, 700 ${y + 3 - i}, 1440 ${y - 2}`} stroke={deskEdge} strokeWidth="1.2" opacity="0.25" fill="none" className={T} />
+        {/* desk top: far edge highlight, surface, wood grain, front edge, front face */}
+        <rect x={0} y={DESK} width={W} height={FRONT - DESK} fill={deskTop} className={T} />
+        <rect x={0} y={DESK} width={W} height={4} fill={deskHi} opacity={0.9} className={T} />
+        {[330, 390, 460, 540, 630, 720, 790].map((y, i) => (
+          <path key={y} d={`M0 ${y} C ${360 + i * 40} ${y - 10 + (i % 2) * 14}, ${900 - i * 30} ${y + 12 - (i % 3) * 8}, ${W} ${y - 4}`} stroke={deskEdge} strokeWidth={1.4} opacity={0.22} fill="none" className={T} />
         ))}
+        <rect x={0} y={FRONT} width={W} height={12} fill={deskEdge} className={T} />
+        <rect x={0} y={FRONT + 12} width={W} height={H - FRONT - 12} fill={deskFront} className={T} />
+        {/* pool of lamplight on the desk */}
+        <ellipse cx={1040} cy={470} rx={320} ry={120} fill={P.honeyGlow} opacity={poolOpacity} className={T} />
 
-        {/* light pool on the desk */}
-        <ellipse cx="1120" cy="336" rx="260" ry="26" fill={P.honeyGlow} opacity={poolOpacity} className={T} />
-
-        {/* papers */}
-        <g transform="translate(560 262) rotate(-7)">
-          <rect x="6" y="8" width="250" height="170" fill={P.shadow} />
-          <rect x="0" y="0" width="250" height="170" fill={P.wall} className={T} />
-          <rect x="0" y="0" width="250" height="170" fill={P.wallShade} opacity="0.35" className={T} />
-          {[26, 44, 62, 80, 98, 116].map((y, i) => <rect key={y} x="24" y={y} width={i === 5 ? 110 : 200 - (i % 2) * 24} height="4" fill={P.wallDeep} opacity="0.75" />)}
-          <path d="M150 140 C 162 128, 176 136, 170 146 C 164 156, 186 150, 198 142" stroke={P.brass} strokeWidth="2.4" fill="none" strokeLinecap="round" />
-        </g>
-        <g transform="translate(720 286) rotate(4)">
-          <rect x="5" y="7" width="230" height="150" fill={P.shadow} />
-          <rect x="0" y="0" width="230" height="150" fill={P.wallWarm} className={T} />
-          {[22, 40, 58, 76, 94].map((y, i) => <rect key={y} x="22" y={y} width={186 - (i % 3) * 20} height="4" fill={P.wallDeep} opacity="0.7" />)}
-        </g>
-
-        {/* pen */}
-        <g transform="translate(900 352) rotate(-12)">
-          <rect x="4" y="5" width="150" height="9" rx="4" fill={P.shadow} />
-          <rect x="0" y="0" width="150" height="9" rx="4" fill={P.roof} />
-          <rect x="0" y="0" width="150" height="3.5" rx="2" fill={P.roofLight} />
-          <rect x="104" y="-2" width="28" height="4" rx="2" fill={P.brass} />
-          <path d="M150 1 L162 4.5 L150 8 Z" fill={P.brassLight} />
+        {/* plant: terracotta pot, soil, three leaf clusters */}
+        <g transform="translate(150 150)">
+          <ellipse cx={70} cy={168} rx={78} ry={14} fill={P.shadow} />
+          <path d="M22 100 l8 64 h80 l8 -64 z" fill={P.roofTerracotta} className={T} />
+          <path d="M78 100 h40 l-8 64 h-32 z" fill={shade(P.roofTerracotta, 0.25)} className={T} />
+          <rect x={18} y={92} width={104} height={14} rx={3} fill={P.roofTerracottaLight} className={T} />
+          <rect x={30} y={96} width={80} height={8} fill={shade(P.trunk, 0.3)} />
+          <ellipse cx={46} cy={52} rx={34} ry={44} fill={P.treeDeep} className={T} />
+          <ellipse cx={96} cy={46} rx={36} ry={48} fill={P.tree} className={T} />
+          <ellipse cx={70} cy={28} rx={30} ry={40} fill={P.treeLight} className={T} />
+          <path d="M70 100 L62 40 M70 100 L96 48 M70 100 L46 60" stroke={P.treeDeep} strokeWidth={3} strokeLinecap="round" />
         </g>
 
-        {/* mug */}
-        <g transform="translate(360 240)">
-          <ellipse cx="38" cy="100" rx="46" ry="9" fill={P.shadow} />
-          <rect x="0" y="8" width="76" height="90" rx="10" fill={P.wallSage} className={T} />
-          <rect x="44" y="8" width="32" height="90" rx="10" fill={P.wallSageShade} opacity="0.85" className={T} />
-          <path d="M76 30 C 104 28, 104 76, 76 74" stroke={P.wallSage} strokeWidth="11" fill="none" strokeLinecap="round" className={T} />
-          <path d="M76 30 C 104 28, 104 76, 76 74" stroke={P.wallSageShade} strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.6" />
-          <ellipse cx="38" cy="10" rx="38" ry="9" fill={P.wallSageShade} className={T} />
-          <ellipse cx="38" cy="11" rx="31" ry="6.5" fill={shade(P.trunk, 0.35)} />
-          <ellipse cx="30" cy="9.5" rx="12" ry="2.5" fill={P.trunkLight} opacity="0.5" />
+        {/* paper stack: three sheets, slightly fanned, bottom ones shaded */}
+        <g transform="translate(520 330)">
+          <rect x={12} y={14} width={300} height={210} fill={P.shadow} opacity={0.9} />
+          <g transform="rotate(-5 150 105)"><rect x={0} y={0} width={300} height={210} fill={paperShade} className={T} /></g>
+          <g transform="rotate(3 150 105)"><rect x={0} y={0} width={300} height={210} fill={shade(paper, 0.06)} className={T} /></g>
+          <rect x={0} y={0} width={300} height={210} fill={paper} className={T} />
+          <rect x={0} y={0} width={300} height={210} fill={P.wallShade} opacity={night ? 0.25 : 0.12} className={T} />
+          {[34, 56, 78, 100, 122, 144].map((y, i) => <rect key={y} x={30} y={y} width={i === 5 ? 120 : 240 - (i % 2) * 30} height={5} fill={P.wallDeep} opacity={0.7} />)}
+          <path d="M180 176 C 192 164, 206 172, 200 182 C 194 192, 216 186, 228 178" stroke={P.brass} strokeWidth={2.6} fill="none" strokeLinecap="round" />
         </g>
 
-        {/* lamp: base, stem, arm, shade, bulb */}
+        {/* mug: sage, shaded right face, handle, coffee */}
+        <g transform="translate(380 500)">
+          <ellipse cx={46} cy={112} rx={58} ry={11} fill={P.shadow} />
+          <rect x={0} y={10} width={92} height={100} rx={12} fill={P.wallSage} className={T} />
+          <rect x={54} y={10} width={38} height={100} rx={12} fill={P.wallSageShade} opacity={0.85} className={T} />
+          <path d="M92 36 C 126 34, 126 86, 92 84" stroke={P.wallSage} strokeWidth={13} fill="none" strokeLinecap="round" className={T} />
+          <path d="M92 36 C 126 34, 126 86, 92 84" stroke={P.wallSageShade} strokeWidth={5} fill="none" strokeLinecap="round" opacity={0.6} />
+          <ellipse cx={46} cy={12} rx={46} ry={11} fill={P.wallSageShade} className={T} />
+          <ellipse cx={46} cy={13} rx={38} ry={8} fill={shade(P.trunk, 0.4)} />
+          <ellipse cx={36} cy={11} rx={14} ry={3} fill={P.trunkLight} opacity={0.5} />
+        </g>
+
+        {/* pen with brass clip */}
+        <g transform="translate(860 620) rotate(-14)">
+          <rect x={5} y={6} width={190} height={11} rx={5} fill={P.shadow} />
+          <rect x={0} y={0} width={190} height={11} rx={5} fill={P.roof} />
+          <rect x={0} y={0} width={190} height={4} rx={2} fill={P.roofLight} />
+          <rect x={132} y={-2} width={34} height={5} rx={2} fill={P.brass} />
+          <path d="M190 1 L206 5.5 L190 10 Z" fill={P.brassLight} />
+        </g>
+
+        {/* lamp at top-right: base on the desk, stem, arm, brass shade with light and shadow faces */}
         <g>
-          <ellipse cx="1180" cy="330" rx="56" ry="11" fill={P.shadow} />
-          <ellipse cx="1180" cy="324" rx="48" ry="10" fill={P.roofDeep} />
-          <ellipse cx="1180" cy="320" rx="48" ry="10" fill={P.roof} />
-          <rect x="1175" y="150" width="10" height="170" fill={P.roof} />
-          <rect x="1175" y="150" width="4" height="170" fill={P.roofLight} />
-          <path d="M1180 152 C 1180 118, 1140 110, 1112 128" stroke={P.roof} strokeWidth="9" fill="none" strokeLinecap="round" />
-          <path d="M1180 152 C 1180 118, 1140 110, 1112 128" stroke={P.roofLight} strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.7" />
-          {/* shade: light left face, deep right face, brass rim */}
-          <path d="M1018 196 L1206 196 L1160 118 Q1112 104 1064 118 Z" fill={shade(P.brass, 0.25)} />
-          <path d="M1018 196 L1112 196 L1112 108 Q1086 108 1064 118 Z" fill={P.brassLight} />
-          <path d="M1018 196 L1206 196" stroke={shade(P.brass, 0.4)} strokeWidth="4" />
-          <ellipse cx="1112" cy="196" rx="94" ry="8" fill={P.honeyGlow} opacity={night ? 0.95 : 0.6} className={T} />
+          <ellipse cx={1190} cy={372} rx={66} ry={13} fill={P.shadow} />
+          <ellipse cx={1190} cy={364} rx={56} ry={12} fill={P.roofDeep} />
+          <ellipse cx={1190} cy={359} rx={56} ry={12} fill={P.roof} />
+          <rect x={1184} y={160} width={12} height={200} fill={P.roof} />
+          <rect x={1184} y={160} width={5} height={200} fill={P.roofLight} />
+          <path d="M1190 162 C 1190 120, 1140 108, 1104 128" stroke={P.roof} strokeWidth={10} fill="none" strokeLinecap="round" />
+          <path d="M1190 162 C 1190 120, 1140 108, 1104 128" stroke={P.roofLight} strokeWidth={3.5} fill="none" strokeLinecap="round" opacity={0.7} />
+          <path d="M992 208 L1216 208 L1162 112 Q1104 96 1046 112 Z" fill={shade(P.brass, 0.25)} />
+          <path d="M992 208 L1104 208 L1104 100 Q1072 100 1046 112 Z" fill={P.brassLight} />
+          <path d="M992 208 L1216 208" stroke={shade(P.brass, 0.45)} strokeWidth={5} />
+          <ellipse cx={1104} cy={208} rx={112} ry={9} fill={P.honeyGlow} opacity={night ? 0.95 : 0.6} className={T} />
         </g>
 
-        {/* light cone: flickers on once at load */}
+        {/* light cone: flickers on once at load, brighter at night */}
         <g style={{ animation: 'ks-flicker 1.4s var(--ease-out) 0.3s 1 both' }}>
-          <path d="M1024 198 L1200 198 L1400 336 L820 336 Z" fill={P.lampCone} opacity={coneOpacity} className={T} />
-          <path d="M1060 198 L1164 198 L1270 336 L950 336 Z" fill={P.lampCone} opacity={coneOpacity * 0.6} className={T} />
+          <path d="M1000 212 L1208 212 L1400 560 L720 560 Z" fill={P.lampCone} opacity={coneOpacity} className={T} />
+          <path d="M1046 212 L1162 212 L1260 560 L900 560 Z" fill={P.lampCone} opacity={coneOpacity * 0.6} className={T} />
         </g>
       </svg>
     </div>

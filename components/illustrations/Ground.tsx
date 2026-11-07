@@ -1,4 +1,3 @@
-'use client';
 import { palette as P } from '@/lib/illustrationPalette';
 
 /** Street band: lawn strip, sidewalk, curb, asphalt with dashed centre line. y is the sidewalk top edge. */

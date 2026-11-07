@@ -11,8 +11,8 @@ export type SectionText = { kicker?: string; title: string; body?: string; actio
  * One full-viewport section: scene (full-bleed, layered), text on a soft scrim, down-arrow cue,
  * Replay button when the scene's explainer is done. Layers shift with `--shift` for the camera-move transition.
  */
-export function Section({ index, active, shift, text, children, onNext, isLast, phase, onReplay, align = 'left', textWidth = 'md', id, cursor = true, counter, visibleOverride }: {
-  index: number; active: boolean; shift: number; text?: SectionText; children: ReactNode; onNext: () => void; isLast?: boolean;
+export function Section({ index, active, shift, near = true, text, children, onNext, isLast, phase, onReplay, align = 'left', textWidth = 'md', id, cursor = true, counter, visibleOverride }: {
+  index: number; active: boolean; shift: number; near?: boolean; text?: SectionText; children: ReactNode; onNext: () => void; isLast?: boolean;
   phase?: ExplainerPhase; onReplay?: () => void; align?: 'left' | 'center' | 'right'; textWidth?: 'md' | 'lg'; id: string; cursor?: boolean; counter?: ReactNode; visibleOverride?: boolean;
 }) {
   const { t } = useT();
@@ -35,11 +35,12 @@ export function Section({ index, active, shift, text, children, onNext, isLast, 
       data-section={index}
       data-active={active}
       data-ambient={active ? 'on' : 'off'}
+      data-phase={phase ?? 'none'}
       aria-label={text?.title}
       className="relative h-svh w-full overflow-hidden snap-start"
       style={{ ['--shift' as string]: `${shift}px`, ['--px' as string]: `${px.x}px`, ['--py' as string]: `${px.y}px` }}
     >
-      <div className="absolute inset-0">{children}</div>
+      <div className="absolute inset-0 scene-shift" style={{ visibility: near ? 'visible' : 'hidden' }}>{children}</div>
       {text && (
         <div className="absolute inset-0 pointer-events-none">
           <div className={`mx-auto max-w-[1440px] h-full px-5 md:px-10 lg:px-20 flex ${align === 'center' ? 'items-start pt-[112px] lg:pt-[128px]' : 'items-start pt-[96px] lg:pt-[120px]'}`}>
@@ -49,7 +50,7 @@ export function Section({ index, active, shift, text, children, onNext, isLast, 
               animate={shown ? { opacity: 1, y: 0 } : { opacity: 0.0, y: 10 }}
               transition={{ duration: dur.long, ease: ease.out, delay: shown ? 0.35 : 0 }}
             >
-              <div className="absolute -inset-6 rounded-[20px] -z-[1]" style={{ background: 'var(--scrim)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }} aria-hidden />
+              <div className="absolute -inset-6 rounded-[20px] -z-[1]" style={{ background: 'var(--scrim)', backdropFilter: near ? 'blur(6px)' : undefined, WebkitBackdropFilter: near ? 'blur(6px)' : undefined }} aria-hidden />
               {text.kicker && <p className="text-[15px] font-semibold text-pine mb-3">{text.kicker}</p>}
               <h2 className={`${index === 0 ? 'headline' : 'headline-md'} text-ink`}>
                 <SplitLines text={text.title} active={shown} />

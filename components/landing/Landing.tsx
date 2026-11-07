@@ -10,19 +10,22 @@ import { useSectionNav } from './useSectionNav';
 import { Section } from './Section';
 import { ButtonLink, ButtonPair } from '@/components/ui/Button';
 import { AnimatedNumber } from '@/components/ui/AnimatedNumber';
-import { StreetScene, ClosingScene } from '@/components/scenes/StreetScene';
-import { ChurchCampusScene } from '@/components/scenes/ChurchCampusScene';
-import { AerialScanScene } from '@/components/scenes/AerialScanScene';
-import { PlanMiniScene } from '@/components/scenes/PlanMiniScene';
-import { DeskScene } from '@/components/scenes/DeskScene';
-import { IsoBlockScene } from '@/components/scenes/IsoBlockScene';
-import { ChallengeScene } from '@/components/scenes/ChallengeScene';
-import { LuckScene } from '@/components/scenes/LuckScene';
+import dynamic from 'next/dynamic';
+const ClosingScene = dynamic(() => import('@/components/scenes/StreetScene').then((m) => m.ClosingScene), { ssr: false });
+const ChurchCampusScene = dynamic(() => import('@/components/scenes/ChurchCampusScene').then((m) => m.ChurchCampusScene), { ssr: false });
+const AerialScanScene = dynamic(() => import('@/components/scenes/AerialScanScene').then((m) => m.AerialScanScene), { ssr: false });
+const PlanMiniScene = dynamic(() => import('@/components/scenes/PlanMiniScene').then((m) => m.PlanMiniScene), { ssr: false });
+const DeskScene = dynamic(() => import('@/components/scenes/DeskScene').then((m) => m.DeskScene), { ssr: false });
+const IsoBlockScene = dynamic(() => import('@/components/scenes/IsoBlockScene').then((m) => m.IsoBlockScene), { ssr: false });
+const ChallengeScene = dynamic(() => import('@/components/scenes/ChallengeScene').then((m) => m.ChallengeScene), { ssr: false });
+const HowItWorksScene = dynamic(() => import('@/components/scenes/HowItWorksScene').then((m) => m.HowItWorksScene), { ssr: false });
+const SearchVsWaitScene = dynamic(() => import('@/components/scenes/SearchVsWaitScene').then((m) => m.SearchVsWaitScene), { ssr: false });
+const LuckScene = dynamic(() => import('@/components/scenes/LuckScene').then((m) => m.LuckScene), { ssr: false });
 import type { SceneProps } from '@/components/scenes/types';
 
-const COUNT = 9;
+const COUNT = 11;
 
-export function Landing({ introDone, heroArmed = true }: { introDone: boolean; heroArmed?: boolean }) {
+export function Landing({ introDone, heroArmed = true, hero }: { introDone: boolean; heroArmed?: boolean; hero: React.ReactNode }) {
   const { theme } = useTheme();
   const { t } = useT();
   const reduced = !!useReducedMotion();
@@ -59,9 +62,15 @@ export function Landing({ introDone, heroArmed = true }: { introDone: boolean; h
     replayKey: replayKeys[i] ?? 0,
     finishKey: finishKeys[i] ?? 0,
     onPhase: setPhase(i),
+    startDone: phases[i] === 'done',
   });
+  // Only the active section and its neighbours are mounted (preloaded); others keep their height and paint nothing.
+  // Neighbours mount ~900 ms after a section change so the transition itself never pays the mount cost.
+  const [settledActive, setSettledActive] = useState(0);
+  useEffect(() => { const id = setTimeout(() => setSettledActive(nav.active), 900); return () => clearTimeout(id); }, [nav.active]);
+  const near = (i: number) => introDone && (i === nav.active || Math.abs(i - settledActive) <= 1);
   const shift = (i: number) => (i - nav.active) * 48;
-  const sec = (i: number) => ({ index: i, active: introDone && nav.active === i, shift: shift(i), onNext: () => onNext(i), phase: phases[i], onReplay: phases[i] ? () => setReplayKeys((s) => ({ ...s, [i]: (s[i] ?? 0) + 1 })) : undefined });
+  const sec = (i: number) => ({ index: i, active: introDone && nav.active === i, shift: shift(i), near: near(i) || i === 0, onNext: () => onNext(i), phase: phases[i], onReplay: phases[i] ? () => setReplayKeys((s) => ({ ...s, [i]: (s[i] ?? 0) + 1 })) : undefined });
 
   return (
     <div id="landing" className="relative" data-testid="landing" data-intro-done={introDone}>
@@ -76,50 +85,60 @@ export function Landing({ introDone, heroArmed = true }: { introDone: boolean; h
               </ButtonPair>
             ),
           }}>
-          <StreetScene {...sceneProps(0)} />
-          <HeroCounter active={introDone && nav.active === 0} sites={stats.sites} homes={stats.homes} />
+          {hero}
+          <HeroCounter sites={stats.sites} homes={stats.homes} />
         </Section>
       </div>
       <div ref={nav.register(1)}>
         <Section {...sec(1)} id="challenge" textWidth="lg" text={{ kicker: t('land.chal.kicker'), title: t('land.chal.title'), body: t('land.chal.body') }}>
-          {introDone && <ChallengeScene {...sceneProps(1)} />}
+          {near(1) && <ChallengeScene {...sceneProps(1)} />}
         </Section>
       </div>
       <div ref={nav.register(2)}>
         <Section {...sec(2)} id="luck" text={{ kicker: t('land.luck.kicker'), title: t('land.luck.title'), body: t('land.luck.body') }}>
-          {introDone && <LuckScene {...sceneProps(2)} />}
+          {near(2) && <LuckScene {...sceneProps(2)} />}
         </Section>
       </div>
       <div ref={nav.register(3)}>
         <Section {...sec(3)} id="law" text={{ kicker: t('land.s2.kicker'), title: t('land.s2.title'), body: t('land.s2.body') }}>
-          {introDone && <ChurchCampusScene {...sceneProps(3)} />}
+          {near(3) && <ChurchCampusScene {...sceneProps(3)} />}
         </Section>
       </div>
       <div ref={nav.register(4)}>
-        <Section {...sec(4)} id="scan" text={{ kicker: t('land.s3.kicker'), title: t('land.s3.title'), body: t('land.s3.body') }}>
-          {introDone && <AerialScanScene {...sceneProps(4)} />}
+        <Section {...sec(4)} id="how" text={{ kicker: t('land.hiw.kicker'), title: t('land.hiw.title'), body: t('land.hiw.body') }}>
+          {near(4) && <HowItWorksScene {...sceneProps(4)} />}
         </Section>
       </div>
       <div ref={nav.register(5)}>
-        <Section {...sec(5)} id="plan" text={{ kicker: t('land.s4.kicker'), title: t('land.s4.title'), body: t('land.s4.body') }}>
-          {introDone && <PlanMiniScene {...sceneProps(5)} />}
+        <Section {...sec(5)} id="searching" textWidth="lg" text={{ kicker: t('land.svw.kicker'), title: t('land.svw.title') }}>
+          {near(5) && <SearchVsWaitScene {...sceneProps(5)} />}
         </Section>
       </div>
       <div ref={nav.register(6)}>
-        <Section {...sec(6)} id="pitch" text={{ kicker: t('land.s5.kicker'), title: t('land.s5.title'), body: t('land.s5.body') }}>
-          {introDone && <DeskScene {...sceneProps(6)} />}
+        <Section {...sec(6)} id="scan" text={{ kicker: t('land.s3.kicker'), title: t('land.s3.title'), body: t('land.s3.body') }}>
+          {near(6) && <AerialScanScene {...sceneProps(6)} />}
         </Section>
       </div>
       <div ref={nav.register(7)}>
-        <Section {...sec(7)} id="pipeline" text={{ kicker: t('land.s6.kicker'), title: t('land.s6.title'), body: t('land.s6.body') }}>
-          {introDone && <IsoBlockScene {...sceneProps(7)} />}
+        <Section {...sec(7)} id="plan" text={{ kicker: t('land.s4.kicker'), title: t('land.s4.title'), body: t('land.s4.body') }}>
+          {near(7) && <PlanMiniScene {...sceneProps(7)} />}
         </Section>
       </div>
       <div ref={nav.register(8)}>
-        <Section {...sec(8)} id="close" isLast align="center" textWidth="lg" phase={undefined} onReplay={undefined}
+        <Section {...sec(8)} id="pitch" text={{ kicker: t('land.s5.kicker'), title: t('land.s5.title'), body: t('land.s5.body') }}>
+          {near(8) && <DeskScene {...sceneProps(8)} />}
+        </Section>
+      </div>
+      <div ref={nav.register(9)}>
+        <Section {...sec(9)} id="pipeline" text={{ kicker: t('land.s6.kicker'), title: t('land.s6.title'), body: t('land.s6.body') }}>
+          {near(9) && <IsoBlockScene {...sceneProps(9)} />}
+        </Section>
+      </div>
+      <div ref={nav.register(10)}>
+        <Section {...sec(10)} id="close" isLast align="center" textWidth="lg" phase={undefined} onReplay={undefined}
           text={{ title: t('land.close.title'), actions: <div className="mx-auto max-w-[260px]"><ButtonLink href="/sites" size="lg" className="w-full">{t('hero.findSites')}</ButtonLink></div> }}
-          counter={<div className="text-center"><span className="big-number text-pine"><AnimatedNumber value={introDone && nav.active === 8 ? stats.homes : 0} immediate={false} /></span><div className="text-[15px] text-ink-2 mt-1">{t('land.close.sub')}</div></div>}>
-          {introDone && <ClosingScene {...sceneProps(8)} />}
+          counter={<div className="text-center"><span className="big-number text-pine"><AnimatedNumber value={introDone && nav.active === 10 ? stats.homes : 0} immediate={false} /></span><div className="text-[15px] text-ink-2 mt-1">{t('land.close.sub')}</div></div>}>
+          {near(10) && <ClosingScene {...sceneProps(10)} />}
         </Section>
       </div>
       {/* section dots */}
@@ -138,12 +157,12 @@ export function Landing({ introDone, heroArmed = true }: { introDone: boolean; h
   );
 }
 
-function HeroCounter({ active, sites, homes }: { active: boolean; sites: number; homes: number }) {
+function HeroCounter({ sites, homes }: { sites: number; homes: number }) {
   const { t } = useT();
   return (
     <div className="hidden md:block absolute right-5 md:right-10 lg:right-20 top-[calc(110px+16vw)] lg:top-[300px] panel px-4 py-2.5 text-right pointer-events-none" data-testid="hero-counter" aria-live="polite">
       <div className="text-[22px] font-semibold tabular-nums text-ink leading-7">
-        <AnimatedNumber value={active ? sites : 0} immediate={false} /> {t('hero.counter')} · <AnimatedNumber value={active ? homes : 0} immediate={false} /> {t('hero.potential')}
+        <AnimatedNumber value={sites} /> {t('hero.counter')} · <AnimatedNumber value={homes} /> {t('hero.potential')}
       </div>
     </div>
   );

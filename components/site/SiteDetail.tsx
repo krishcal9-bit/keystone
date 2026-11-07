@@ -1,6 +1,5 @@
 'use client';
-import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
-import Link from 'next/link';
+import { useEffect, useMemo, useRef, useState, useCallback, useDeferredValue, memo } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import type { Parcel } from '@/lib/sb4';
 import { checkEligibility, recommendedScenario, fitScore, impact, defaultKeepSpaces, insetFor, type Reason } from '@/lib/sb4';
@@ -10,6 +9,7 @@ import { spring, ease, dur } from '@/lib/motion';
 import { AerialLot } from '@/components/illustrations/AerialLot';
 import { AnimatedNumber } from '@/components/ui/AnimatedNumber';
 import { Button, ButtonLink } from '@/components/ui/Button';
+import { TransitionLink } from '@/components/ui/TransitionLink';
 import { Pill, SampleDataLabel } from '@/components/ui/Pill';
 import { Markdown } from '@/components/ui/Markdown';
 import { Skeleton } from '@/components/ui/Skeleton';
@@ -18,6 +18,7 @@ import { streamPost } from '@/lib/streamClient';
 import { addToPipeline, isInPipeline } from '@/lib/pipeline';
 import { ownerLabel } from '@/lib/sb4';
 import { AerialBackdrop } from '@/components/scenes/AerialBackdrop';
+import { vetTimer } from '@/lib/comparison';
 import { ClosesTheGap } from '@/components/gap/ClosesTheGap';
 import { CityRules } from '@/components/gap/CityRules';
 import { TimeToKeys } from '@/components/gap/TimeToKeys';
@@ -26,18 +27,18 @@ export function SiteDetail({ parcel }: { parcel: Parcel }) {
   const { t } = useT();
   const { theme } = useTheme();
   const night = theme === 'dark';
-  const reduced = useReducedMotion();
   const [keep, setKeep] = useState(defaultKeepSpaces(parcel));
   const [pressing, setPressing] = useState(false);
   const [delta, setDelta] = useState<{ n: number; id: number } | null>(null);
   const prevHomes = useRef<number | null>(null);
   const elig = useMemo(() => checkEligibility(parcel), [parcel]);
   const fit = useMemo(() => fitScore(parcel), [parcel]);
+  const keepDeferred = useDeferredValue(keep);
   const scenario = useMemo(() => recommendedScenario(parcel, keep), [parcel, keep]);
   const im = impact(scenario.homes);
   const buildablePoly = useMemo(() => insetFor(parcel), [parcel]);
   const [inPipe, setInPipe] = useState(false);
-  useEffect(() => { setInPipe(isInPipeline(parcel.id)); }, [parcel.id]);
+  useEffect(() => { setInPipe(isInPipeline(parcel.id)); vetTimer.startVet(parcel.id); }, [parcel.id]);
 
   useEffect(() => {
     if (prevHomes.current !== null && scenario.homes > prevHomes.current) {
@@ -59,10 +60,10 @@ export function SiteDetail({ parcel }: { parcel: Parcel }) {
   };
 
   return (
-    <div className="relative min-h-svh pt-16">
-      <div className="absolute inset-x-0 bottom-0 h-[42svh] pointer-events-none overflow-hidden" aria-hidden><AerialBackdrop night={night} /></div>
+    <div className="relative min-h-svh pt-16" data-scene="">
+      <div className="absolute inset-x-0 top-16 bottom-0 pointer-events-none select-none overflow-hidden" aria-hidden><AerialBackdrop night={night} /></div>
       <div className="relative mx-auto max-w-[1440px] px-5 md:px-10 lg:px-20 pt-6 pb-20">
-        <nav aria-label="Breadcrumb" className="text-[13px] text-ink-2 mb-3"><Link href="/sites" className="hover:text-ink">{t('sites.title')}</Link> <span className="mx-1">/</span> <span>{parcel.city}</span></nav>
+        <nav aria-label="Breadcrumb" className="text-[13px] text-ink-2 mb-3"><TransitionLink href="/sites" dir="back" className="hover:text-ink">{t('sites.title')}</TransitionLink> <span className="mx-1">/</span> <span>{parcel.city}</span></nav>
         <div className="rise-in flex flex-wrap items-end justify-between gap-4 mb-6">
           <div className="max-w-[760px]">
             <div className="flex items-center gap-3 flex-wrap"><h1 className="headline-md">{parcel.displayName}</h1><SampleDataLabel /></div>
@@ -85,8 +86,8 @@ export function SiteDetail({ parcel }: { parcel: Parcel }) {
                   <LegendDot color="#3C4A52" label={t('site.sanctuary')} /><LegendDot color="#4A4F52" label={t('site.keptStalls')} /><LegendDot color="var(--pine)" label={t('site.buildableArea')} />
                 </div>
               </div>
-              <div className="rounded-[10px] overflow-hidden border border-line" data-testid="site-diagram">
-                <AerialLot parcel={parcel} night={night} id={`site-${parcel.id}`} showBuildable={elig.eligible ? buildablePoly : undefined} keptStalls={undefined} ambient seed={2} keptShare={keptStalls} />
+              <div className="rounded-[10px] overflow-hidden border border-line vt-site-focus" data-testid="site-diagram">
+                <AerialLot parcel={parcel} night={night} id={`site-${parcel.id}`} showBuildable={elig.eligible ? buildablePoly : undefined} ambient seed={2} keptShare={keptStalls} />
               </div>
             </motion.div>
 
@@ -110,9 +111,9 @@ export function SiteDetail({ parcel }: { parcel: Parcel }) {
               <div className="flex items-center justify-between text-[13px] text-ink-2 tabular-nums"><span>0</span><span>{parcel.parkingSpaces}</span></div>
             </div>
 
-            <ClosesTheGap parcel={parcel} keepSpaces={keep} homes={scenario.homes} />
+            <ClosesTheGap parcel={parcel} keepSpaces={keepDeferred} homes={recommendedScenario(parcel, keepDeferred).homes} />
             <div className="grid grid-cols-2 gap-3">
-              <ButtonLink href={`/plan/${parcel.id}?keep=${keep}`} variant="primary">{t('site.openPlan')}</ButtonLink>
+              <TransitionLink href={`/plan/${parcel.id}?keep=${keep}`} shared="[data-testid=site-diagram]" className="inline-flex items-center justify-center gap-2 font-medium rounded-[8px] h-11 px-4 text-[15px] bg-pine text-paper hover:bg-pine-deep pressable">{t('site.openPlan')}</TransitionLink>
               <ButtonLink href={`/scan?parcel=${parcel.id}`} variant="secondary">{t('site.scan')}</ButtonLink>
               <ButtonLink href={`/pitch/${parcel.id}`} variant="secondary">{t('site.pitch')}</ButtonLink>
               <Button variant="secondary" onClick={addPipe} disabled={inPipe} data-testid="add-pipeline">{inPipe ? t('site.inPipeline') : t('site.addPipeline')}</Button>
@@ -144,18 +145,7 @@ export function SiteDetail({ parcel }: { parcel: Parcel }) {
               </AnimatePresence>
             </div>
 
-            <div className="panel p-4">
-              <h2 className="text-[15px] font-semibold mb-2">{t('site.fitBreakdown')} <span className="text-ink-2 font-medium tabular-nums">· {fit.score}/100</span></h2>
-              <ul className="flex flex-col gap-2">
-                {fit.factors.map((f, i) => (
-                  <li key={f.id} className="grid grid-cols-[110px_1fr_40px] items-center gap-3 text-[13px]">
-                    <span className="text-ink-2 truncate" title={f.note}>{f.label}</span>
-                    <span className="h-1.5 rounded-full bg-line overflow-hidden"><motion.span className="block h-full bg-pine rounded-full origin-left" initial={{ scaleX: 0 }} animate={{ scaleX: f.points / f.max }} transition={{ delay: reduced ? 0 : 0.3 + i * 0.05, duration: dur.long, ease: ease.out }} /></span>
-                    <span className="text-right tabular-nums text-ink">{f.points}/{f.max}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <FitBreakdown fit={fit} />
 
             <Brief parcelId={parcel.id} keepSpaces={keep} />
             <TimeToKeys />
@@ -166,6 +156,25 @@ export function SiteDetail({ parcel }: { parcel: Parcel }) {
     </div>
   );
 }
+
+const FitBreakdown = memo(function FitBreakdown({ fit }: { fit: ReturnType<typeof fitScore> }) {
+  const { t } = useT();
+  const reduced = useReducedMotion();
+  return (
+    <div className="panel p-4">
+      <h2 className="text-[15px] font-semibold mb-2">{t('site.fitBreakdown')} <span className="text-ink-2 font-medium tabular-nums">· {fit.score}/100</span></h2>
+      <ul className="flex flex-col gap-2">
+        {fit.factors.map((f, i) => (
+          <li key={f.id} className="grid grid-cols-[110px_1fr_40px] items-center gap-3 text-[13px]">
+            <span className="text-ink-2 truncate" title={f.note}>{f.label}</span>
+            <span className="h-1.5 rounded-full bg-line overflow-hidden"><motion.span className="block h-full bg-pine rounded-full origin-left" initial={{ scaleX: 0 }} animate={{ scaleX: f.points / f.max }} transition={{ delay: reduced ? 0 : 0.3 + i * 0.05, duration: dur.long, ease: ease.out }} /></span>
+            <span className="text-right tabular-nums text-ink">{f.points}/{f.max}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+});
 
 function LegendDot({ color, label }: { color: string; label: string }) {
   return <span className="inline-flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-[2px]" style={{ background: color }} />{label}</span>;
@@ -180,7 +189,7 @@ function Num({ label, value, digits = 0, accent = false, testId }: { label: stri
   );
 }
 
-function EligibilityCard({ reasons, warnings, eligible }: { reasons: Reason[]; warnings: { id: string; label: string; detail: string }[]; eligible: boolean }) {
+const EligibilityCard = memo(function EligibilityCard({ reasons, warnings, eligible }: { reasons: Reason[]; warnings: { id: string; label: string; detail: string }[]; eligible: boolean }) {
   const { t } = useT();
   const [why, setWhy] = useState(false);
   const reduced = useReducedMotion();
@@ -217,7 +226,7 @@ function EligibilityCard({ reasons, warnings, eligible }: { reasons: Reason[]; w
       {!eligible && <span className="sr-only">{t('common.notEligible')}</span>}
     </div>
   );
-}
+});
 
 function Check({ pass, delay }: { pass: boolean; delay: number }) {
   return (
@@ -231,7 +240,7 @@ function Check({ pass, delay }: { pass: boolean; delay: number }) {
   );
 }
 
-function Brief({ parcelId, keepSpaces }: { parcelId: string; keepSpaces: number }) {
+const Brief = memo(function Brief({ parcelId, keepSpaces }: { parcelId: string; keepSpaces: number }) {
   const { t } = useT();
   const [text, setText] = useState('');
   const [state, setState] = useState<'idle' | 'loading' | 'streaming' | 'done' | 'error'>('idle');
@@ -248,6 +257,7 @@ function Brief({ parcelId, keepSpaces }: { parcelId: string; keepSpaces: number 
       const res = await streamPost('/api/brief', { parcelId, keepSpaces: keep }, (_c, full) => { setState('streaming'); setText(full); }, ac.signal);
       setSource(res.source);
       setState('done');
+      vetTimer.endVet(parcelId);
     } catch (e) {
       if ((e as Error)?.name === 'AbortError') return;
       setState('error');
@@ -263,7 +273,7 @@ function Brief({ parcelId, keepSpaces }: { parcelId: string; keepSpaces: number 
   }, []);
 
   return (
-    <motion.div layout className="panel p-4" data-testid="brief" transition={spring.smooth}>
+    <div className="panel p-4" data-testid="brief">
       <div className="flex items-center justify-between gap-3">
         <div>
           <h2 className="text-[15px] font-semibold">{t('site.brief')}</h2>
@@ -271,12 +281,12 @@ function Brief({ parcelId, keepSpaces }: { parcelId: string; keepSpaces: number 
         </div>
         <Button variant="secondary" size="sm" loading={state === 'loading'} onClick={() => run(keepSpaces)} data-testid="brief-button">{state === 'idle' || state === 'error' ? t('site.generateBrief') : t('plan.regenerate')}</Button>
       </div>
-      <motion.div layout="position" className="mt-3">
+      <div className="mt-3">
         {state === 'loading' && <Skeleton lines={5} />}
         {state === 'error' && <p className="text-[14px] text-signal-red">{t('common.error')}</p>}
         {(state === 'streaming' || state === 'done') && <Markdown text={text} />}
         {state === 'done' && source === 'fallback' && <p className="mt-2 text-[12px] text-ink-2">{t('common.fallbackNote')}</p>}
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
-}
+});

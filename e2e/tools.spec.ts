@@ -7,9 +7,8 @@ test('site finder: filtering to eligible updates totals; clicking a marker opens
   await page.getByTestId('filter-eligible').click();
   await expect(page.locator('[data-testid=total-sites] [data-value]')).toHaveAttribute('data-value', '48');
   const marker = page.locator('[data-marker="oakfield-community-church"]');
-  await marker.scrollIntoViewIfNeeded();
   await marker.click({ force: true });
-  await page.waitForURL(/\/sites\/oakfield-community-church/);
+  await expect.poll(() => page.url(), { timeout: 20_000 }).toMatch(/\/sites\/oakfield-community-church/);
   await expect(page.getByTestId('eligibility')).toBeVisible();
 });
 
@@ -65,9 +64,12 @@ test('theme: dark mode applies before paint; street lamps are on', async ({ page
   await page.waitForTimeout(500);
   await page.keyboard.press('Escape');
   await expect(page.getByTestId('landing')).toHaveAttribute('data-intro-done', 'true', { timeout: 10_000 });
-  const lamps = page.locator('[data-section="0"] [data-lamp]');
-  expect(await lamps.count()).toBeGreaterThanOrEqual(3);
-  await expect(lamps.first()).toHaveAttribute('data-on', 'true');
+  // The hero street is a pre-rendered image per theme: night must be the visible one, and its file carries lit lamps.
+  await expect(page.locator('[data-section="0"] img.hero-static-night')).toBeVisible();
+  await expect(page.locator('[data-section="0"] img.hero-static-day')).toBeHidden();
+  const svg = await page.evaluate(() => fetch('/art/hero-night.svg').then((r) => r.text()));
+  expect((svg.match(/data-lamp/g) ?? []).length).toBeGreaterThanOrEqual(3);
+  expect(svg).toContain('data-on="true"');
 });
 
 test('lane pill is visible on every route; judges page see-it links open the right screens', async ({ page }) => {

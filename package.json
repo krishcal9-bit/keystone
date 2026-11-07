@@ -11,7 +11,10 @@
     "test": "vitest run",
     "check": "tsc --noEmit && eslint . && vitest run && next build --turbopack",
     "e2e": "playwright test",
-    "screenshots": "MOCK_CLAUDE=1 playwright test --config playwright.screens.config.ts"
+    "screenshots": "MOCK_CLAUDE=1 playwright test --config playwright.screens.config.ts",
+    "gen:art": "esbuild scripts/gen-static-art.tsx --bundle --platform=node --jsx=automatic --alias:@=. --log-level=warning --outfile=.gen/gen-static-art.cjs && node .gen/gen-static-art.cjs",
+    "prebuild": "npm run gen:art",
+    "gen:raster": "node scripts/gen-raster.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.6.0",
@@ -36,6 +39,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.187.0",
+    "esbuild": "^0.28.2",
     "eslint": "^9",
     "eslint-config-next": "15.5.29",
     "tailwindcss": "^4",

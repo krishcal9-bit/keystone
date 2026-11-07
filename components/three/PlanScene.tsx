@@ -31,6 +31,8 @@ export type PlanSceneProps = {
   autoSunSweep?: boolean;
   speed?: number;
   zoom?: number;
+  /** 'always' while the scene is on screen and animating; 'never' when hidden. */
+  frameloop?: 'always' | 'never' | 'demand';
   onCanvas?: (el: HTMLCanvasElement) => void;
   className?: string;
 };
@@ -51,7 +53,7 @@ export function PlanScene(props: PlanSceneProps) {
       <Canvas
         shadows={{ type: THREE.PCFShadowMap }}
         dpr={[1, 2]}
-        frameloop="demand"
+        frameloop={props.frameloop ?? 'always'}
         gl={{ antialias: true, preserveDrawingBuffer: true, powerPreference: 'high-performance' }}
         camera={{ fov: 24, near: 1, far: R * 12, position: [R * 0.9, R * 0.75, R * 0.95] }}
         onCreated={({ gl, scene }) => {

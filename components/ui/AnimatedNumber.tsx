@@ -11,15 +11,17 @@ type Props = {
   suffix?: string;
   /** Snap instantly on first render (no roll from zero). */
   immediate?: boolean;
+  /** Spring for the roll; the default settles in about 900 ms. Pass a stiffer one for a snap. */
+  springConfig?: { stiffness: number; damping: number; mass?: number };
 };
 
 const safe = (n: number) => (Number.isFinite(n) ? n : 0);
 
-export function AnimatedNumber({ value, format, locale = 'en-US', className = '', prefix = '', suffix = '', immediate = true }: Props) {
+export function AnimatedNumber({ value, format, locale = 'en-US', className = '', prefix = '', suffix = '', immediate = true, springConfig }: Props) {
   const reduced = useReducedMotion();
   const target = safe(value);
   const mv = useMotionValue(immediate ? target : 0);
-  const sp = useSpring(mv, { stiffness: 120, damping: 24, mass: 0.6 });
+  const sp = useSpring(mv, springConfig ?? { stiffness: 120, damping: 24, mass: 0.6 });
   const fmt = useRef(new Intl.NumberFormat(locale, { maximumFractionDigits: 0, ...format }));
   const [text, setText] = useState(() => fmt.current.format(immediate ? target : 0));
   const first = useRef(true);

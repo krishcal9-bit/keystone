@@ -79,7 +79,7 @@ npm run check                # tsc · eslint · vitest · next build
 
 1. Load the site: blueprint, the arch builds, the keystone locks, the camera dives into Orange County, parcel dots appear, "Keystone" fills the screen, then the hero.
 2. "Habitat OC's limit isn't families. It's land. Since July 2024, California's SB 4 lets churches and nonprofit colleges build affordable homes on their own land by right. Almost nobody is using it."
-3. Press Down through "The challenge" and "The law changed in 2024": the cost stack shrinks; the empty lot fills with homes while the church keeps its parking.
+3. Press Down through "The challenge", "The law changed in 2024", "How it works" (Find · Check · Design · Partner) and "Searching vs. waiting": the cost stack shrinks, the empty lot fills with homes while the church keeps its parking, and the headline metric shows 48× more options, about 480× faster vetting and $100,000 less land per home (editable assumptions with sources).
 4. Site Finder: filter to eligible sites near transit; totals roll.
 5. Open a sample church: eligibility explained; drag "keep parking" from 120 to 60 spaces; homes jump; the gap closes.
 6. Lot Scan: drop a satellite screenshot; Keystone outlines parking and open land and computes buildable area.
@@ -88,6 +88,12 @@ npm run check                # tsc · eslint · vitest · next build
 9. Pipeline: move the site to "Meeting set"; homes unlocked rolls up.
 10. Toggle dark mode on the landing street: lamps flicker on one by one.
 11. Close: "Keystone finds the ground. Habitat builds the homes."
+
+## Performance notes
+
+Measured on the production build at 4× CPU throttle with `scripts/dev/perf.mjs`: only the active landing section and its neighbours are mounted, markers are one CSS-driven SVG layer, the 3D canvas renders only while on screen, and no filters or layouts animate. Lighthouse mobile reports live in `docs/lighthouse/` (latest local runs: home 96–97, Site Finder 85–88; TBT is the noisy metric on a shared machine).
+
+Illustration art that never changes at runtime is pre-rendered: `npm run gen:art` (also `prebuild`) writes the hero street (`public/art/hero-*.svg`, loaded as images) and the map detail layer (`public/art/map-detail-*.svg`); `npm run gen:raster` rasterises the latter to WebP with the bundled Chromium (output is committed; rerun it after changing `components/map/MapArt.tsx` or `ocArt.ts`). See `docs/DECISIONS.md` for why.
 
 ## What Habitat OC would need to adopt this
 

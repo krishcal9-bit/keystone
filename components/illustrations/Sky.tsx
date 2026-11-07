@@ -1,4 +1,3 @@
-'use client';
 import { palette as P } from '@/lib/illustrationPalette';
 
 type Props = { w: number; h: number; night?: boolean; dusk?: boolean; id: string; clouds?: boolean; stars?: boolean };

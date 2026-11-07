@@ -8,6 +8,7 @@ import { palette as P, shade, seeded } from '@/lib/illustrationPalette';
 import type { Parcel } from '@/lib/sb4';
 import type { Pt, Rect } from '@/lib/geometry';
 import { pointInPolygon, rectsOverlap } from '@/lib/geometry';
+import { memo, useMemo } from 'react';
 import { stallsFor } from '@/lib/stalls';
 
 export type AerialLotProps = {
@@ -51,11 +52,11 @@ export function treesFor(parcel: AerialLotProps['parcel'], seed = 3): AerialTree
   return trees;
 }
 
-export function AerialLot({ parcel, size = 400, night = false, keptStalls, keptShare, showBuildable, children, id = 'aerial', ambient = false, seed = 3, groundFill }: AerialLotProps) {
+function AerialLotInner({ parcel, size = 400, night = false, keptStalls, keptShare, showBuildable, children, id = 'aerial', ambient = false, seed = 3, groundFill }: AerialLotProps) {
   const s = size;
   const poly = parcel.lotPolygon;
   const bx = Math.max(...poly.map((p) => p.x)), by = Math.max(...poly.map((p) => p.y));
-  const trees = treesFor(parcel, seed);
+  const trees = useMemo(() => treesFor(parcel, seed), [parcel, seed]);
   const b = parcel.buildingRect;
   const clip = `${id}-clip`;
   const lawn = night ? P.lawnDeep : P.lawn;
@@ -63,7 +64,7 @@ export function AerialLot({ parcel, size = 400, night = false, keptStalls, keptS
   const streetRect: Rect = streetSide === 'top' ? { x: -0.2, y: -0.16, w: bx + 0.4, h: 0.14 }
     : streetSide === 'bottom' ? { x: -0.2, y: by + 0.02, w: bx + 0.4, h: 0.14 }
     : streetSide === 'left' ? { x: -0.16, y: -0.2, w: 0.14, h: by + 0.4 } : { x: bx + 0.02, y: -0.2, w: 0.14, h: by + 0.4 };
-  const allStalls = parcel.parkingRects.flatMap((r) => stallsFor(r, s));
+  const allStalls = useMemo(() => parcel.parkingRects.flatMap((r) => stallsFor(r, s)), [parcel, s]);
   const kept = keptStalls ?? (keptShare != null ? Math.round(keptShare * allStalls.length) : allStalls.length);
   const keptList = allStalls.slice(0, kept);
   const keptBoxes = keptList.length ? [keptList.reduce((acc, r) => {
@@ -149,3 +150,5 @@ export function AerialLot({ parcel, size = 400, night = false, keptStalls, keptS
     </svg>
   );
 }
+
+export const AerialLot = memo(AerialLotInner);

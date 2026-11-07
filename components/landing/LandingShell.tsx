@@ -4,12 +4,12 @@ import { Landing } from './Landing';
 import { Intro } from '@/components/intro/Intro';
 
 /** Hero DOM is rendered from the start underneath the intro; the intro hands off to it when done or skipped. */
-export function LandingShell() {
+export function LandingShell({ hero }: { hero: React.ReactNode }) {
   const [introDone, setIntroDone] = useState(false);
   const [armed, setArmed] = useState(false);
   return (
     <>
-      <Landing introDone={introDone} heroArmed={armed} />
+      <Landing introDone={introDone} heroArmed={armed} hero={hero} />
       {!introDone && <Intro onDone={() => setIntroDone(true)} onArm={() => setArmed(true)} />}
     </>
   );

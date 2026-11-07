@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { TransitionLink } from '@/components/ui/TransitionLink';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { motion, useReducedMotion, AnimatePresence } from 'motion/react';
@@ -58,7 +59,7 @@ export function Header() {
             const match = 'match' in n ? n.match : n.href;
             const active = pathname === match || pathname.startsWith(match + '/');
             return (
-              <Link
+              <TransitionLink
                 key={n.href}
                 href={n.href}
                 aria-current={active ? 'page' : undefined}
@@ -66,7 +67,7 @@ export function Header() {
               >
                 {active && <motion.span layoutId="nav-active" className="absolute inset-0 rounded-[8px] bg-pine-soft" transition={reduced ? { duration: 0 } : spring.snappy} />}
                 <span className="relative z-[1]">{t(n.key)}</span>
-              </Link>
+              </TransitionLink>
             );
           })}
         </nav>

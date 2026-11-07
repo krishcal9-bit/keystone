@@ -18,4 +18,6 @@ export type SceneProps = {
   replayKey: number;
   finishKey: number;
   onPhase?: (phase: ExplainerPhase) => void;
+  /** Mount directly in the finished state (the user already watched this section). */
+  startDone?: boolean;
 };

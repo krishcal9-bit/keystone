@@ -5,6 +5,8 @@ import { DeskScene } from '@/components/scenes/DeskScene';
 import { IsoBlockScene } from '@/components/scenes/IsoBlockScene';
 import { ChallengeScene } from '@/components/scenes/ChallengeScene';
 import { LuckScene } from '@/components/scenes/LuckScene';
+import { SearchVsWaitScene } from '@/components/scenes/SearchVsWaitScene';
+import { HowItWorksScene } from '@/components/scenes/HowItWorksScene';
 import type { ExplainerPhase } from '@/components/explainer/useExplainer';
 
 function Harness({ name, Scene }: { name: string; Scene: typeof DeskScene }) {
@@ -31,6 +33,8 @@ export default function DevScenes() {
       <Harness name="Iso block" Scene={IsoBlockScene} />
       <Harness name="Challenge" Scene={ChallengeScene} />
       <Harness name="Luck" Scene={LuckScene} />
+      <Harness name="Search vs wait" Scene={SearchVsWaitScene} />
+      <Harness name="How it works" Scene={HowItWorksScene} />
     </div>
   );
 }

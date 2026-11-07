@@ -20,6 +20,8 @@ const ArchScene = dynamic(() => import('./ArchScene').then((m) => m.ArchScene), 
 
 const T_NAME = 3700, T_HOLD_END = 5600, T_FLY = 700;
 const LETTERS = 'Keystone'.split('');
+/** Timeline milestones that change what is rendered; everything in between is a CSS/Motion tween. */
+const STAGES = [500, 700, 2700, 3000, 3600, T_NAME];
 
 export function Intro({ onDone, onArm }: { onDone: () => void; onArm?: () => void }) {
   const reduced = useReducedMotion();
@@ -29,6 +31,7 @@ export function Intro({ onDone, onArm }: { onDone: () => void; onArm?: () => voi
   const tRef = useRef(0);
   const fastRef = useRef(false);
   const [phase, setPhase] = useState<'play' | 'fly' | 'done'>('play');
+  // Discrete timeline stage (ms crossed): the render tree only updates at milestones, never per frame.
   const [ms, setMs] = useState(0);
   const [flyTarget, setFlyTarget] = useState<{ x: number; y: number; scale: number } | null>(null);
   const lockupRef = useRef<HTMLDivElement>(null);
@@ -42,6 +45,7 @@ export function Intro({ onDone, onArm }: { onDone: () => void; onArm?: () => voi
   const onArmRef = useRef(onArm);
   onArmRef.current = onArm;
   const flyRef = useRef<() => void>(() => {});
+  const stageRef = useRef(0);
 
   const finish = useCallback(() => {
     if (doneRef.current) return;
@@ -90,7 +94,8 @@ export function Intro({ onDone, onArm }: { onDone: () => void; onArm?: () => voi
         // no hardware WebGL: skip the arch (700–2700) and go straight to the map
         if (archRef.current === false && tRef.current > 700 && tRef.current < 2700) { t0 -= 2700 - tRef.current; tRef.current = 2700; }
       }
-      setMs(tRef.current);
+      const stage = STAGES.reduce((acc, m) => (tRef.current >= m ? m : acc), 0);
+      if (stage !== stageRef.current) { stageRef.current = stage; setMs(stage); }
       if (tRef.current >= T_HOLD_END && phaseRef.current === 'play') flyRef.current();
       if (phaseRef.current !== 'done') raf = requestAnimationFrame(tick);
     };
@@ -104,8 +109,7 @@ export function Intro({ onDone, onArm }: { onDone: () => void; onArm?: () => voi
 
   const fast = fastRef.current;
   const flyDur = fast ? 0.2 : T_FLY / 1000;
-  const sky = ms < 700 ? Math.min(1, ms / 700) : 1;
-  const mapIn = Math.min(1, Math.max(0, (ms - 2700) / 900));
+  const mapIn = ms >= 2700;
   const nameIn = ms >= T_NAME;
   if (nameIn && !armedRef.current) { armedRef.current = true; setTimeout(() => onArm?.(), 0); }
   const archVisible = ms < 3600;
@@ -114,11 +118,14 @@ export function Intro({ onDone, onArm }: { onDone: () => void; onArm?: () => voi
     <div className="fixed inset-0 z-[70] overflow-hidden" style={{ transform: 'translateZ(0)', willChange: 'transform' }} data-testid="intro" data-phase={phase} aria-hidden>
       {/* sky: deep twilight → page colour */}
       <motion.div className="absolute inset-0" animate={{ opacity: phase === 'fly' ? 0 : 1 }} transition={{ duration: flyDur, ease: ease.out }}
-        style={{ background: night ? `linear-gradient(${P.nightSkyHigh}, ${P.nightSkyLow})` : `linear-gradient(${mixHex('#152238', '#DCE8EE', sky)}, ${mixHex('#2A3650', '#F6F7F5', sky)})` }} />
+        style={{ background: night ? `linear-gradient(${P.nightSkyHigh}, ${P.nightSkyLow})` : 'linear-gradient(#DCE8EE, #F6F7F5)' }}>
+        {/* twilight lifts over the first 700 ms (one opacity tween, no per-frame colour mixing) */}
+        {!night && <motion.div className="absolute inset-0" initial={{ opacity: 1 }} animate={{ opacity: 0 }} transition={{ duration: 0.7, ease: ease.out }} style={{ background: 'linear-gradient(#152238, #2A3650)' }} />}
+      </motion.div>
       {/* warm horizon glow */}
-      <div className="absolute inset-x-0 bottom-0 pointer-events-none" style={{ height: '50vh', background: `radial-gradient(60% 50% at 50% 100%, rgba(227,184,102,${0.35 * (1 - mapIn)}) 0%, rgba(227,184,102,0) 100%)` }} />
+      <motion.div className="absolute inset-x-0 bottom-0 pointer-events-none" animate={{ opacity: mapIn ? 0 : 1 }} transition={{ duration: 0.9, ease: ease.out }} style={{ height: '50vh', background: 'radial-gradient(60% 50% at 50% 100%, rgba(227,184,102,0.35) 0%, rgba(227,184,102,0) 100%)' }} />
       {/* blueprint */}
-      <Blueprint ms={ms} night={night} hidden={mapIn > 0.6} />
+      <Blueprint ms={ms} night={night} hidden={ms >= 3600} />
       {/* arch */}
       {archVisible && arch === true && (
         <motion.div className="absolute inset-0" animate={{ opacity: ms > 3000 ? 0 : 1 }} transition={{ duration: 0.5, ease: ease.out }}>
@@ -169,13 +176,13 @@ export function Intro({ onDone, onArm }: { onDone: () => void; onArm?: () => voi
 }
 
 function Blueprint({ ms, night, hidden }: { ms: number; night: boolean; hidden: boolean }) {
-  const reveal = Math.min(1, ms / 700);
+  const reveal = 1; // draws over the first 700 ms as a tween
   const stroke = night ? 'rgba(168,196,220,0.35)' : 'rgba(30,92,71,0.28)';
   return (
     <motion.svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 w-full h-full" animate={{ opacity: hidden ? 0 : 1 }} transition={{ duration: 0.5 }}>
       <defs>
         <pattern id="bp-grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke={stroke} strokeWidth="1" /></pattern>
-        <clipPath id="bp-clip"><circle cx="720" cy="450" r={reveal * 1000} /></clipPath>
+        <clipPath id="bp-clip"><motion.circle cx="720" cy="450" initial={{ r: 0 }} animate={{ r: 1000 }} transition={{ duration: 0.7, ease: ease.out }} /></clipPath>
       </defs>
       <rect width="1440" height="900" fill="url(#bp-grid)" clipPath="url(#bp-clip)" />
       {/* survey lines + parcel boundary */}
@@ -191,28 +198,24 @@ function Blueprint({ ms, night, hidden }: { ms: number; night: boolean; hidden: 
 }
 
 function OCMapIntro({ ms, night, dim, flying, flyDur }: { ms: number; night: boolean; dim: boolean; flying: boolean; flyDur: number }) {
-  const k = Math.min(1, Math.max(0, (ms - 2700) / 1000));
-  if (k <= 0 && !flying) return null;
+  if (ms < 2700 && !flying) return null;
   return (
-    <motion.div className="absolute inset-0 flex items-center justify-center" animate={{ opacity: flying ? 0 : dim ? 0.3 : k, filter: dim ? 'blur(6px)' : 'blur(0px)', scale: flying ? 1.05 : 1.6 - k * 0.6 }} transition={{ duration: flying ? flyDur : 0.6, ease: ease.out }} data-testid="intro-map">
+    <motion.div className="absolute inset-0 flex items-center justify-center" initial={{ opacity: 0, scale: 1.6 }} animate={{ opacity: flying ? 0 : dim ? 0.25 : 1, scale: flying ? 1.05 : 1 }} transition={{ duration: flying ? flyDur : 1, ease: ease.out }} data-testid="intro-map">
       <svg viewBox="0 0 1000 1000" className="h-[110vh] w-auto">
         <path d={COUNTY_PATH} fill={night ? '#1C2A25' : '#EEF2EC'} stroke={night ? '#2E4139' : '#CFDAD2'} strokeWidth={2} />
         <path d={COAST_PATH} fill="none" stroke={night ? '#5F8AA6' : '#8FB4C7'} strokeWidth={4} strokeLinecap="round" />
         {FREEWAYS.map((f) => <path key={f.id} d={f.d} fill="none" stroke={night ? '#3A4A44' : '#D0D7D1'} strokeWidth={f.major ? 4 : 2.5} strokeLinecap="round" />)}
         {CITY_LABELS.filter((c) => c.size === 'lg').map((c) => { const p = ll(c.lon, c.lat); return <text key={c.name} x={p.x} y={p.y} textAnchor="middle" fontSize={16} fontWeight={600} fill={night ? '#A7B4AE' : '#4A5753'} fontFamily="var(--font-public-sans)">{c.name}</text>; })}
-        {parcels.map((p, i) => (
-          <motion.g key={p.id} initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: ms > 2900 + i * 12 ? 1 : 0, scale: ms > 2900 + i * 12 ? 1 : 0.5 }} transition={{ type: 'spring', duration: 0.45, bounce: 0.2 }} style={{ transformOrigin: `${p.mapX}px ${p.mapY}px` }}>
-            <circle cx={p.mapX} cy={p.mapY} r={16} fill={P.brassLight} opacity={0.3} />
-            <circle cx={p.mapX} cy={p.mapY} r={6} fill={P.brass} stroke={night ? '#0F1513' : '#FFFFFF'} strokeWidth={1.5} />
-          </motion.g>
-        ))}
+        {/* 60 markers as one CSS-driven layer (no per-marker Motion components to hydrate) */}
+        <g data-on={ms > 2900 ? 'true' : 'false'}>
+          {parcels.map((p, i) => (
+            <g key={p.id} className="intro-mk" style={{ ['--d' as string]: `${i * 12}ms`, transformOrigin: `${p.mapX}px ${p.mapY}px` }}>
+              <circle cx={p.mapX} cy={p.mapY} r={16} fill={P.brassLight} opacity={0.3} />
+              <circle cx={p.mapX} cy={p.mapY} r={6} fill={P.brass} stroke={night ? '#0F1513' : '#FFFFFF'} strokeWidth={1.5} />
+            </g>
+          ))}
+        </g>
       </svg>
     </motion.div>
   );
-}
-
-function mixHex(a: string, b: string, t: number) {
-  const pa = parseInt(a.slice(1), 16), pb = parseInt(b.slice(1), 16);
-  const ch = (s: number) => Math.round(((pa >> s) & 255) * (1 - t) + ((pb >> s) & 255) * t);
-  return `rgb(${ch(16)}, ${ch(8)}, ${ch(0)})`;
 }

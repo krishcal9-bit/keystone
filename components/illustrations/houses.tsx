@@ -1,4 +1,3 @@
-'use client';
 /**
  * Six distinct homes. Each sits on the ground line (y = 0) with its own contact shadow.
  * Props: night (windows and porch lights glow), scale via the parent's transform.
