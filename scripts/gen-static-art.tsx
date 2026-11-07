@@ -40,7 +40,7 @@ const HERO_CSS = `
 `.replace(/\n/g, '');
 
 const svgFile = (markup: string) =>
-  `<?xml version="1.0" encoding="UTF-8"?>\n` + markup.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ').replace('<defs>', `<style>${HERO_CSS}</style><defs>`);
+  `<?xml version="1.0" encoding="UTF-8"?>\n` + markup.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" ').replace('<defs>', `<style>${HERO_CSS}</style><defs>`);
 
 mkdirSync('public/art', { recursive: true });
 writeFileSync('public/art/hero-day.svg', svgFile(day));
