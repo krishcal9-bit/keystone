@@ -22,7 +22,7 @@ import type { SceneProps } from '@/components/scenes/types';
 
 const COUNT = 9;
 
-export function Landing({ introDone }: { introDone: boolean }) {
+export function Landing({ introDone, heroArmed = true }: { introDone: boolean; heroArmed?: boolean }) {
   const { theme } = useTheme();
   const { t } = useT();
   const reduced = !!useReducedMotion();
@@ -66,7 +66,7 @@ export function Landing({ introDone }: { introDone: boolean }) {
   return (
     <div id="landing" className="relative" data-testid="landing" data-intro-done={introDone}>
       <div ref={nav.register(0)}>
-        <Section {...sec(0)} id="hero" phase={undefined} onReplay={undefined} textWidth="lg"
+        <Section {...sec(0)} id="hero" phase={undefined} onReplay={undefined} textWidth="lg" visibleOverride={!introDone && !heroArmed ? true : undefined}
           text={{
             title: t('hero.title'), body: t('hero.sub'),
             actions: (
@@ -82,44 +82,44 @@ export function Landing({ introDone }: { introDone: boolean }) {
       </div>
       <div ref={nav.register(1)}>
         <Section {...sec(1)} id="challenge" textWidth="lg" text={{ kicker: t('land.chal.kicker'), title: t('land.chal.title'), body: t('land.chal.body') }}>
-          <ChallengeScene {...sceneProps(1)} />
+          {introDone && <ChallengeScene {...sceneProps(1)} />}
         </Section>
       </div>
       <div ref={nav.register(2)}>
         <Section {...sec(2)} id="luck" text={{ kicker: t('land.luck.kicker'), title: t('land.luck.title'), body: t('land.luck.body') }}>
-          <LuckScene {...sceneProps(2)} />
+          {introDone && <LuckScene {...sceneProps(2)} />}
         </Section>
       </div>
       <div ref={nav.register(3)}>
         <Section {...sec(3)} id="law" text={{ kicker: t('land.s2.kicker'), title: t('land.s2.title'), body: t('land.s2.body') }}>
-          <ChurchCampusScene {...sceneProps(3)} />
+          {introDone && <ChurchCampusScene {...sceneProps(3)} />}
         </Section>
       </div>
       <div ref={nav.register(4)}>
         <Section {...sec(4)} id="scan" text={{ kicker: t('land.s3.kicker'), title: t('land.s3.title'), body: t('land.s3.body') }}>
-          <AerialScanScene {...sceneProps(4)} />
+          {introDone && <AerialScanScene {...sceneProps(4)} />}
         </Section>
       </div>
       <div ref={nav.register(5)}>
         <Section {...sec(5)} id="plan" text={{ kicker: t('land.s4.kicker'), title: t('land.s4.title'), body: t('land.s4.body') }}>
-          <PlanMiniScene {...sceneProps(5)} />
+          {introDone && <PlanMiniScene {...sceneProps(5)} />}
         </Section>
       </div>
       <div ref={nav.register(6)}>
         <Section {...sec(6)} id="pitch" text={{ kicker: t('land.s5.kicker'), title: t('land.s5.title'), body: t('land.s5.body') }}>
-          <DeskScene {...sceneProps(6)} />
+          {introDone && <DeskScene {...sceneProps(6)} />}
         </Section>
       </div>
       <div ref={nav.register(7)}>
         <Section {...sec(7)} id="pipeline" text={{ kicker: t('land.s6.kicker'), title: t('land.s6.title'), body: t('land.s6.body') }}>
-          <IsoBlockScene {...sceneProps(7)} />
+          {introDone && <IsoBlockScene {...sceneProps(7)} />}
         </Section>
       </div>
       <div ref={nav.register(8)}>
         <Section {...sec(8)} id="close" isLast align="center" textWidth="lg" phase={undefined} onReplay={undefined}
           text={{ title: t('land.close.title'), actions: <div className="mx-auto max-w-[260px]"><ButtonLink href="/sites" size="lg" className="w-full">{t('hero.findSites')}</ButtonLink></div> }}
           counter={<div className="text-center"><span className="big-number text-pine"><AnimatedNumber value={introDone && nav.active === 8 ? stats.homes : 0} immediate={false} /></span><div className="text-[15px] text-ink-2 mt-1">{t('land.close.sub')}</div></div>}>
-          <ClosingScene {...sceneProps(8)} />
+          {introDone && <ClosingScene {...sceneProps(8)} />}
         </Section>
       </div>
       {/* section dots */}

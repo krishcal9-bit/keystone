@@ -11,9 +11,9 @@ export type SectionText = { kicker?: string; title: string; body?: string; actio
  * One full-viewport section: scene (full-bleed, layered), text on a soft scrim, down-arrow cue,
  * Replay button when the scene's explainer is done. Layers shift with `--shift` for the camera-move transition.
  */
-export function Section({ index, active, shift, text, children, onNext, isLast, phase, onReplay, align = 'left', textWidth = 'md', id, cursor = true, counter }: {
+export function Section({ index, active, shift, text, children, onNext, isLast, phase, onReplay, align = 'left', textWidth = 'md', id, cursor = true, counter, visibleOverride }: {
   index: number; active: boolean; shift: number; text?: SectionText; children: ReactNode; onNext: () => void; isLast?: boolean;
-  phase?: ExplainerPhase; onReplay?: () => void; align?: 'left' | 'center' | 'right'; textWidth?: 'md' | 'lg'; id: string; cursor?: boolean; counter?: ReactNode;
+  phase?: ExplainerPhase; onReplay?: () => void; align?: 'left' | 'center' | 'right'; textWidth?: 'md' | 'lg'; id: string; cursor?: boolean; counter?: ReactNode; visibleOverride?: boolean;
 }) {
   const { t } = useT();
   const ref = useRef<HTMLElement>(null);
@@ -26,6 +26,7 @@ export function Section({ index, active, shift, text, children, onNext, isLast, 
     return () => window.removeEventListener('pointermove', onMove);
   }, [active, cursor]);
 
+  const shown = visibleOverride ?? active;
   const textCol = align === 'center' ? 'items-center text-center mx-auto' : align === 'right' ? 'ml-auto' : '';
   return (
     <section
@@ -45,13 +46,13 @@ export function Section({ index, active, shift, text, children, onNext, isLast, 
             <motion.div
               className={`pointer-events-auto relative isolate ${textWidth === 'lg' ? 'max-w-[760px]' : 'max-w-[560px]'} flex flex-col ${textCol}`}
               initial={false}
-              animate={active ? { opacity: 1, y: 0 } : { opacity: 0.0, y: 10 }}
-              transition={{ duration: dur.long, ease: ease.out, delay: active ? 0.35 : 0 }}
+              animate={shown ? { opacity: 1, y: 0 } : { opacity: 0.0, y: 10 }}
+              transition={{ duration: dur.long, ease: ease.out, delay: shown ? 0.35 : 0 }}
             >
               <div className="absolute -inset-6 rounded-[20px] -z-[1]" style={{ background: 'var(--scrim)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }} aria-hidden />
               {text.kicker && <p className="text-[15px] font-semibold text-pine mb-3">{text.kicker}</p>}
               <h2 className={`${index === 0 ? 'headline' : 'headline-md'} text-ink`}>
-                <SplitLines text={text.title} active={active} />
+                <SplitLines text={text.title} active={shown} />
               </h2>
               {text.body && <p className="mt-5 text-[17px] md:text-[18px] leading-7 text-ink-2 max-w-[52ch]">{text.body}</p>}
               {text.actions && <div className="mt-7 w-full max-w-[420px]">{text.actions}</div>}

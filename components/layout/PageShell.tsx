@@ -1,7 +1,5 @@
 'use client';
 import type { ReactNode } from 'react';
-import { motion } from 'motion/react';
-import { ease, dur } from '@/lib/motion';
 import { SampleDataLabel } from '@/components/ui/Pill';
 
 /**
@@ -16,7 +14,7 @@ export function PageShell({ title, subtitle, lane, children, backdrop, actions, 
     <div className="relative min-h-svh pt-16">
       {backdrop && <div className="absolute inset-x-0 top-16 bottom-0 overflow-hidden pointer-events-none" aria-hidden>{backdrop}</div>}
       <div className={`relative mx-auto px-5 md:px-10 lg:px-20 ${width === 'narrow' ? 'max-w-[1000px]' : 'max-w-[1440px]'} pt-8 pb-20`}>
-        <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: dur.medium, ease: ease.out }} className="flex flex-wrap items-end justify-between gap-4 mb-6">
+        <div className="rise-in flex flex-wrap items-end justify-between gap-4 mb-6">
           <div className="max-w-[720px]">
             <div className="flex items-center gap-3 mb-1">
               <h1 id={titleId} className="headline-md">{title}</h1>
@@ -26,7 +24,7 @@ export function PageShell({ title, subtitle, lane, children, backdrop, actions, 
             {subtitle && <p className="text-ink-2 text-[18px] leading-7">{subtitle}</p>}
           </div>
           {actions && <div className="flex items-center gap-2">{actions}</div>}
-        </motion.div>
+        </div>
         {children}
       </div>
     </div>

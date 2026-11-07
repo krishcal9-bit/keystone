@@ -174,7 +174,7 @@ input, textarea { caret-color: var(--pine); }
   pointer-events: none;
   z-index: 60;
   opacity: 0.03;
-  background-image: url("/grain.png");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 1 0'/></filter><rect width='128' height='128' filter='url(%23n)'/></svg>");
   background-repeat: repeat;
   background-size: 128px 128px;
   mix-blend-mode: multiply;
@@ -301,3 +301,8 @@ html:has(#landing) body { overflow-x: hidden; }
 /* Header hides its lockup while the intro plays, so the flying lockup lands on it */
 html[data-intro="playing"] #site-header { opacity: 0; transition: opacity 400ms var(--ease-out); }
 html[data-intro="done"] #site-header, #site-header { opacity: 1; transition: opacity 400ms var(--ease-out); }
+
+/* Entrance that runs at first paint (no JS dependency, keeps LCP early) */
+@keyframes ks-rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.rise-in { animation: ks-rise 320ms var(--ease-out) both; }
+@media (prefers-reduced-motion: reduce) { .rise-in { animation: none; } }

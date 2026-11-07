@@ -22,9 +22,8 @@ import type { PlanView } from '@/components/three/PlanScene';
 
 const PlanScene = dynamic(() => import('@/components/three/PlanScene').then((m) => m.PlanScene), { ssr: false, loading: () => null });
 
-function webglOk() {
-  try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch { return false; }
-}
+import { webglQuality } from '@/lib/webgl';
+const webglOk = () => webglQuality() === 'hardware';
 
 export function PlanStudio({ parcel, initialKeep }: { parcel: Parcel; initialKeep?: number }) {
   const { t } = useT();

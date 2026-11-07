@@ -14,13 +14,14 @@ import { ease } from '@/lib/motion';
 import { COUNTY_PATH, COAST_PATH, FREEWAYS, CITY_LABELS, ll } from '@/components/map/ocGeo';
 import { parcels } from '@/lib/data';
 import { KeystoneIcon } from '@/components/brand/KeystoneIcon';
+import { webglQuality } from '@/lib/webgl';
 
 const ArchScene = dynamic(() => import('./ArchScene').then((m) => m.ArchScene), { ssr: false, loading: () => null });
 
 const T_NAME = 3700, T_HOLD_END = 5600, T_FLY = 700;
 const LETTERS = 'Keystone'.split('');
 
-export function Intro({ onDone }: { onDone: () => void }) {
+export function Intro({ onDone, onArm }: { onDone: () => void; onArm?: () => void }) {
   const reduced = useReducedMotion();
   const { theme } = useTheme();
   const { t } = useT();
@@ -35,6 +36,11 @@ export function Intro({ onDone }: { onDone: () => void }) {
   const readyRef = useRef(false);
   const mountRef = useRef(0);
   const phaseRef = useRef<'play' | 'fly' | 'done'>('play');
+  const [arch, setArch] = useState<boolean | null>(null);
+  const archRef = useRef<boolean | null>(null);
+  const armedRef = useRef(false);
+  const onArmRef = useRef(onArm);
+  onArmRef.current = onArm;
   const flyRef = useRef<() => void>(() => {});
 
   const finish = useCallback(() => {
@@ -61,12 +67,13 @@ export function Intro({ onDone }: { onDone: () => void }) {
 
   // skip on any input
   useEffect(() => {
-    if (reduced) { const id = setTimeout(finish, 150); return () => clearTimeout(id); }
+    if (reduced) { onArmRef.current?.(); const id = setTimeout(finish, 150); return () => clearTimeout(id); }
     const skip = () => { if (phase === 'play') { fastRef.current = true; tRef.current = Math.max(tRef.current, T_NAME + 900); fly(); } };
     window.addEventListener('keydown', skip); window.addEventListener('pointerdown', skip); window.addEventListener('wheel', skip, { passive: true }); window.addEventListener('touchstart', skip, { passive: true });
     return () => { window.removeEventListener('keydown', skip); window.removeEventListener('pointerdown', skip); window.removeEventListener('wheel', skip); window.removeEventListener('touchstart', skip); };
   }, [reduced, phase, fly, finish]);
 
+  useEffect(() => { const ok = webglQuality() === 'hardware'; archRef.current = ok; setArch(ok); if (!ok) readyRef.current = true; }, []);
   flyRef.current = fly;
   // timeline clock (started once; never restarted on phase changes)
   useEffect(() => {
@@ -80,6 +87,8 @@ export function Intro({ onDone }: { onDone: () => void }) {
         // hold at the blueprint until the 3D chunk is ready (max 1.5 s), then continue
         if (!readyRef.current && now - mountRef.current < 1500 && now - t0 > 650) t0 = now - 650;
         tRef.current = now - t0;
+        // no hardware WebGL: skip the arch (700–2700) and go straight to the map
+        if (archRef.current === false && tRef.current > 700 && tRef.current < 2700) { t0 -= 2700 - tRef.current; tRef.current = 2700; }
       }
       setMs(tRef.current);
       if (tRef.current >= T_HOLD_END && phaseRef.current === 'play') flyRef.current();
@@ -98,19 +107,20 @@ export function Intro({ onDone }: { onDone: () => void }) {
   const sky = ms < 700 ? Math.min(1, ms / 700) : 1;
   const mapIn = Math.min(1, Math.max(0, (ms - 2700) / 900));
   const nameIn = ms >= T_NAME;
+  if (nameIn && !armedRef.current) { armedRef.current = true; setTimeout(() => onArm?.(), 0); }
   const archVisible = ms < 3600;
 
   return (
-    <div className="fixed inset-0 z-[70] overflow-hidden" data-testid="intro" data-phase={phase} aria-hidden>
+    <div className="fixed inset-0 z-[70] overflow-hidden" style={{ transform: 'translateZ(0)', willChange: 'transform' }} data-testid="intro" data-phase={phase} aria-hidden>
       {/* sky: deep twilight → page colour */}
       <motion.div className="absolute inset-0" animate={{ opacity: phase === 'fly' ? 0 : 1 }} transition={{ duration: flyDur, ease: ease.out }}
         style={{ background: night ? `linear-gradient(${P.nightSkyHigh}, ${P.nightSkyLow})` : `linear-gradient(${mixHex('#152238', '#DCE8EE', sky)}, ${mixHex('#2A3650', '#F6F7F5', sky)})` }} />
       {/* warm horizon glow */}
-      <div className="absolute inset-x-0 bottom-0 h-1/2 pointer-events-none" style={{ background: `radial-gradient(60% 50% at 50% 100%, rgba(227,184,102,${0.35 * (1 - mapIn)}) 0%, rgba(227,184,102,0) 100%)` }} />
+      <div className="absolute inset-x-0 bottom-0 pointer-events-none" style={{ height: '50vh', background: `radial-gradient(60% 50% at 50% 100%, rgba(227,184,102,${0.35 * (1 - mapIn)}) 0%, rgba(227,184,102,0) 100%)` }} />
       {/* blueprint */}
       <Blueprint ms={ms} night={night} hidden={mapIn > 0.6} />
       {/* arch */}
-      {archVisible && (
+      {archVisible && arch === true && (
         <motion.div className="absolute inset-0" animate={{ opacity: ms > 3000 ? 0 : 1 }} transition={{ duration: 0.5, ease: ease.out }}>
           <ArchScene tl={{ tRef, fast: fastRef }} night={night} onReady={() => { readyRef.current = true; }} />
         </motion.div>
@@ -131,7 +141,7 @@ export function Intro({ onDone }: { onDone: () => void }) {
             >
               <div className="flex items-center gap-[0.3em]" style={{ fontSize: 'clamp(64px, 9vw, 150px)' }}>
                 <motion.span initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4, ease: ease.out }} className="inline-flex" style={{ height: '1em' }}>
-                  <KeystoneIcon size={Math.round(Math.min(150, Math.max(64, (typeof window !== 'undefined' ? window.innerWidth : 1440) * 0.09)) * 0.95)} glow />
+                  <KeystoneIcon size={128} glow className="h-[0.95em] w-auto" />
                 </motion.span>
                 <span className="wordmark text-ink relative inline-flex overflow-hidden" style={{ lineHeight: 1.05, paddingBottom: '0.06em' }}>
                   {LETTERS.map((ch, i) => (

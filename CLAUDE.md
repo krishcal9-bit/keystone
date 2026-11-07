@@ -43,6 +43,9 @@ plan, drafts the pitch to the congregation, and tracks the pipeline. Brand: "Hom
 1 scaffold/tokens/header/i18n · 2 engine + data · 3 illustration system · 4 Site Finder · 5 Site Detail ·
 6 Plan Studio · 7 Lot Scan · 8 Pitch Kit · 9 Pipeline · 10 Landing · 11 Intro · 12 Ask + 404 · 13 QA/README/tag.
 
+## Add-on (lane branding)
+Lane is always "Find it". `lib/gap.ts` is the illustrative per-home cost model; `lib/cityRules.ts` the sample city checklist; `/judges` + `components/tour` the Judge Guide and guided tour. Brief figures cite "Source: Claude Impact Lab challenge brief"; SB 4 claims cite HCD; modelled money/time are labelled illustrative.
+
 ## Commands
 `npm run check` (tsc, eslint, vitest, next build --turbopack) must pass before every push. `npm run e2e` runs Playwright with `MOCK_CLAUDE=1`.
 Record judgment calls in `docs/DECISIONS.md`.

@@ -63,7 +63,7 @@ export function SiteDetail({ parcel }: { parcel: Parcel }) {
       <div className="absolute inset-x-0 bottom-0 h-[42svh] pointer-events-none overflow-hidden" aria-hidden><AerialBackdrop night={night} /></div>
       <div className="relative mx-auto max-w-[1440px] px-5 md:px-10 lg:px-20 pt-6 pb-20">
         <nav aria-label="Breadcrumb" className="text-[13px] text-ink-2 mb-3"><Link href="/sites" className="hover:text-ink">{t('sites.title')}</Link> <span className="mx-1">/</span> <span>{parcel.city}</span></nav>
-        <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: dur.medium, ease: ease.out }} className="flex flex-wrap items-end justify-between gap-4 mb-6">
+        <div className="rise-in flex flex-wrap items-end justify-between gap-4 mb-6">
           <div className="max-w-[760px]">
             <div className="flex items-center gap-3 flex-wrap"><h1 className="headline-md">{parcel.displayName}</h1><SampleDataLabel /></div>
             <p className="text-[14px] text-pine font-medium mt-1" data-testid="lane-line">{t('lane.site')}</p>
@@ -73,7 +73,7 @@ export function SiteDetail({ parcel }: { parcel: Parcel }) {
             {elig.eligible ? <Pill tone="pine">{t('common.eligible')}</Pill> : <Pill tone="red">{t('common.notEligible')}</Pill>}
             <Pill tone="neutral">{t('sites.fit')} {fit.score}</Pill>
           </div>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* left: diagram + slider + actions */}

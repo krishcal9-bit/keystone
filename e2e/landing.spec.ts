@@ -33,11 +33,11 @@ test.describe('landing', () => {
     const count = await page.locator('[data-section]').count();
     expect(count).toBeGreaterThanOrEqual(9);
     for (let i = 1; i < count; i++) {
-      await page.keyboard.press('ArrowDown');
-      await page.waitForTimeout(900);
       // a press during an auto-play sequence completes it; the next press moves on
-      if ((await page.locator(`[data-section="${i}"]`).getAttribute('data-active')) !== 'true') {
+      for (let attempt = 0; attempt < 3; attempt++) {
         await page.keyboard.press('ArrowDown');
+        await page.waitForTimeout(1000);
+        if ((await page.locator(`[data-section="${i}"]`).getAttribute('data-active')) === 'true') break;
       }
       await page.waitForTimeout(300);
       const header = await page.getByTestId('header').boundingBox();

@@ -1,17 +1,16 @@
 'use client';
 import { useState } from 'react';
-import dynamic from 'next/dynamic';
 import { Landing } from './Landing';
-
-const Intro = dynamic(() => import('@/components/intro/Intro').then((m) => m.Intro), { ssr: false, loading: () => null });
+import { Intro } from '@/components/intro/Intro';
 
 /** Hero DOM is rendered from the start underneath the intro; the intro hands off to it when done or skipped. */
 export function LandingShell() {
   const [introDone, setIntroDone] = useState(false);
+  const [armed, setArmed] = useState(false);
   return (
     <>
-      <Landing introDone={introDone} />
-      {!introDone && <Intro onDone={() => setIntroDone(true)} />}
+      <Landing introDone={introDone} heroArmed={armed} />
+      {!introDone && <Intro onDone={() => setIntroDone(true)} onArm={() => setArmed(true)} />}
     </>
   );
 }

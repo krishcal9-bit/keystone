@@ -35,7 +35,7 @@ export type ArchTimeline = { tRef: React.MutableRefObject<number>; fast: React.M
 
 export function ArchScene({ tl, night, onReady }: { tl: ArchTimeline; night: boolean; onReady?: () => void }) {
   return (
-    <Canvas dpr={[1, 2]} camera={{ fov: 30, near: 0.1, far: 100, position: [0, 1.2, 11] }} gl={{ antialias: true, alpha: true }} shadows={{ type: THREE.PCFShadowMap }} style={{ background: 'transparent' }} frameloop="always" onCreated={() => onReady?.()}>
+    <Canvas dpr={[1, 1.5]} camera={{ fov: 30, near: 0.1, far: 100, position: [0, 1.2, 11] }} gl={{ antialias: true, alpha: true }} shadows={{ type: THREE.PCFShadowMap }} style={{ background: 'transparent' }} frameloop="always" onCreated={() => onReady?.()}>
       <Rig tl={tl} />
       <hemisphereLight args={[night ? '#2A3F5C' : P.sky, night ? '#13201A' : P.lawn, night ? 0.5 : 0.8]} />
       <directionalLight position={[-4, 7, 5]} intensity={night ? 1.1 : 2.1} color={night ? '#AFC6E6' : '#FFF4DF'} castShadow shadow-mapSize={[1024, 1024]} />

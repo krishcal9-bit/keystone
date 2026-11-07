@@ -15,6 +15,7 @@ import { PlanDiagram2D } from '@/components/plan/PlanDiagram2D';
 import { useT } from '@/lib/i18n';
 import { Sky } from '@/components/illustrations/Sky';
 import { Hills } from '@/components/illustrations/Ground';
+import { webglQuality } from '@/lib/webgl';
 
 const PlanScene = dynamic(() => import('@/components/three/PlanScene').then((m) => m.PlanScene), { ssr: false, loading: () => null });
 const parcel = parcels[0];
@@ -26,7 +27,7 @@ export function PlanMiniScene(props: SceneProps) {
   const model = useMemo(() => buildPlanModel(parcel, { unitType: 'flat', keepSpaces: defaultKeepSpaces(parcel), garden: true }), []);
   const [gl, setGl] = useState<boolean | null>(null);
   const [built, setBuilt] = useState(0);
-  useEffect(() => { try { const c = document.createElement('canvas'); setGl(!!(c.getContext('webgl2') || c.getContext('webgl')) && !props.reduced); } catch { setGl(false); } }, [props.reduced]);
+  useEffect(() => { setGl(webglQuality() === 'hardware' && !props.reduced); }, [props.reduced]);
   const playing = ex.phase !== 'idle';
   const buildKey = playing ? ex.key + 1 : 0;
   useEffect(() => { if (!playing) setBuilt(0); }, [playing]);

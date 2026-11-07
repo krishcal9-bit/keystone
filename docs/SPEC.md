@@ -107,3 +107,12 @@ Keep scenes mounted; distinct homes; labels on solid backing; scenery never styl
 
 ## 14. Demo script (3 minutes)
 1 intro · 2 the pitch · 3 Down through "The law changed in 2024" · 4 Site Finder filter to eligible near transit · 5 open a sample church, drag keep parking 120→60 · 6 Lot Scan · 7 Plan Studio generate/before-after/sun · 8 Pitch Kit Spanish letter + objections · 9 Pipeline move to "Meeting set" · 10 dark mode lamps · 11 close.
+
+## Add-on: lane branding and the challenge framing
+Figures from the Claude Impact Lab challenge brief: "Every home has to hit $0." $1.47M median OC home price, ~4 years land to keys, 34 cities with their own forms and fees, a family can pay 30–35% of income. Our lane: **Find it**.
+1. Lane pill "Lane · Find it" in the header (opens /judges); a "Find it:" line under every tool title.
+2. Landing section "The challenge": cost stack (Land, Design, Permits, Build) vs what closes it; the Keystone move shrinks Land and Permits; four brief stats with Keystone's answers. All dollar figures illustrative.
+3. Landing section "From luck to a system": waiting by the phone vs the OC map lighting up, ranked.
+4. Site Detail and Plan Studio: "Closes the gap" bar from the engine (illustrative), "City rules" card (sample checklist, SB 4 override, objective standards), "Time to keys" timelines.
+5. `/judges`: "Lane: Find it" guide with the challenge→feature table, See-it deep links and a 60-second guided tour.
+6. Copy rules: "Find it" everywhere; brief claims cite "Source: Claude Impact Lab challenge brief"; SB 4 claims cite HCD; modelled money/time labelled illustrative.
