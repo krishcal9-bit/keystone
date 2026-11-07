@@ -1,7 +1,9 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  distDir: process.env.NEXT_DIST_DIR || '.next',
+  reactStrictMode: true,
+  experimental: { optimizePackageImports: ['motion', 'three', '@react-three/drei'] },
 };
 
 export default nextConfig;

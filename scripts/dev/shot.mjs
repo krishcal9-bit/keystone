@@ -1,0 +1,14 @@
+import { chromium } from 'playwright';
+const [,, url, out, theme='light', w='1440', h='900', wait='1500', full='0'] = process.argv;
+const browser = await chromium.launch();
+const ctx = await browser.newContext({ viewport: { width: +w, height: +h }, deviceScaleFactor: 1, colorScheme: theme === 'dark' ? 'dark' : 'light' });
+const page = await ctx.newPage();
+const logs = [];
+page.on('console', m => { if (m.type() === 'error' || m.type() === 'warning') logs.push(`[${m.type()}] ${m.text()}`); });
+page.on('pageerror', e => logs.push(`[pageerror] ${e.message}`));
+await page.addInitScript((t) => { try { localStorage.setItem('keystone:v1:theme', t); } catch {} }, theme);
+await page.goto(url, { waitUntil: 'networkidle' });
+await page.waitForTimeout(+wait);
+await page.screenshot({ path: out, fullPage: full === '1' });
+console.log(logs.join('\n') || 'console clean');
+await browser.close();
