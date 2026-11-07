@@ -23,6 +23,7 @@ export async function buildPlanPdf({ model, png, notLegal }: { model: PlanModel;
       <Page size="LETTER" style={s.page}>
         <Text style={s.h1}>{p.displayName}</Text>
         <Text style={s.sub}>{p.city}, Orange County · Keystone site plan · Sample data</Text>
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
         {png && <Image src={png} style={s.img} />}
         <View style={s.row}>
           <View style={s.stat}><Text style={s.big}>{model.placed}</Text><Text style={s.lab}>Habitat homes placed ({model.opts.unitType === 'flat' ? 'stacked flats' : 'townhomes'})</Text></View>

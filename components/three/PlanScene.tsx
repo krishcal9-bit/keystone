@@ -29,6 +29,7 @@ export type PlanSceneProps = {
   cursorLight?: boolean;
   autoSunSweep?: boolean;
   speed?: number;
+  zoom?: number;
   onCanvas?: (el: HTMLCanvasElement) => void;
   className?: string;
 };
@@ -75,7 +76,7 @@ export function PlanScene(props: PlanSceneProps) {
         <SiteFeatures model={model} showPlan={props.showPlan} />
         <Trees model={model} />
         <Lamps model={model} night={props.night} />
-        <CameraRig model={model} view={props.view} interactive={interactive} />
+        <CameraRig model={model} view={props.view} interactive={interactive} zoom={props.zoom ?? 1} />
         <NightTween night={props.night} />
       </Canvas>
     </div>
@@ -379,7 +380,7 @@ function Homes({ model, buildKey, showPlan, onBuildEnd, night, speed }: { model:
 
     const counts = { found: 0, walls: wallMats.map(() => 0), roofs: roofMats.map(() => 0), win: 0, lit: 0, door: 0 };
     const F = refs.found.current;
-    units.forEach((u, i) => {
+    units.forEach((u) => {
       const r = u.rect;
       const cx = r.x + r.w / 2, cz = r.y + r.h / 2;
       const t = elapsed - u.start;
@@ -600,8 +601,8 @@ function Lamps({ model, night }: { model: PlanModel; night: boolean }) {
 }
 
 // ---------- Camera ----------
-function CameraRig({ model, view, interactive }: { model: PlanModel; view: PlanView; interactive: boolean }) {
-  const R = Math.max(model.bounds.w, model.bounds.h);
+function CameraRig({ model, view, interactive, zoom }: { model: PlanModel; view: PlanView; interactive: boolean; zoom: number }) {
+  const R = Math.max(model.bounds.w, model.bounds.h) * zoom;
   const controls = useRef<OrbitControlsImpl>(null);
   const camera = useThree((s) => s.camera);
   const invalidate = useThree((s) => s.invalidate);

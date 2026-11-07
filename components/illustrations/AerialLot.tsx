@@ -55,7 +55,6 @@ export function AerialLot({ parcel, size = 400, night = false, keptStalls, keptS
   const s = size;
   const poly = parcel.lotPolygon;
   const bx = Math.max(...poly.map((p) => p.x)), by = Math.max(...poly.map((p) => p.y));
-  const h = by * s;
   const trees = treesFor(parcel, seed);
   const b = parcel.buildingRect;
   const clip = `${id}-clip`;
