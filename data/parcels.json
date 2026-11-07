@@ -1,0 +1,3577 @@
+[
+ {
+  "id": "oakfield-community-church",
+  "displayName": "Oakfield Community Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1979-06-10",
+  "faith": "Community church",
+  "city": "Santa Ana",
+  "mapX": 366,
+  "mapY": 344,
+  "lotAcres": 3.9,
+  "buildingAcres": 0.7,
+  "parkingAcres": 0.96,
+  "parkingSpaces": 120,
+  "openAcres": 2.24,
+  "zoning": "institutional",
+  "nearSchoolM": 320,
+  "nearTransitM": 260,
+  "nearGroceryM": 480,
+  "slopePct": 1,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "es",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.72
+   },
+   {
+    "x": 0,
+    "y": 0.72
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.3,
+   "h": 0.24
+  },
+  "parkingRects": [
+   {
+    "x": 0.42,
+    "y": 0.06,
+    "w": 0.52,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "seabreeze-united-methodist-church-an1",
+  "displayName": "Seabreeze United Methodist Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2006-10-03",
+  "faith": "United Methodist church",
+  "city": "Anaheim",
+  "mapX": 341,
+  "mapY": 183,
+  "lotAcres": 1.5,
+  "buildingAcres": 0.24,
+  "parkingAcres": 0.47,
+  "parkingSpaces": 58,
+  "openAcres": 0.79,
+  "zoning": "residential",
+  "nearSchoolM": 260,
+  "nearTransitM": 1500,
+  "nearGroceryM": 1700,
+  "slopePct": 3,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.55
+   },
+   {
+    "x": 0,
+    "y": 0.55
+   }
+  ],
+  "buildingRect": {
+   "x": 0.66,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.08,
+    "w": 0.54,
+    "h": 0.24
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "orchard-gate-lutheran-church-we2",
+  "displayName": "Orchard Gate Lutheran Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1985-09-25",
+  "faith": "Lutheran church",
+  "city": "Westminster",
+  "mapX": 176,
+  "mapY": 332,
+  "lotAcres": 1.73,
+  "buildingAcres": 0.28,
+  "parkingAcres": 0.49,
+  "parkingSpaces": 60,
+  "openAcres": 0.96,
+  "zoning": "residential",
+  "nearSchoolM": 350,
+  "nearTransitM": 650,
+  "nearGroceryM": 1700,
+  "slopePct": 2,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.9
+   },
+   {
+    "x": 0,
+    "y": 0.9
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.22
+  },
+  "parkingRects": [
+   {
+    "x": 0.4,
+    "y": 0.06,
+    "w": 0.54,
+    "h": 0.38
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "fairhaven-catholic-parish-hu3",
+  "displayName": "Fairhaven Catholic Parish (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1966-06-27",
+  "faith": "Catholic parish",
+  "city": "Huntington Beach",
+  "mapX": 222,
+  "mapY": 522,
+  "lotAcres": 4.99,
+  "buildingAcres": 1.06,
+  "parkingAcres": 1.88,
+  "parkingSpaces": 233,
+  "openAcres": 2.05,
+  "zoning": "institutional",
+  "nearSchoolM": 260,
+  "nearTransitM": 1500,
+  "nearGroceryM": 1700,
+  "slopePct": 2,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.55
+   },
+   {
+    "x": 0,
+    "y": 0.55
+   }
+  ],
+  "buildingRect": {
+   "x": 0.66,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.08,
+    "w": 0.54,
+    "h": 0.24
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "sunrise-hill-presbyterian-church-we4",
+  "displayName": "Sunrise Hill Presbyterian Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2006-04-18",
+  "faith": "Presbyterian church",
+  "city": "Westminster",
+  "mapX": 213,
+  "mapY": 338,
+  "lotAcres": 4.47,
+  "buildingAcres": 0.71,
+  "parkingAcres": 1.72,
+  "parkingSpaces": 214,
+  "openAcres": 2.04,
+  "zoning": "institutional",
+  "nearSchoolM": 420,
+  "nearTransitM": 380,
+  "nearGroceryM": 250,
+  "slopePct": 4,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "vi",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 1
+   },
+   {
+    "x": 0,
+    "y": 1
+   }
+  ],
+  "buildingRect": {
+   "x": 0.08,
+   "y": 0.08,
+   "w": 0.34,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.5,
+    "y": 0.08,
+    "w": 0.44,
+    "h": 0.36
+   },
+   {
+    "x": 0.08,
+    "y": 0.44,
+    "w": 0.34,
+    "h": 0.2
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "northgate-episcopal-church-co5",
+  "displayName": "Northgate Episcopal Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1959-04-03",
+  "faith": "Episcopal church",
+  "city": "Costa Mesa",
+  "mapX": 306,
+  "mapY": 532,
+  "lotAcres": 4.35,
+  "buildingAcres": 0.72,
+  "parkingAcres": 1.28,
+  "parkingSpaces": 159,
+  "openAcres": 2.35,
+  "zoning": "commercial",
+  "nearSchoolM": 350,
+  "nearTransitM": 2200,
+  "nearGroceryM": 900,
+  "slopePct": 9,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 0.82,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.18
+   },
+   {
+    "x": 1,
+    "y": 0.88
+   },
+   {
+    "x": 0,
+    "y": 0.88
+   }
+  ],
+  "buildingRect": {
+   "x": 0.6,
+   "y": 0.52,
+   "w": 0.32,
+   "h": 0.28
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.52,
+    "w": 0.48,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "bottom"
+ },
+ {
+  "id": "bellflower-pentecostal-church-an6",
+  "displayName": "Bellflower Pentecostal Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2007-06-14",
+  "faith": "Pentecostal church",
+  "city": "Anaheim",
+  "mapX": 342,
+  "mapY": 204,
+  "lotAcres": 4.35,
+  "buildingAcres": 0.71,
+  "parkingAcres": 1.3,
+  "parkingSpaces": 161,
+  "openAcres": 2.34,
+  "zoning": "residential",
+  "nearSchoolM": 260,
+  "nearTransitM": 380,
+  "nearGroceryM": 400,
+  "slopePct": 2,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.55
+   },
+   {
+    "x": 0,
+    "y": 0.55
+   }
+  ],
+  "buildingRect": {
+   "x": 0.66,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.08,
+    "w": 0.54,
+    "h": 0.24
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "meadowlark-korean-presbyterian-church-sa7",
+  "displayName": "Meadowlark Korean Presbyterian Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2024-03-15",
+  "faith": "Korean Presbyterian church",
+  "city": "Santa Ana",
+  "mapX": 407,
+  "mapY": 351,
+  "lotAcres": 2.07,
+  "buildingAcres": 0.36,
+  "parkingAcres": 0.68,
+  "parkingSpaces": 84,
+  "openAcres": 1.03,
+  "zoning": "residential",
+  "nearSchoolM": 260,
+  "nearTransitM": 380,
+  "nearGroceryM": 400,
+  "slopePct": 6,
+  "floodZone": true,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0.08,
+    "y": 0
+   },
+   {
+    "x": 0.92,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.8
+   },
+   {
+    "x": 0,
+    "y": 0.8
+   }
+  ],
+  "buildingRect": {
+   "x": 0.12,
+   "y": 0.08,
+   "w": 0.3,
+   "h": 0.26
+  },
+  "parkingRects": [
+   {
+    "x": 0.5,
+    "y": 0.1,
+    "w": 0.4,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "morning-star-catholic-parish-or8",
+  "displayName": "Morning Star Catholic Parish (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1952-07-09",
+  "faith": "Vietnamese Catholic parish",
+  "city": "Orange",
+  "mapX": 409,
+  "mapY": 255,
+  "lotAcres": 2.58,
+  "buildingAcres": 0.64,
+  "parkingAcres": 0.81,
+  "parkingSpaces": 100,
+  "openAcres": 1.13,
+  "zoning": "commercial",
+  "nearSchoolM": 1200,
+  "nearTransitM": 300,
+  "nearGroceryM": 400,
+  "slopePct": 3,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0.08,
+    "y": 0
+   },
+   {
+    "x": 0.92,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.8
+   },
+   {
+    "x": 0,
+    "y": 0.8
+   }
+  ],
+  "buildingRect": {
+   "x": 0.12,
+   "y": 0.08,
+   "w": 0.3,
+   "h": 0.26
+  },
+  "parkingRects": [
+   {
+    "x": 0.5,
+    "y": 0.1,
+    "w": 0.4,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "pepper-tree-evangelical-church-hu9",
+  "displayName": "Pepper Tree Evangelical Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1958-10-16",
+  "faith": "Evangelical church",
+  "city": "Huntington Beach",
+  "mapX": 206,
+  "mapY": 515,
+  "lotAcres": 5.45,
+  "buildingAcres": 0.8,
+  "parkingAcres": 1.87,
+  "parkingSpaces": 232,
+  "openAcres": 2.78,
+  "zoning": "residential",
+  "nearSchoolM": 260,
+  "nearTransitM": 380,
+  "nearGroceryM": 700,
+  "slopePct": 1,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.72
+   },
+   {
+    "x": 0,
+    "y": 0.72
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.3,
+   "h": 0.24
+  },
+  "parkingRects": [
+   {
+    "x": 0.42,
+    "y": 0.06,
+    "w": 0.52,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "temple-three-oaks-hu0",
+  "displayName": "Temple Three Oaks (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2018-06-09",
+  "faith": "Synagogue",
+  "city": "Huntington Beach",
+  "mapX": 185,
+  "mapY": 494,
+  "lotAcres": 4.72,
+  "buildingAcres": 0.71,
+  "parkingAcres": 1.94,
+  "parkingSpaces": 241,
+  "openAcres": 2.07,
+  "zoning": "residential",
+  "nearSchoolM": 750,
+  "nearTransitM": 200,
+  "nearGroceryM": 250,
+  "slopePct": 9,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 0.82,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.18
+   },
+   {
+    "x": 1,
+    "y": 0.88
+   },
+   {
+    "x": 0,
+    "y": 0.88
+   }
+  ],
+  "buildingRect": {
+   "x": 0.6,
+   "y": 0.52,
+   "w": 0.32,
+   "h": 0.28
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.52,
+    "w": 0.48,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "bottom"
+ },
+ {
+  "id": "quiet-harbor-islamic-center-sa1",
+  "displayName": "Quiet Harbor Islamic Center (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1960-04-12",
+  "faith": "Islamic center",
+  "city": "Santa Ana",
+  "mapX": 344,
+  "mapY": 346,
+  "lotAcres": 4.34,
+  "buildingAcres": 0.75,
+  "parkingAcres": 2.03,
+  "parkingSpaces": 252,
+  "openAcres": 1.56,
+  "zoning": "residential",
+  "nearSchoolM": 1800,
+  "nearTransitM": 450,
+  "nearGroceryM": 1300,
+  "slopePct": 1,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "es",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.72
+   },
+   {
+    "x": 0,
+    "y": 0.72
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.3,
+   "h": 0.24
+  },
+  "parkingRects": [
+   {
+    "x": 0.42,
+    "y": 0.06,
+    "w": 0.52,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "silver-lake-buddhist-temple-tu2",
+  "displayName": "Silver Lake Buddhist Temple (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1988-10-07",
+  "faith": "Buddhist temple",
+  "city": "Tustin",
+  "mapX": 476,
+  "mapY": 351,
+  "lotAcres": 1.94,
+  "buildingAcres": 0.44,
+  "parkingAcres": 0.6,
+  "parkingSpaces": 74,
+  "openAcres": 0.9,
+  "zoning": "institutional",
+  "nearSchoolM": 260,
+  "nearTransitM": 800,
+  "nearGroceryM": 1700,
+  "slopePct": 3,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.9
+   },
+   {
+    "x": 0,
+    "y": 0.9
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.22
+  },
+  "parkingRects": [
+   {
+    "x": 0.4,
+    "y": 0.06,
+    "w": 0.54,
+    "h": 0.38
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "willow-creek-gurdwara-sahib-or3",
+  "displayName": "Willow Creek Gurdwara Sahib (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2008-09-23",
+  "faith": "Sikh gurdwara",
+  "city": "Orange",
+  "mapX": 370,
+  "mapY": 272,
+  "lotAcres": 3.37,
+  "buildingAcres": 0.73,
+  "parkingAcres": 1.12,
+  "parkingSpaces": 139,
+  "openAcres": 1.52,
+  "zoning": "residential",
+  "nearSchoolM": 1800,
+  "nearTransitM": 300,
+  "nearGroceryM": 700,
+  "slopePct": 2,
+  "floodZone": false,
+  "hazards": [
+   "liquefaction"
+  ],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.72
+   },
+   {
+    "x": 0,
+    "y": 0.72
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.3,
+   "h": 0.24
+  },
+  "parkingRects": [
+   {
+    "x": 0.42,
+    "y": 0.06,
+    "w": 0.52,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "peregrine-hindu-temple-co4",
+  "displayName": "Peregrine Hindu Temple (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1997-04-22",
+  "faith": "Hindu temple",
+  "city": "Costa Mesa",
+  "mapX": 289,
+  "mapY": 558,
+  "lotAcres": 3.46,
+  "buildingAcres": 0.81,
+  "parkingAcres": 1.56,
+  "parkingSpaces": 194,
+  "openAcres": 1.09,
+  "zoning": "residential",
+  "nearSchoolM": 350,
+  "nearTransitM": 380,
+  "nearGroceryM": 1700,
+  "slopePct": 2,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.9
+   },
+   {
+    "x": 0,
+    "y": 0.9
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.22
+  },
+  "parkingRects": [
+   {
+    "x": 0.4,
+    "y": 0.06,
+    "w": 0.54,
+    "h": 0.38
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "greenfield-friends-meeting-ir5",
+  "displayName": "Greenfield Friends Meeting (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2004-11-28",
+  "faith": "Friends meeting",
+  "city": "Irvine",
+  "mapX": 471,
+  "mapY": 479,
+  "lotAcres": 1.31,
+  "buildingAcres": 0.33,
+  "parkingAcres": 0.57,
+  "parkingSpaces": 70,
+  "openAcres": 0.41,
+  "zoning": "institutional",
+  "nearSchoolM": 420,
+  "nearTransitM": 1100,
+  "nearGroceryM": 550,
+  "slopePct": 3,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0.08,
+    "y": 0
+   },
+   {
+    "x": 0.92,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.8
+   },
+   {
+    "x": 0,
+    "y": 0.8
+   }
+  ],
+  "buildingRect": {
+   "x": 0.12,
+   "y": 0.08,
+   "w": 0.3,
+   "h": 0.26
+  },
+  "parkingRects": [
+   {
+    "x": 0.5,
+    "y": 0.1,
+    "w": 0.4,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "stonebridge-nondenominational-church-co6",
+  "displayName": "Stonebridge Nondenominational Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1960-05-12",
+  "faith": "Nondenominational church",
+  "city": "Costa Mesa",
+  "mapX": 323,
+  "mapY": 541,
+  "lotAcres": 1.44,
+  "buildingAcres": 0.27,
+  "parkingAcres": 0.48,
+  "parkingSpaces": 59,
+  "openAcres": 0.69,
+  "zoning": "institutional",
+  "nearSchoolM": 600,
+  "nearTransitM": 300,
+  "nearGroceryM": 900,
+  "slopePct": 3,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 0.78,
+    "y": 0
+   },
+   {
+    "x": 0.78,
+    "y": 1
+   },
+   {
+    "x": 0,
+    "y": 1
+   }
+  ],
+  "buildingRect": {
+   "x": 0.08,
+   "y": 0.66,
+   "w": 0.3,
+   "h": 0.26
+  },
+  "parkingRects": [
+   {
+    "x": 0.08,
+    "y": 0.1,
+    "w": 0.26,
+    "h": 0.5
+   }
+  ],
+  "streetSide": "bottom"
+ },
+ {
+  "id": "ironwood-seventh-day-adventist-church-an7",
+  "displayName": "Ironwood Seventh-day Adventist Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2017-02-13",
+  "faith": "Seventh-day Adventist church",
+  "city": "Anaheim",
+  "mapX": 324,
+  "mapY": 167,
+  "lotAcres": 5.13,
+  "buildingAcres": 1.17,
+  "parkingAcres": 1.76,
+  "parkingSpaces": 219,
+  "openAcres": 2.2,
+  "zoning": "commercial",
+  "nearSchoolM": 420,
+  "nearTransitM": 650,
+  "nearGroceryM": 700,
+  "slopePct": 1,
+  "floodZone": false,
+  "hazards": [
+   "noise-airport"
+  ],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.72
+   },
+   {
+    "x": 0,
+    "y": 0.72
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.3,
+   "h": 0.24
+  },
+  "parkingRects": [
+   {
+    "x": 0.42,
+    "y": 0.06,
+    "w": 0.52,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "sagebrush-orthodox-church-we8",
+  "displayName": "Sagebrush Orthodox Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1990-09-10",
+  "faith": "Orthodox church",
+  "city": "Westminster",
+  "mapX": 205,
+  "mapY": 376,
+  "lotAcres": 5.01,
+  "buildingAcres": 1.21,
+  "parkingAcres": 2.12,
+  "parkingSpaces": 263,
+  "openAcres": 1.68,
+  "zoning": "institutional",
+  "nearSchoolM": 900,
+  "nearTransitM": 300,
+  "nearGroceryM": 900,
+  "slopePct": 3,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "vi",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.9
+   },
+   {
+    "x": 0,
+    "y": 0.9
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.22
+  },
+  "parkingRects": [
+   {
+    "x": 0.4,
+    "y": 0.06,
+    "w": 0.54,
+    "h": 0.38
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "oakfield-community-church-sa9",
+  "displayName": "Oakfield Community Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1993-08-15",
+  "faith": "Community church",
+  "city": "Santa Ana",
+  "mapX": 377,
+  "mapY": 340,
+  "lotAcres": 1.35,
+  "buildingAcres": 0.22,
+  "parkingAcres": 0.59,
+  "parkingSpaces": 73,
+  "openAcres": 0.54,
+  "zoning": "residential",
+  "nearSchoolM": 260,
+  "nearTransitM": 450,
+  "nearGroceryM": 900,
+  "slopePct": 4,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "es",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 0.82,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.18
+   },
+   {
+    "x": 1,
+    "y": 0.88
+   },
+   {
+    "x": 0,
+    "y": 0.88
+   }
+  ],
+  "buildingRect": {
+   "x": 0.6,
+   "y": 0.52,
+   "w": 0.32,
+   "h": 0.28
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.52,
+    "w": 0.48,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "bottom"
+ },
+ {
+  "id": "kingfisher-baptist-church-co0",
+  "displayName": "Kingfisher Baptist Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1955-01-08",
+  "faith": "Baptist church",
+  "city": "Costa Mesa",
+  "mapX": 334,
+  "mapY": 528,
+  "lotAcres": 2.48,
+  "buildingAcres": 0.41,
+  "parkingAcres": 0.79,
+  "parkingSpaces": 98,
+  "openAcres": 1.28,
+  "zoning": "commercial",
+  "nearSchoolM": 900,
+  "nearTransitM": 1100,
+  "nearGroceryM": 700,
+  "slopePct": 2,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.55
+   },
+   {
+    "x": 0,
+    "y": 0.55
+   }
+  ],
+  "buildingRect": {
+   "x": 0.66,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.08,
+    "w": 0.54,
+    "h": 0.24
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "maple-court-united-methodist-church-ga1",
+  "displayName": "Maple Court United Methodist Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1965-07-08",
+  "faith": "United Methodist church",
+  "city": "Garden Grove",
+  "mapX": 269,
+  "mapY": 347,
+  "lotAcres": 6.76,
+  "buildingAcres": 1.56,
+  "parkingAcres": 2.93,
+  "parkingSpaces": 364,
+  "openAcres": 2.27,
+  "zoning": "residential",
+  "nearSchoolM": 1200,
+  "nearTransitM": 300,
+  "nearGroceryM": 1700,
+  "slopePct": 9,
+  "floodZone": true,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 1
+   },
+   {
+    "x": 0,
+    "y": 1
+   }
+  ],
+  "buildingRect": {
+   "x": 0.08,
+   "y": 0.08,
+   "w": 0.34,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.5,
+    "y": 0.08,
+    "w": 0.44,
+    "h": 0.36
+   },
+   {
+    "x": 0.08,
+    "y": 0.44,
+    "w": 0.34,
+    "h": 0.2
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "sandpiper-lutheran-church-or2",
+  "displayName": "Sandpiper Lutheran Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2009-03-24",
+  "faith": "Lutheran church",
+  "city": "Orange",
+  "mapX": 405,
+  "mapY": 302,
+  "lotAcres": 4.19,
+  "buildingAcres": 0.95,
+  "parkingAcres": 1.6,
+  "parkingSpaces": 199,
+  "openAcres": 1.64,
+  "zoning": "institutional",
+  "nearSchoolM": 600,
+  "nearTransitM": 380,
+  "nearGroceryM": 550,
+  "slopePct": 4,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.55
+   },
+   {
+    "x": 0,
+    "y": 0.55
+   }
+  ],
+  "buildingRect": {
+   "x": 0.66,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.08,
+    "w": 0.54,
+    "h": 0.24
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "lighthouse-catholic-parish-ga3",
+  "displayName": "Lighthouse Catholic Parish (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1979-02-14",
+  "faith": "Catholic parish",
+  "city": "Garden Grove",
+  "mapX": 238,
+  "mapY": 331,
+  "lotAcres": 1.67,
+  "buildingAcres": 0.28,
+  "parkingAcres": 0.7,
+  "parkingSpaces": 87,
+  "openAcres": 0.69,
+  "zoning": "residential",
+  "nearSchoolM": 180,
+  "nearTransitM": 2200,
+  "nearGroceryM": 700,
+  "slopePct": 9,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "vi",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 0.82,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.18
+   },
+   {
+    "x": 1,
+    "y": 0.88
+   },
+   {
+    "x": 0,
+    "y": 0.88
+   }
+  ],
+  "buildingRect": {
+   "x": 0.6,
+   "y": 0.52,
+   "w": 0.32,
+   "h": 0.28
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.52,
+    "w": 0.48,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "bottom"
+ },
+ {
+  "id": "red-barn-presbyterian-church-an4",
+  "displayName": "Red Barn Presbyterian Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2005-09-24",
+  "faith": "Presbyterian church",
+  "city": "Anaheim",
+  "mapX": 292,
+  "mapY": 195,
+  "lotAcres": 2.94,
+  "buildingAcres": 0.71,
+  "parkingAcres": 1.38,
+  "parkingSpaces": 171,
+  "openAcres": 0.85,
+  "zoning": "institutional",
+  "nearSchoolM": 900,
+  "nearTransitM": 300,
+  "nearGroceryM": 1700,
+  "slopePct": 9,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "es",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.9
+   },
+   {
+    "x": 0,
+    "y": 0.9
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.22
+  },
+  "parkingRects": [
+   {
+    "x": 0.4,
+    "y": 0.06,
+    "w": 0.54,
+    "h": 0.38
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "wisteria-episcopal-church-sa5",
+  "displayName": "Wisteria Episcopal Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1955-02-21",
+  "faith": "Episcopal church",
+  "city": "Santa Ana",
+  "mapX": 362,
+  "mapY": 370,
+  "lotAcres": 4.16,
+  "buildingAcres": 0.78,
+  "parkingAcres": 1.63,
+  "parkingSpaces": 202,
+  "openAcres": 1.75,
+  "zoning": "residential",
+  "nearSchoolM": 750,
+  "nearTransitM": 800,
+  "nearGroceryM": 550,
+  "slopePct": 6,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "es",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 0.82,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.18
+   },
+   {
+    "x": 1,
+    "y": 0.88
+   },
+   {
+    "x": 0,
+    "y": 0.88
+   }
+  ],
+  "buildingRect": {
+   "x": 0.6,
+   "y": 0.52,
+   "w": 0.32,
+   "h": 0.28
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.52,
+    "w": 0.48,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "bottom"
+ },
+ {
+  "id": "saddleback-view-pentecostal-church-an6",
+  "displayName": "Saddleback View Pentecostal Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1996-04-21",
+  "faith": "Pentecostal church",
+  "city": "Anaheim",
+  "mapX": 315,
+  "mapY": 215,
+  "lotAcres": 1.79,
+  "buildingAcres": 0.41,
+  "parkingAcres": 0.52,
+  "parkingSpaces": 64,
+  "openAcres": 0.86,
+  "zoning": "residential",
+  "nearSchoolM": 260,
+  "nearTransitM": 2200,
+  "nearGroceryM": 400,
+  "slopePct": 15,
+  "floodZone": false,
+  "hazards": [
+   "noise-airport",
+   "fire-severity"
+  ],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.55
+   },
+   {
+    "x": 0,
+    "y": 0.55
+   }
+  ],
+  "buildingRect": {
+   "x": 0.66,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.08,
+    "w": 0.54,
+    "h": 0.24
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "eastwind-korean-presbyterian-church-tu7",
+  "displayName": "Eastwind Korean Presbyterian Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1966-03-10",
+  "faith": "Korean Presbyterian church",
+  "city": "Tustin",
+  "mapX": 475,
+  "mapY": 381,
+  "lotAcres": 2.99,
+  "buildingAcres": 0.64,
+  "parkingAcres": 1.28,
+  "parkingSpaces": 159,
+  "openAcres": 1.07,
+  "zoning": "residential",
+  "nearSchoolM": 420,
+  "nearTransitM": 200,
+  "nearGroceryM": 1300,
+  "slopePct": 3,
+  "floodZone": false,
+  "hazards": [
+   "liquefaction"
+  ],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.9
+   },
+   {
+    "x": 0,
+    "y": 0.9
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.22
+  },
+  "parkingRects": [
+   {
+    "x": 0.4,
+    "y": 0.06,
+    "w": 0.54,
+    "h": 0.38
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "mission-vale-catholic-parish-ir8",
+  "displayName": "Mission Vale Catholic Parish (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1999-02-17",
+  "faith": "Vietnamese Catholic parish",
+  "city": "Irvine",
+  "mapX": 425,
+  "mapY": 498,
+  "lotAcres": 5.49,
+  "buildingAcres": 1.0,
+  "parkingAcres": 2.01,
+  "parkingSpaces": 250,
+  "openAcres": 2.48,
+  "zoning": "institutional",
+  "nearSchoolM": 1200,
+  "nearTransitM": 300,
+  "nearGroceryM": 700,
+  "slopePct": 2,
+  "floodZone": false,
+  "hazards": [
+   "liquefaction"
+  ],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.55
+   },
+   {
+    "x": 0,
+    "y": 0.55
+   }
+  ],
+  "buildingRect": {
+   "x": 0.66,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.08,
+    "w": 0.54,
+    "h": 0.24
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "shepherd-hill-evangelical-church-we9",
+  "displayName": "Shepherd Hill Evangelical Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2024-09-01",
+  "faith": "Evangelical church",
+  "city": "Westminster",
+  "mapX": 194,
+  "mapY": 327,
+  "lotAcres": 5.72,
+  "buildingAcres": 1.36,
+  "parkingAcres": 2.22,
+  "parkingSpaces": 276,
+  "openAcres": 2.14,
+  "zoning": "residential",
+  "nearSchoolM": 900,
+  "nearTransitM": 650,
+  "nearGroceryM": 250,
+  "slopePct": 9,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "vi",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 0.82,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.18
+   },
+   {
+    "x": 1,
+    "y": 0.88
+   },
+   {
+    "x": 0,
+    "y": 0.88
+   }
+  ],
+  "buildingRect": {
+   "x": 0.6,
+   "y": 0.52,
+   "w": 0.32,
+   "h": 0.28
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.52,
+    "w": 0.48,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "bottom"
+ },
+ {
+  "id": "temple-tidewater-ir0",
+  "displayName": "Temple Tidewater (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1987-09-01",
+  "faith": "Synagogue",
+  "city": "Irvine",
+  "mapX": 449,
+  "mapY": 496,
+  "lotAcres": 3.86,
+  "buildingAcres": 0.91,
+  "parkingAcres": 1.34,
+  "parkingSpaces": 166,
+  "openAcres": 1.61,
+  "zoning": "residential",
+  "nearSchoolM": 1200,
+  "nearTransitM": 1100,
+  "nearGroceryM": 1700,
+  "slopePct": 1,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 0.78,
+    "y": 0
+   },
+   {
+    "x": 0.78,
+    "y": 1
+   },
+   {
+    "x": 0,
+    "y": 1
+   }
+  ],
+  "buildingRect": {
+   "x": 0.08,
+   "y": 0.66,
+   "w": 0.3,
+   "h": 0.26
+  },
+  "parkingRects": [
+   {
+    "x": 0.08,
+    "y": 0.1,
+    "w": 0.26,
+    "h": 0.5
+   }
+  ],
+  "streetSide": "bottom"
+ },
+ {
+  "id": "clearwater-islamic-center-ir1",
+  "displayName": "Clearwater Islamic Center (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1999-08-18",
+  "faith": "Islamic center",
+  "city": "Irvine",
+  "mapX": 449,
+  "mapY": 462,
+  "lotAcres": 2.35,
+  "buildingAcres": 0.4,
+  "parkingAcres": 0.97,
+  "parkingSpaces": 120,
+  "openAcres": 0.98,
+  "zoning": "residential",
+  "nearSchoolM": 420,
+  "nearTransitM": 1100,
+  "nearGroceryM": 550,
+  "slopePct": 3,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.9
+   },
+   {
+    "x": 0,
+    "y": 0.9
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.22
+  },
+  "parkingRects": [
+   {
+    "x": 0.4,
+    "y": 0.06,
+    "w": 0.54,
+    "h": 0.38
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "magnolia-hill-buddhist-temple-fu2",
+  "displayName": "Magnolia Hill Buddhist Temple (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2020-03-09",
+  "faith": "Buddhist temple",
+  "city": "Fullerton",
+  "mapX": 278,
+  "mapY": 118,
+  "lotAcres": 2.3,
+  "buildingAcres": 0.42,
+  "parkingAcres": 0.78,
+  "parkingSpaces": 97,
+  "openAcres": 1.1,
+  "zoning": "residential",
+  "nearSchoolM": 260,
+  "nearTransitM": 120,
+  "nearGroceryM": 900,
+  "slopePct": 3,
+  "floodZone": false,
+  "hazards": [
+   "liquefaction"
+  ],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.55
+   },
+   {
+    "x": 0,
+    "y": 0.55
+   }
+  ],
+  "buildingRect": {
+   "x": 0.66,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.08,
+    "w": 0.54,
+    "h": 0.24
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "amber-grove-gurdwara-sahib-ga3",
+  "displayName": "Amber Grove Gurdwara Sahib (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2013-02-27",
+  "faith": "Sikh gurdwara",
+  "city": "Garden Grove",
+  "mapX": 288,
+  "mapY": 341,
+  "lotAcres": 3.97,
+  "buildingAcres": 1.02,
+  "parkingAcres": 1.31,
+  "parkingSpaces": 163,
+  "openAcres": 1.64,
+  "zoning": "residential",
+  "nearSchoolM": 600,
+  "nearTransitM": 200,
+  "nearGroceryM": 400,
+  "slopePct": 1,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "ko",
+  "lotPolygon": [
+   {
+    "x": 0.08,
+    "y": 0
+   },
+   {
+    "x": 0.92,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.8
+   },
+   {
+    "x": 0,
+    "y": 0.8
+   }
+  ],
+  "buildingRect": {
+   "x": 0.12,
+   "y": 0.08,
+   "w": 0.3,
+   "h": 0.26
+  },
+  "parkingRects": [
+   {
+    "x": 0.5,
+    "y": 0.1,
+    "w": 0.4,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "hilltop-hindu-temple-fu4",
+  "displayName": "Hilltop Hindu Temple (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2009-08-10",
+  "faith": "Hindu temple",
+  "city": "Fullerton",
+  "mapX": 313,
+  "mapY": 136,
+  "lotAcres": 5.5,
+  "buildingAcres": 0.92,
+  "parkingAcres": 2.11,
+  "parkingSpaces": 262,
+  "openAcres": 2.47,
+  "zoning": "institutional",
+  "nearSchoolM": 420,
+  "nearTransitM": 450,
+  "nearGroceryM": 1300,
+  "slopePct": 1,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "ko",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 0.82,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.18
+   },
+   {
+    "x": 1,
+    "y": 0.88
+   },
+   {
+    "x": 0,
+    "y": 0.88
+   }
+  ],
+  "buildingRect": {
+   "x": 0.6,
+   "y": 0.52,
+   "w": 0.32,
+   "h": 0.28
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.52,
+    "w": 0.48,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "bottom"
+ },
+ {
+  "id": "juniper-friends-meeting-ga5",
+  "displayName": "Juniper Friends Meeting (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2012-05-02",
+  "faith": "Friends meeting",
+  "city": "Garden Grove",
+  "mapX": 255,
+  "mapY": 286,
+  "lotAcres": 2.12,
+  "buildingAcres": 0.34,
+  "parkingAcres": 0.77,
+  "parkingSpaces": 95,
+  "openAcres": 1.01,
+  "zoning": "residential",
+  "nearSchoolM": 420,
+  "nearTransitM": 800,
+  "nearGroceryM": 250,
+  "slopePct": 2,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "vi",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 0.78,
+    "y": 0
+   },
+   {
+    "x": 0.78,
+    "y": 1
+   },
+   {
+    "x": 0,
+    "y": 1
+   }
+  ],
+  "buildingRect": {
+   "x": 0.08,
+   "y": 0.66,
+   "w": 0.3,
+   "h": 0.26
+  },
+  "parkingRects": [
+   {
+    "x": 0.08,
+    "y": 0.1,
+    "w": 0.26,
+    "h": 0.5
+   }
+  ],
+  "streetSide": "bottom"
+ },
+ {
+  "id": "cottonwood-nondenominational-church-fu6",
+  "displayName": "Cottonwood Nondenominational Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1988-08-04",
+  "faith": "Nondenominational church",
+  "city": "Fullerton",
+  "mapX": 277,
+  "mapY": 135,
+  "lotAcres": 1.92,
+  "buildingAcres": 0.31,
+  "parkingAcres": 0.66,
+  "parkingSpaces": 82,
+  "openAcres": 0.95,
+  "zoning": "residential",
+  "nearSchoolM": 180,
+  "nearTransitM": 800,
+  "nearGroceryM": 1300,
+  "slopePct": 4,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "es",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.9
+   },
+   {
+    "x": 0,
+    "y": 0.9
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.22
+  },
+  "parkingRects": [
+   {
+    "x": 0.4,
+    "y": 0.06,
+    "w": 0.54,
+    "h": 0.38
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "cedar-mesa-seventh-day-adventist-church-ga7",
+  "displayName": "Cedar Mesa Seventh-day Adventist Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1954-11-27",
+  "faith": "Seventh-day Adventist church",
+  "city": "Garden Grove",
+  "mapX": 254,
+  "mapY": 339,
+  "lotAcres": 1.29,
+  "buildingAcres": 0.33,
+  "parkingAcres": 0.58,
+  "parkingSpaces": 72,
+  "openAcres": 0.38,
+  "zoning": "residential",
+  "nearSchoolM": 350,
+  "nearTransitM": 650,
+  "nearGroceryM": 700,
+  "slopePct": 9,
+  "floodZone": false,
+  "hazards": [
+   "liquefaction"
+  ],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.9
+   },
+   {
+    "x": 0,
+    "y": 0.9
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.22
+  },
+  "parkingRects": [
+   {
+    "x": 0.4,
+    "y": 0.06,
+    "w": 0.54,
+    "h": 0.38
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "sycamore-row-orthodox-church-co8",
+  "displayName": "Sycamore Row Orthodox Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1992-05-11",
+  "faith": "Orthodox church",
+  "city": "Costa Mesa",
+  "mapX": 348,
+  "mapY": 544,
+  "lotAcres": 3.83,
+  "buildingAcres": 0.79,
+  "parkingAcres": 1.42,
+  "parkingSpaces": 176,
+  "openAcres": 1.62,
+  "zoning": "residential",
+  "nearSchoolM": 1200,
+  "nearTransitM": 800,
+  "nearGroceryM": 250,
+  "slopePct": 2,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "es",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 1
+   },
+   {
+    "x": 0,
+    "y": 1
+   }
+  ],
+  "buildingRect": {
+   "x": 0.08,
+   "y": 0.08,
+   "w": 0.34,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.5,
+    "y": 0.08,
+    "w": 0.44,
+    "h": 0.36
+   },
+   {
+    "x": 0.08,
+    "y": 0.44,
+    "w": 0.34,
+    "h": 0.2
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "horizon-community-church-we9",
+  "displayName": "Horizon Community Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1968-05-15",
+  "faith": "Community church",
+  "city": "Westminster",
+  "mapX": 193,
+  "mapY": 353,
+  "lotAcres": 4.2,
+  "buildingAcres": 0.97,
+  "parkingAcres": 1.35,
+  "parkingSpaces": 168,
+  "openAcres": 1.88,
+  "zoning": "commercial",
+  "nearSchoolM": 900,
+  "nearTransitM": 200,
+  "nearGroceryM": 400,
+  "slopePct": 1,
+  "floodZone": false,
+  "hazards": [
+   "noise-airport"
+  ],
+  "congregationLanguage": "vi",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 0.82,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.18
+   },
+   {
+    "x": 1,
+    "y": 0.88
+   },
+   {
+    "x": 0,
+    "y": 0.88
+   }
+  ],
+  "buildingRect": {
+   "x": 0.6,
+   "y": 0.52,
+   "w": 0.32,
+   "h": 0.28
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.52,
+    "w": 0.48,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "bottom"
+ },
+ {
+  "id": "palmgrove-baptist-church-hu0",
+  "displayName": "Palmgrove Baptist Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2017-12-09",
+  "faith": "Baptist church",
+  "city": "Huntington Beach",
+  "mapX": 168,
+  "mapY": 492,
+  "lotAcres": 6.4,
+  "buildingAcres": 1.28,
+  "parkingAcres": 2.71,
+  "parkingSpaces": 337,
+  "openAcres": 2.41,
+  "zoning": "residential",
+  "nearSchoolM": 350,
+  "nearTransitM": 200,
+  "nearGroceryM": 550,
+  "slopePct": 6,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.72
+   },
+   {
+    "x": 0,
+    "y": 0.72
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.3,
+   "h": 0.24
+  },
+  "parkingRects": [
+   {
+    "x": 0.42,
+    "y": 0.06,
+    "w": 0.52,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "crescent-united-methodist-church-sa1",
+  "displayName": "Crescent United Methodist Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2014-03-15",
+  "faith": "United Methodist church",
+  "city": "Santa Ana",
+  "mapX": 385,
+  "mapY": 377,
+  "lotAcres": 4.39,
+  "buildingAcres": 0.62,
+  "parkingAcres": 1.87,
+  "parkingSpaces": 232,
+  "openAcres": 1.9,
+  "zoning": "residential",
+  "nearSchoolM": 900,
+  "nearTransitM": 380,
+  "nearGroceryM": 1700,
+  "slopePct": 6,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "es",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.55
+   },
+   {
+    "x": 0,
+    "y": 0.55
+   }
+  ],
+  "buildingRect": {
+   "x": 0.66,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.08,
+    "w": 0.54,
+    "h": 0.24
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "riverbend-lutheran-church-tu2",
+  "displayName": "Riverbend Lutheran Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1971-08-02",
+  "faith": "Lutheran church",
+  "city": "Tustin",
+  "mapX": 460,
+  "mapY": 369,
+  "lotAcres": 7.46,
+  "buildingAcres": 1.86,
+  "parkingAcres": 2.66,
+  "parkingSpaces": 331,
+  "openAcres": 2.94,
+  "zoning": "residential",
+  "nearSchoolM": 350,
+  "nearTransitM": 200,
+  "nearGroceryM": 700,
+  "slopePct": 3,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "es",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.9
+   },
+   {
+    "x": 0,
+    "y": 0.9
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.22
+  },
+  "parkingRects": [
+   {
+    "x": 0.4,
+    "y": 0.06,
+    "w": 0.54,
+    "h": 0.38
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "bright-water-catholic-parish-or3",
+  "displayName": "Bright Water Catholic Parish (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2020-07-11",
+  "faith": "Catholic parish",
+  "city": "Orange",
+  "mapX": 435,
+  "mapY": 299,
+  "lotAcres": 7.35,
+  "buildingAcres": 1.1,
+  "parkingAcres": 2.54,
+  "parkingSpaces": 316,
+  "openAcres": 3.71,
+  "zoning": "institutional",
+  "nearSchoolM": 260,
+  "nearTransitM": 1100,
+  "nearGroceryM": 400,
+  "slopePct": 3,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 0.82,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.18
+   },
+   {
+    "x": 1,
+    "y": 0.88
+   },
+   {
+    "x": 0,
+    "y": 0.88
+   }
+  ],
+  "buildingRect": {
+   "x": 0.6,
+   "y": 0.52,
+   "w": 0.32,
+   "h": 0.28
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.52,
+    "w": 0.48,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "bottom"
+ },
+ {
+  "id": "blue-jacaranda-presbyterian-church-or4",
+  "displayName": "Blue Jacaranda Presbyterian Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1970-04-17",
+  "faith": "Presbyterian church",
+  "city": "Orange",
+  "mapX": 381,
+  "mapY": 299,
+  "lotAcres": 3.39,
+  "buildingAcres": 0.59,
+  "parkingAcres": 1.2,
+  "parkingSpaces": 149,
+  "openAcres": 1.6,
+  "zoning": "residential",
+  "nearSchoolM": 1200,
+  "nearTransitM": 2200,
+  "nearGroceryM": 400,
+  "slopePct": 2,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.72
+   },
+   {
+    "x": 0,
+    "y": 0.72
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.3,
+   "h": 0.24
+  },
+  "parkingRects": [
+   {
+    "x": 0.42,
+    "y": 0.06,
+    "w": 0.52,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "lantern-hill-episcopal-church-fu5",
+  "displayName": "Lantern Hill Episcopal Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "2011-05-22",
+  "faith": "Episcopal church",
+  "city": "Fullerton",
+  "mapX": 288,
+  "mapY": 172,
+  "lotAcres": 2.78,
+  "buildingAcres": 0.61,
+  "parkingAcres": 1.28,
+  "parkingSpaces": 159,
+  "openAcres": 0.89,
+  "zoning": "residential",
+  "nearSchoolM": 600,
+  "nearTransitM": 1100,
+  "nearGroceryM": 1700,
+  "slopePct": 3,
+  "floodZone": false,
+  "hazards": [
+   "liquefaction"
+  ],
+  "congregationLanguage": "ko",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 1
+   },
+   {
+    "x": 0,
+    "y": 1
+   }
+  ],
+  "buildingRect": {
+   "x": 0.08,
+   "y": 0.08,
+   "w": 0.34,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.5,
+    "y": 0.08,
+    "w": 0.44,
+    "h": 0.36
+   },
+   {
+    "x": 0.08,
+    "y": 0.44,
+    "w": 0.34,
+    "h": 0.2
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "goldenrod-pentecostal-church-ir6",
+  "displayName": "Goldenrod Pentecostal Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1989-12-10",
+  "faith": "Pentecostal church",
+  "city": "Irvine",
+  "mapX": 455,
+  "mapY": 441,
+  "lotAcres": 3.78,
+  "buildingAcres": 0.7,
+  "parkingAcres": 1.33,
+  "parkingSpaces": 165,
+  "openAcres": 1.75,
+  "zoning": "residential",
+  "nearSchoolM": 1200,
+  "nearTransitM": 450,
+  "nearGroceryM": 1700,
+  "slopePct": 8,
+  "floodZone": false,
+  "hazards": [
+   "fire-severity"
+  ],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0.08,
+    "y": 0
+   },
+   {
+    "x": 0.92,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.8
+   },
+   {
+    "x": 0,
+    "y": 0.8
+   }
+  ],
+  "buildingRect": {
+   "x": 0.12,
+   "y": 0.08,
+   "w": 0.3,
+   "h": 0.26
+  },
+  "parkingRects": [
+   {
+    "x": 0.5,
+    "y": 0.1,
+    "w": 0.4,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "harbor-light-korean-presbyterian-church-fu7",
+  "displayName": "Harbor Light Korean Presbyterian Church (sample)",
+  "ownerType": "congregation",
+  "ownerSince": "1969-11-04",
+  "faith": "Korean Presbyterian church",
+  "city": "Fullerton",
+  "mapX": 299,
+  "mapY": 128,
+  "lotAcres": 3.02,
+  "buildingAcres": 0.49,
+  "parkingAcres": 1.0,
+  "parkingSpaces": 124,
+  "openAcres": 1.53,
+  "zoning": "commercial",
+  "nearSchoolM": 350,
+  "nearTransitM": 1500,
+  "nearGroceryM": 550,
+  "slopePct": 3,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "ko",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.55
+   },
+   {
+    "x": 0,
+    "y": 0.55
+   }
+  ],
+  "buildingRect": {
+   "x": 0.66,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.08,
+    "w": 0.54,
+    "h": 0.24
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "pacific-crest-college",
+  "displayName": "Pacific Crest College (sample)",
+  "ownerType": "college",
+  "ownerSince": "1968-08-15",
+  "faith": "Independent nonprofit college",
+  "city": "Orange",
+  "mapX": 440,
+  "mapY": 277,
+  "lotAcres": 14.0,
+  "buildingAcres": 3.08,
+  "parkingAcres": 4.76,
+  "parkingSpaces": 592,
+  "openAcres": 6.16,
+  "zoning": "institutional",
+  "nearSchoolM": 200,
+  "nearTransitM": 350,
+  "nearGroceryM": 800,
+  "slopePct": 2,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 1
+   },
+   {
+    "x": 0,
+    "y": 1
+   }
+  ],
+  "buildingRect": {
+   "x": 0.08,
+   "y": 0.08,
+   "w": 0.34,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.5,
+    "y": 0.08,
+    "w": 0.44,
+    "h": 0.36
+   },
+   {
+    "x": 0.08,
+    "y": 0.44,
+    "w": 0.34,
+    "h": 0.2
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "harborview-theological-seminary",
+  "displayName": "Harborview Theological Seminary (sample)",
+  "ownerType": "college",
+  "ownerSince": "1991-02-02",
+  "faith": "Independent nonprofit college",
+  "city": "Costa Mesa",
+  "mapX": 290,
+  "mapY": 539,
+  "lotAcres": 9.5,
+  "buildingAcres": 2.09,
+  "parkingAcres": 3.23,
+  "parkingSpaces": 401,
+  "openAcres": 4.18,
+  "zoning": "institutional",
+  "nearSchoolM": 200,
+  "nearTransitM": 600,
+  "nearGroceryM": 800,
+  "slopePct": 2,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 1
+   },
+   {
+    "x": 0,
+    "y": 1
+   }
+  ],
+  "buildingRect": {
+   "x": 0.08,
+   "y": 0.08,
+   "w": 0.34,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.5,
+    "y": 0.08,
+    "w": 0.44,
+    "h": 0.36
+   },
+   {
+    "x": 0.08,
+    "y": 0.44,
+    "w": 0.34,
+    "h": 0.2
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "westgate-logistics-yard",
+  "displayName": "Westgate Logistics Yard (sample)",
+  "ownerType": "commercial",
+  "ownerSince": "2009-05-01",
+  "faith": null,
+  "city": "Anaheim",
+  "mapX": 292,
+  "mapY": 213,
+  "lotAcres": 3.86,
+  "buildingAcres": 1.16,
+  "parkingAcres": 1.54,
+  "parkingSpaces": 191,
+  "openAcres": 1.16,
+  "zoning": "commercial",
+  "nearSchoolM": 1500,
+  "nearTransitM": 700,
+  "nearGroceryM": 500,
+  "slopePct": 3,
+  "floodZone": false,
+  "hazards": [
+   "hazardous-site"
+  ],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 1
+   },
+   {
+    "x": 0,
+    "y": 1
+   }
+  ],
+  "buildingRect": {
+   "x": 0.08,
+   "y": 0.08,
+   "w": 0.34,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.5,
+    "y": 0.08,
+    "w": 0.44,
+    "h": 0.36
+   },
+   {
+    "x": 0.08,
+    "y": 0.44,
+    "w": 0.34,
+    "h": 0.2
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "harbor-plaza-shopping-center",
+  "displayName": "Harbor Plaza Shopping Center (sample)",
+  "ownerType": "commercial",
+  "ownerSince": "2001-05-01",
+  "faith": null,
+  "city": "Garden Grove",
+  "mapX": 273,
+  "mapY": 320,
+  "lotAcres": 1.69,
+  "buildingAcres": 0.51,
+  "parkingAcres": 0.68,
+  "parkingSpaces": 84,
+  "openAcres": 0.5,
+  "zoning": "commercial",
+  "nearSchoolM": 400,
+  "nearTransitM": 300,
+  "nearGroceryM": 500,
+  "slopePct": 3,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.72
+   },
+   {
+    "x": 0,
+    "y": 0.72
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.3,
+   "h": 0.24
+  },
+  "parkingRects": [
+   {
+    "x": 0.42,
+    "y": 0.06,
+    "w": 0.52,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "coast-auto-mall-lot-c",
+  "displayName": "Coast Auto Mall Lot C (sample)",
+  "ownerType": "commercial",
+  "ownerSince": "2014-05-01",
+  "faith": null,
+  "city": "Huntington Beach",
+  "mapX": 178,
+  "mapY": 521,
+  "lotAcres": 6.25,
+  "buildingAcres": 1.88,
+  "parkingAcres": 2.5,
+  "parkingSpaces": 311,
+  "openAcres": 1.87,
+  "zoning": "commercial",
+  "nearSchoolM": 1500,
+  "nearTransitM": 700,
+  "nearGroceryM": 500,
+  "slopePct": 2,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 0.78,
+    "y": 0
+   },
+   {
+    "x": 0.78,
+    "y": 1
+   },
+   {
+    "x": 0,
+    "y": 1
+   }
+  ],
+  "buildingRect": {
+   "x": 0.08,
+   "y": 0.66,
+   "w": 0.3,
+   "h": 0.26
+  },
+  "parkingRects": [
+   {
+    "x": 0.08,
+    "y": 0.1,
+    "w": 0.26,
+    "h": 0.5
+   }
+  ],
+  "streetSide": "bottom"
+ },
+ {
+  "id": "brookline-estate-private",
+  "displayName": "Brookline Estate (private) (sample)",
+  "ownerType": "private",
+  "ownerSince": "1985-05-01",
+  "faith": null,
+  "city": "Orange",
+  "mapX": 424,
+  "mapY": 285,
+  "lotAcres": 3.72,
+  "buildingAcres": 1.12,
+  "parkingAcres": 1.49,
+  "parkingSpaces": 185,
+  "openAcres": 1.11,
+  "zoning": "residential",
+  "nearSchoolM": 800,
+  "nearTransitM": 300,
+  "nearGroceryM": 900,
+  "slopePct": 3,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 1
+   },
+   {
+    "x": 0,
+    "y": 1
+   }
+  ],
+  "buildingRect": {
+   "x": 0.08,
+   "y": 0.08,
+   "w": 0.34,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.5,
+    "y": 0.08,
+    "w": 0.44,
+    "h": 0.36
+   },
+   {
+    "x": 0.08,
+    "y": 0.44,
+    "w": 0.34,
+    "h": 0.2
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "vista-family-trust-lot",
+  "displayName": "Vista Family Trust Lot (sample)",
+  "ownerType": "private",
+  "ownerSince": "1971-05-01",
+  "faith": null,
+  "city": "Tustin",
+  "mapX": 433,
+  "mapY": 346,
+  "lotAcres": 4.49,
+  "buildingAcres": 1.35,
+  "parkingAcres": 1.8,
+  "parkingSpaces": 224,
+  "openAcres": 1.34,
+  "zoning": "residential",
+  "nearSchoolM": 400,
+  "nearTransitM": 700,
+  "nearGroceryM": 500,
+  "slopePct": 1,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 1
+   },
+   {
+    "x": 0,
+    "y": 1
+   }
+  ],
+  "buildingRect": {
+   "x": 0.08,
+   "y": 0.08,
+   "w": 0.34,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.5,
+    "y": 0.08,
+    "w": 0.44,
+    "h": 0.36
+   },
+   {
+    "x": 0.08,
+    "y": 0.44,
+    "w": 0.34,
+    "h": 0.2
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "alder-street-duplexes",
+  "displayName": "Alder Street Duplexes (sample)",
+  "ownerType": "private",
+  "ownerSince": "2009-05-01",
+  "faith": null,
+  "city": "Santa Ana",
+  "mapX": 363,
+  "mapY": 350,
+  "lotAcres": 4.02,
+  "buildingAcres": 1.21,
+  "parkingAcres": 1.61,
+  "parkingSpaces": 200,
+  "openAcres": 1.2,
+  "zoning": "residential",
+  "nearSchoolM": 400,
+  "nearTransitM": 1400,
+  "nearGroceryM": 900,
+  "slopePct": 2,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.55
+   },
+   {
+    "x": 0,
+    "y": 0.55
+   }
+  ],
+  "buildingRect": {
+   "x": 0.66,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.06,
+    "y": 0.08,
+    "w": 0.54,
+    "h": 0.24
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "meridian-holdings-parcel",
+  "displayName": "Meridian Holdings Parcel (sample)",
+  "ownerType": "private",
+  "ownerSince": "2001-05-01",
+  "faith": null,
+  "city": "Irvine",
+  "mapX": 426,
+  "mapY": 477,
+  "lotAcres": 4.93,
+  "buildingAcres": 1.48,
+  "parkingAcres": 1.97,
+  "parkingSpaces": 245,
+  "openAcres": 1.48,
+  "zoning": "commercial",
+  "nearSchoolM": 1500,
+  "nearTransitM": 700,
+  "nearGroceryM": 500,
+  "slopePct": 1,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 1
+   },
+   {
+    "x": 0,
+    "y": 1
+   }
+  ],
+  "buildingRect": {
+   "x": 0.08,
+   "y": 0.08,
+   "w": 0.34,
+   "h": 0.3
+  },
+  "parkingRects": [
+   {
+    "x": 0.5,
+    "y": 0.08,
+    "w": 0.44,
+    "h": 0.36
+   },
+   {
+    "x": 0.08,
+    "y": 0.44,
+    "w": 0.34,
+    "h": 0.2
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "city-corporation-yard",
+  "displayName": "City Corporation Yard (sample)",
+  "ownerType": "public",
+  "ownerSince": "2016-05-01",
+  "faith": null,
+  "city": "Fullerton",
+  "mapX": 317,
+  "mapY": 119,
+  "lotAcres": 5.34,
+  "buildingAcres": 1.6,
+  "parkingAcres": 2.14,
+  "parkingSpaces": 266,
+  "openAcres": 1.6,
+  "zoning": "institutional",
+  "nearSchoolM": 400,
+  "nearTransitM": 700,
+  "nearGroceryM": 900,
+  "slopePct": 1,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.9
+   },
+   {
+    "x": 0,
+    "y": 0.9
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.22
+  },
+  "parkingRects": [
+   {
+    "x": 0.4,
+    "y": 0.06,
+    "w": 0.54,
+    "h": 0.38
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "flood-control-basin-12",
+  "displayName": "Flood Control Basin 12 (sample)",
+  "ownerType": "public",
+  "ownerSince": "1976-05-01",
+  "faith": null,
+  "city": "Westminster",
+  "mapX": 181,
+  "mapY": 369,
+  "lotAcres": 3.58,
+  "buildingAcres": 1.07,
+  "parkingAcres": 1.43,
+  "parkingSpaces": 177,
+  "openAcres": 1.08,
+  "zoning": "institutional",
+  "nearSchoolM": 800,
+  "nearTransitM": 700,
+  "nearGroceryM": 900,
+  "slopePct": 3,
+  "floodZone": true,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0.08,
+    "y": 0
+   },
+   {
+    "x": 0.92,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.8
+   },
+   {
+    "x": 0,
+    "y": 0.8
+   }
+  ],
+  "buildingRect": {
+   "x": 0.12,
+   "y": 0.08,
+   "w": 0.3,
+   "h": 0.26
+  },
+  "parkingRects": [
+   {
+    "x": 0.5,
+    "y": 0.1,
+    "w": 0.4,
+    "h": 0.3
+   }
+  ],
+  "streetSide": "top"
+ },
+ {
+  "id": "district-bus-depot",
+  "displayName": "District Bus Depot (sample)",
+  "ownerType": "public",
+  "ownerSince": "1974-05-01",
+  "faith": null,
+  "city": "Costa Mesa",
+  "mapX": 304,
+  "mapY": 552,
+  "lotAcres": 6.11,
+  "buildingAcres": 1.83,
+  "parkingAcres": 2.44,
+  "parkingSpaces": 303,
+  "openAcres": 1.84,
+  "zoning": "institutional",
+  "nearSchoolM": 400,
+  "nearTransitM": 300,
+  "nearGroceryM": 500,
+  "slopePct": 2,
+  "floodZone": false,
+  "hazards": [],
+  "congregationLanguage": "en",
+  "lotPolygon": [
+   {
+    "x": 0,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0
+   },
+   {
+    "x": 1,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.5
+   },
+   {
+    "x": 0.55,
+    "y": 0.9
+   },
+   {
+    "x": 0,
+    "y": 0.9
+   }
+  ],
+  "buildingRect": {
+   "x": 0.06,
+   "y": 0.08,
+   "w": 0.28,
+   "h": 0.22
+  },
+  "parkingRects": [
+   {
+    "x": 0.4,
+    "y": 0.06,
+    "w": 0.54,
+    "h": 0.38
+   }
+  ],
+  "streetSide": "top"
+ }
+]

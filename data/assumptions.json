@@ -1,0 +1,59 @@
+{
+  "_note": "Editable planning defaults used by lib/sb4.ts. Every number here is a planning assumption, not a legal requirement, unless the note says it comes from SB 4.",
+  "sqftPerAcre": 43560,
+  "sqftPerParkingSpace": {
+    "value": 350,
+    "note": "Per kept parking space including aisles and drive lanes."
+  },
+  "setbackPct": {
+    "value": 0.1,
+    "note": "Share of gross buildable area lost to setbacks and site circulation."
+  },
+  "townhome": {
+    "footprintSqft": 900,
+    "yardSqft": 300,
+    "landSqftPerUnit": 1850,
+    "stories": 2,
+    "bedrooms": 3,
+    "note": "Habitat townhome: 900 sq ft footprint over two stories plus a small yard; ~1,850 sq ft of land per unit once shared drive aisles are counted (about 23 homes per acre)."
+  },
+  "flats": {
+    "unitSqft": 850,
+    "stories": 3,
+    "landSqftPerUnit": 750,
+    "capOverMinimum": 1.1,
+    "note": "Stacked flats: three stories of 850 sq ft units; ~750 sq ft of land per unit (about 58 homes per acre). Practical count is capped at 1.1\u00d7 the SB 4 minimum to keep projects at Habitat scale."
+  },
+  "peoplePerHousehold": {
+    "value": 3.4,
+    "note": "Average Habitat OC partner-family size used for people-housed estimates."
+  },
+  "affordabilityYears": {
+    "value": 45,
+    "note": "From SB 4: ownership units carry a 45-year affordability deed restriction (55 years for rental)."
+  },
+  "defaultKeepParkingShare": {
+    "value": 0.5,
+    "note": "Default scenario keeps half of today's parking spaces for the congregation."
+  },
+  "landValuePerAcre": {
+    "value": 3000000,
+    "note": "Illustrative assumption only: approximate Orange County land value per acre used to describe what a land partnership is worth. Not an appraisal."
+  },
+  "density": {
+    "metropolitanMin": 30,
+    "nonResidentialZoneMin": 40,
+    "note": "From SB 4: minimum density in a metropolitan jurisdiction like Orange County is 30 units per acre, or 40 where the zone does not allow residential use."
+  },
+  "sb4": {
+    "ownershipCutoff": "2024-01-01",
+    "effectiveFrom": "2024-07-02",
+    "sunset": "2036-01-01",
+    "moderateIncomeMaxShare": 0.2,
+    "staffUnitsMaxShare": 0.05,
+    "ownershipDeedYears": 45,
+    "rentalDeedYears": 55,
+    "extraStoriesAllowed": 1,
+    "note": "Objective standards from Gov. Code \u00a7 65913.16 as summarized in the HCD SB 4 fact sheet."
+  }
+}

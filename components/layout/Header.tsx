@@ -12,7 +12,7 @@ import { spring, dur, ease } from '@/lib/motion';
 const nav = [
   { href: '/sites', key: 'nav.sites' },
   { href: '/scan', key: 'nav.scan' },
-  { href: '/plan/grace-community-sa', key: 'nav.plan', match: '/plan' },
+  { href: '/plan/oakfield-community-church', key: 'nav.plan', match: '/plan' },
   { href: '/pipeline', key: 'nav.pipeline' },
   { href: '/ask', key: 'nav.ask' },
 ] as const;
