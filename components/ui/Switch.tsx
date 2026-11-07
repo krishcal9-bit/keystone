@@ -11,7 +11,7 @@ export function Switch({ checked, onChange, label, className = '' }: { checked: 
         aria-checked={checked}
         aria-label={label}
         onClick={() => onChange(!checked)}
-        className={`relative w-11 h-6 rounded-full border transition-colors duration-[160ms] ${checked ? 'bg-pine border-pine' : 'bg-line border-line'}`}
+        className={`relative w-11 h-6 rounded-full border transition-colors duration-[160ms] ${checked ? 'bg-pine border-pine' : 'bg-[color-mix(in_srgb,var(--ink-2)_35%,var(--line))] border-transparent'}`}
       >
         <motion.span
           className="absolute top-[2px] left-[2px] w-[18px] h-[18px] rounded-full bg-white shadow-[0_1px_2px_rgba(24,36,32,0.25)]"

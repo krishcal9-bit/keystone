@@ -14,6 +14,7 @@ export type AerialLotProps = {
   size?: number; // rendered width in px of the unit frame
   night?: boolean;
   keptStalls?: number; // how many stalls to draw as "kept" (filled); others fade when buildable
+  keptShare?: number; // 0–1 share of stalls kept (alternative to keptStalls)
   showBuildable?: Pt[]; // polygon (normalized) washed in pine
   children?: React.ReactNode;
   id?: string;
@@ -60,14 +61,14 @@ export function stallsFor(r: Rect, s: number, maxStalls = Infinity) {
 }
 const scaleRect = (r: Rect, s: number): Rect => ({ x: r.x * s, y: r.y * s, w: r.w * s, h: r.h * s });
 
-export function AerialLot({ parcel, size = 400, night = false, keptStalls, showBuildable, children, id = 'aerial', ambient = false, seed = 3 }: AerialLotProps) {
-  const s = size;
+export type AerialTree = { x: number; y: number; r: number; kind: number };
+
+/** Deterministic tree scatter in the open land (normalized lot frame). Shared with the Lot Scan fixtures. */
+export function treesFor(parcel: AerialLotProps['parcel'], seed = 3): AerialTree[] {
   const poly = parcel.lotPolygon;
   const bx = Math.max(...poly.map((p) => p.x)), by = Math.max(...poly.map((p) => p.y));
-  const h = by * s;
   const rnd = seeded(seed + parcel.id.length);
-  // trees: deterministic scatter in open land
-  const trees: { x: number; y: number; r: number; kind: number }[] = [];
+  const trees: AerialTree[] = [];
   const blocked = [parcel.buildingRect, ...parcel.parkingRects];
   for (let i = 0; i < 60 && trees.length < 9; i++) {
     const p = { x: rnd() * bx, y: rnd() * by };
@@ -78,6 +79,15 @@ export function AerialLot({ parcel, size = 400, night = false, keptStalls, showB
     if (trees.some((t) => Math.hypot(t.x - p.x, t.y - p.y) < t.r + r + 0.01)) continue;
     trees.push({ x: p.x, y: p.y, r, kind: Math.floor(rnd() * 3) });
   }
+  return trees;
+}
+
+export function AerialLot({ parcel, size = 400, night = false, keptStalls, keptShare, showBuildable, children, id = 'aerial', ambient = false, seed = 3 }: AerialLotProps) {
+  const s = size;
+  const poly = parcel.lotPolygon;
+  const bx = Math.max(...poly.map((p) => p.x)), by = Math.max(...poly.map((p) => p.y));
+  const h = by * s;
+  const trees = treesFor(parcel, seed);
   const b = parcel.buildingRect;
   const clip = `${id}-clip`;
   const lawn = night ? P.lawnDeep : P.lawn;
@@ -86,7 +96,13 @@ export function AerialLot({ parcel, size = 400, night = false, keptStalls, showB
     : streetSide === 'bottom' ? { x: -0.2, y: by + 0.02, w: bx + 0.4, h: 0.14 }
     : streetSide === 'left' ? { x: -0.16, y: -0.2, w: 0.14, h: by + 0.4 } : { x: bx + 0.02, y: -0.2, w: 0.14, h: by + 0.4 };
   const allStalls = parcel.parkingRects.flatMap((r) => stallsFor(r, s));
-  const kept = keptStalls ?? allStalls.length;
+  const kept = keptStalls ?? (keptShare != null ? Math.round(keptShare * allStalls.length) : allStalls.length);
+  const keptList = allStalls.slice(0, kept);
+  const keptBoxes = keptList.length ? [keptList.reduce((acc, r) => {
+    const x0 = Math.min(acc.x, r.x), y0 = Math.min(acc.y, r.y);
+    const x1 = Math.max(acc.x + acc.w, r.x + r.w), y1 = Math.max(acc.y + acc.h, r.y + r.h);
+    return { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
+  }, { ...keptList[0] })] : [];
 
   return (
     <svg viewBox={`${-0.2 * s} ${-0.2 * s} ${(bx + 0.4) * s} ${(by + 0.4) * s}`} width="100%" style={{ display: 'block', aspectRatio: `${bx + 0.4} / ${by + 0.4}` }} role="img" aria-label="Aerial view of the lot">
@@ -130,7 +146,15 @@ export function AerialLot({ parcel, size = 400, night = false, keptStalls, showB
         ))}
         {/* buildable wash */}
         {showBuildable && (
-          <path d={polyToPath(showBuildable, s)} fill={P.pine} opacity={0.22} stroke={P.pine} strokeWidth={1.5} strokeDasharray="6 4" data-buildable />
+          <g data-buildable>
+            <mask id={`${id}-bmask`}>
+              <path d={polyToPath(showBuildable, s)} fill="white" />
+              <rect x={(b.x - 0.015) * s} y={(b.y - 0.015) * s} width={(b.w + 0.03) * s} height={(b.h + 0.03) * s} fill="black" />
+              {keptBoxes.map((k, i) => <rect key={i} x={k.x - 2} y={k.y - 2} width={k.w + 4} height={k.h + 4} fill="black" />)}
+            </mask>
+            <path d={polyToPath(showBuildable, s)} fill={P.pine} opacity={0.2} mask={`url(#${id}-bmask)`} className="ks-t" />
+            <path d={polyToPath(showBuildable, s)} fill="none" stroke={P.pine} strokeWidth={1.5} strokeDasharray="6 4" opacity={0.9} />
+          </g>
         )}
         {/* building: shadow, walls, roof planes */}
         <rect x={(b.x + 0.012) * s} y={(b.y + 0.016) * s} width={b.w * s} height={b.h * s} rx={2} fill={P.shadow} opacity={0.7} />

@@ -64,7 +64,7 @@ def shapes():
       dict(poly=[(0,0),(1,0),(1,0.55),(0,0.55)], bld=(0.66,0.08,0.28,0.3), park=[(0.06,0.08,0.54,0.24)], street='top'),
     ]
 
-def jitter(cx, cy, r=38):
+def jitter(cx, cy, r=62):
     a = random.random()*math.tau; d = random.random()**0.6 * r
     return round(cx + math.cos(a)*d), round(cy + math.sin(a)*d*0.9)
 
@@ -73,7 +73,7 @@ used = set()
 def pos(city):
     for _ in range(50):
         x,y = jitter(*CITIES[city])
-        if all((x-ux)**2+(y-uy)**2 > 16**2 for ux,uy in used):
+        if all((x-ux)**2+(y-uy)**2 > 24**2 for ux,uy in used):
             used.add((x,y)); return x,y
     used.add((x,y)); return x,y
 

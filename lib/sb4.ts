@@ -435,3 +435,10 @@ export const rectToMeters = (r: Rect, mpu: number): Rect => ({ x: r.x * mpu, y: 
 
 /** Illustrative land value of the buildable area (clearly labelled as an assumption in the UI). */
 export const illustrativeLandValue = (acres: number) => Math.max(0, safeNum(acres)) * A.landValuePerAcre;
+
+/** Buildable outline for diagrams: the lot polygon inset by the setback share (normalized frame). */
+export function insetFor(parcel: Pick<Parcel, 'lotPolygon'>): Pt[] {
+  const b = bbox(parcel.lotPolygon);
+  const d = Math.min(b.w, b.h) * 0.045;
+  return insetPolygon(parcel.lotPolygon, d);
+}
