@@ -8,6 +8,7 @@ import { palette as P, shade, seeded } from '@/lib/illustrationPalette';
 import type { Parcel } from '@/lib/sb4';
 import type { Pt, Rect } from '@/lib/geometry';
 import { pointInPolygon, rectsOverlap } from '@/lib/geometry';
+import { stallsFor } from '@/lib/stalls';
 
 export type AerialLotProps = {
   parcel: Pick<Parcel, 'lotPolygon' | 'buildingRect' | 'parkingRects' | 'streetSide' | 'id'>;
@@ -20,46 +21,14 @@ export type AerialLotProps = {
   id?: string;
   ambient?: boolean;
   seed?: number;
+  /** Fill for the ground around the lot; pass 'none' to let a scene behind show through. */
+  groundFill?: string;
 };
 
 export const polyToPath = (pts: Pt[], s: number, ox = 0, oy = 0) =>
   pts.map((p, i) => `${i ? 'L' : 'M'}${(ox + p.x * s).toFixed(1)} ${(oy + p.y * s).toFixed(1)}`).join(' ') + ' Z';
 
-export function stallsFor(r: Rect, s: number, maxStalls = Infinity) {
-  // double-loaded bays running along the longer axis
-  const horizontal = r.w >= r.h;
-  const stallW = 0.028, stallD = 0.055, aisle = 0.07;
-  const out: Rect[] = [];
-  if (horizontal) {
-    const bayH = stallD * 2 + aisle;
-    const bays = Math.max(1, Math.floor(r.h / bayH));
-    const perRow = Math.floor((r.w - 0.02) / stallW);
-    for (let b = 0; b < bays; b++) {
-      for (let side = 0; side < 2; side++) {
-        const y = r.y + 0.01 + b * bayH + (side ? stallD + aisle : 0);
-        for (let i = 0; i < perRow; i++) {
-          if (out.length >= maxStalls) return out.map((q) => scaleRect(q, s));
-          out.push({ x: r.x + 0.01 + i * stallW, y, w: stallW, h: stallD });
-        }
-      }
-    }
-  } else {
-    const bayW = stallD * 2 + aisle;
-    const bays = Math.max(1, Math.floor(r.w / bayW));
-    const perCol = Math.floor((r.h - 0.02) / stallW);
-    for (let b = 0; b < bays; b++) {
-      for (let side = 0; side < 2; side++) {
-        const x = r.x + 0.01 + b * bayW + (side ? stallD + aisle : 0);
-        for (let i = 0; i < perCol; i++) {
-          if (out.length >= maxStalls) return out.map((q) => scaleRect(q, s));
-          out.push({ x, y: r.y + 0.01 + i * stallW, w: stallD, h: stallW });
-        }
-      }
-    }
-  }
-  return out.map((q) => scaleRect(q, s));
-}
-const scaleRect = (r: Rect, s: number): Rect => ({ x: r.x * s, y: r.y * s, w: r.w * s, h: r.h * s });
+export { stallsFor };
 
 export type AerialTree = { x: number; y: number; r: number; kind: number };
 
@@ -82,7 +51,7 @@ export function treesFor(parcel: AerialLotProps['parcel'], seed = 3): AerialTree
   return trees;
 }
 
-export function AerialLot({ parcel, size = 400, night = false, keptStalls, keptShare, showBuildable, children, id = 'aerial', ambient = false, seed = 3 }: AerialLotProps) {
+export function AerialLot({ parcel, size = 400, night = false, keptStalls, keptShare, showBuildable, children, id = 'aerial', ambient = false, seed = 3, groundFill }: AerialLotProps) {
   const s = size;
   const poly = parcel.lotPolygon;
   const bx = Math.max(...poly.map((p) => p.x)), by = Math.max(...poly.map((p) => p.y));
@@ -115,7 +84,7 @@ export function AerialLot({ parcel, size = 400, night = false, keptStalls, keptS
         </pattern>
       </defs>
       {/* surrounding ground + street */}
-      <rect x={-0.2 * s} y={-0.2 * s} width={(bx + 0.4) * s} height={(by + 0.4) * s} fill={night ? '#243a30' : '#C9D7CC'} className="ks-t" />
+      <rect x={-0.2 * s} y={-0.2 * s} width={(bx + 0.4) * s} height={(by + 0.4) * s} fill={groundFill ?? (night ? '#243a30' : '#C9D7CC')} className="ks-t" />
       <rect x={streetRect.x * s} y={streetRect.y * s} width={streetRect.w * s} height={streetRect.h * s} fill={night ? P.asphaltDeep : P.asphalt} className="ks-t" />
       {streetSide === 'top' || streetSide === 'bottom' ? (
         <>

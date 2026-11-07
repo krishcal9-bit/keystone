@@ -358,6 +358,26 @@ export const en = {
   'scan.howItAdds': 'Open land plus parking, minus kept spaces at {sqft} sq ft each, minus {pct}% for setbacks.',
   'scan.handles': 'Drag a vertex',
   'scan.doneTracing': 'Done tracing',
+
+  // Pitch (additions)
+  'pitch.exported': 'Exported',
+  'pitch.copyAll': 'Copy all answers',
+  'pitch.copiedAll': 'Answers copied',
+  'pitch.homesLabel': 'Habitat homes',
+  'pitch.peopleHoused': 'people housed',
+  'pitch.affordabilityYears': 'affordability-years',
+  'pitch.answerPlaceholder': 'Answer the board member the way you would in the room.',
+  'pitch.sendHint': 'Ctrl or Cmd + Enter to send',
+  'pitch.practiceDone': 'Practice complete',
+  'pitch.practiceEmpty': 'No practice yet. Start one and the board member opens with their first objection.',
+  'pitch.letterEmpty': 'No letter yet. Choose a language and draft one; it writes itself onto this page.',
+  'pitch.objectionsEmpty': 'No questions prepared yet. Prepare the Q&A to see all six objections with answers you can edit.',
+  'pitch.thinking': 'The board member is typing',
+  'pitch.staffCopyHint': 'The same letter in English so staff can follow along.',
+  'pitch.editHint': 'Edit the letter directly on the page. Changes stay here until you copy them.',
+  'pitch.saved': 'Transcript saved',
+  'pitch.transcriptLocal': 'Transcripts are saved on this device only.',
+  'pitch.pdfFooter': 'Numbers assume keeping {n} of {total} parking spaces.',
 } as const;
 
 export type DictKey = keyof typeof en;
