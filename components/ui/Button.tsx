@@ -9,7 +9,7 @@ type Size = 'md' | 'lg' | 'sm';
 
 const base = 'inline-flex items-center justify-center gap-2 font-medium select-none whitespace-nowrap rounded-[8px] transition-[background-color,color,border-color] duration-[120ms] ease-out disabled:opacity-50 disabled:pointer-events-none';
 const variants: Record<Variant, string> = {
-  primary: 'bg-pine text-[#F6F7F5] hover:bg-pine-deep',
+  primary: 'bg-pine text-paper hover:bg-pine-deep',
   secondary: 'bg-surface text-ink border border-line hover:bg-pine-soft',
   ghost: 'bg-transparent text-ink hover:bg-pine-soft',
   danger: 'bg-transparent text-signal-red border border-line hover:bg-pine-soft',

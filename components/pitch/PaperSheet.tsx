@@ -47,6 +47,7 @@ export function PaperSheet({ text, streaming, done, onChange, lang, placeholder,
         lineHeight: `${lineHeight}px`,
       }}
       data-paper
+      data-testid="letter-text"
     >
       {/* letterhead */}
       <div className="flex items-start justify-between gap-4 mb-7" style={{ fontFamily: 'var(--font-sans)', fontSize: 12, lineHeight: '16px', color: '#6B665C' }}>

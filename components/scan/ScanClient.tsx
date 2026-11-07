@@ -187,7 +187,8 @@ export function ScanClient({ parcel }: { parcel: Parcel | null }) {
   const planHref = `/plan/${parcel?.id ?? 'oakfield-community-church'}`;
 
   return (
-    <PageShell title={t('scan.title')} subtitle={t('scan.subtitle')} backdrop={<AerialBackdrop night={theme === 'dark'} />} titleId="scan-title">
+    <PageShell title={t('scan.title')} lane={t('lane.scan')} subtitle={t('scan.subtitle')} backdrop={<AerialBackdrop night={theme === 'dark'} />} titleId="scan-title">
+      <div data-testid="scan-page" className="contents" />
       <div className="grid gap-8 lg:grid-cols-12 lg:gap-10 items-start">
         <div className="lg:col-span-7 flex flex-col gap-5 min-w-0">
           {image ? (
@@ -261,6 +262,7 @@ export function ScanClient({ parcel }: { parcel: Parcel | null }) {
                   key={s.id}
                   type="button"
                   onClick={() => loadSample(s.id)}
+                  data-testid={`sample-${s.id}`}
                   disabled={busyFile || phase === 'scanning'}
                   aria-pressed={sampleId === s.id}
                   className={`group relative overflow-hidden rounded-[8px] border transition-colors duration-[120ms] min-h-11 ${sampleId === s.id ? 'border-pine' : 'border-line hover:border-ink-2'} disabled:opacity-50`}

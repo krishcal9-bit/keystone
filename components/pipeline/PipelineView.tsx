@@ -80,7 +80,7 @@ export function PipelineView() {
   return (
     <PageShell
       title={t('pipe.title')}
-      subtitle={t('pipe.subtitle')}
+      lane={t('lane.pipeline')} subtitle={t('pipe.subtitle')}
       backdrop={<SkylineBand />}
       actions={(
         <>
@@ -103,8 +103,7 @@ export function PipelineView() {
           </div>
           <div>
             <dt className="text-[13px] leading-[18px] text-ink-2">{t('pipe.stalled')}</dt>
-            <dd className={`big-number text-[36px] md:text-[56px] mt-1 ${stats.stalled ? 'text-signal-amber' : 'text-ink'}`}><AnimatedNumber value={ready ? stats.stalled : 0} immediate={false} /></dd>
-            <p className="text-[13px] leading-[18px] text-ink-2 mt-1 hidden md:block">{t('pipe.stalledHelp')}</p>
+            <dd className={`big-number text-[36px] md:text-[56px] mt-1 ${stats.stalled ? 'text-signal-amber' : 'text-ink'}`}><AnimatedNumber value={ready ? stats.stalled : 0} immediate={false} /><span className="block font-sans text-[13px] leading-[18px] text-ink-2 mt-1 hidden md:block" style={{ fontVariationSettings: 'normal', letterSpacing: 0 }}>{t('pipe.stalledHelp')}</span></dd>
           </div>
         </dl>
         <div className="mt-6 md:mt-8">

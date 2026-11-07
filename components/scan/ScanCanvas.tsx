@@ -167,7 +167,7 @@ export function ScanCanvas({ image, polygons, onChange, scanning, revealKey, sho
               const d = toPath(poly.points, w, h);
               const delay = categoryIndex(poly.category) * TRACE_STAGGER;
               return (
-                <g key={`${revealKey}-${poly.id}`}>
+                <g key={`${revealKey}-${poly.id}`} data-polygon={poly.category}>
                   <motion.path d={d} fill={st.fill} initial={{ opacity: 0 }} animate={{ opacity: st.fillOpacity }} transition={{ duration: dur.medium, ease: ease.out, delay: delay + TRACE_DUR * 0.55 }} style={{ pointerEvents: 'none' }} />
                   <motion.path d={d} fill="none" stroke={P.wall} strokeWidth={4} strokeOpacity={0.7} strokeLinejoin="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: TRACE_DUR, ease: ease.out, delay }} style={{ pointerEvents: 'none' }} />
                   <motion.path d={d} fill="none" stroke={st.stroke} strokeWidth={2} strokeLinejoin="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: TRACE_DUR, ease: ease.out, delay }} style={{ pointerEvents: 'none' }} />
@@ -179,7 +179,7 @@ export function ScanCanvas({ image, polygons, onChange, scanning, revealKey, sho
             {interactive && ordered.map((poly) => poly.points.map((p, i) => (
               <g key={`${poly.id}-${i}`}>
                 <circle
-                  cx={p.x * w} cy={p.y * h} r={22} fill="transparent"
+                  cx={p.x * w} cy={p.y * h} r={22} fill="transparent" data-vertex={poly.category}
                   style={{ cursor: 'grab', touchAction: 'none' }}
                   onPointerDown={(e) => onHandleDown(e, poly.id, i)}
                   onPointerMove={onHandleMove}

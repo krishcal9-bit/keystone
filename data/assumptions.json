@@ -55,5 +55,79 @@
     "rentalDeedYears": 55,
     "extraStoriesAllowed": 1,
     "note": "Objective standards from Gov. Code \u00a7 65913.16 as summarized in the HCD SB 4 fact sheet."
+  },
+  "brief": {
+    "source": "Claude Impact Lab challenge brief",
+    "medianHomePrice": 1470000,
+    "yearsLandToKeys": 4,
+    "cities": 34,
+    "familyPayShareMin": 0.3,
+    "familyPayShareMax": 0.35,
+    "note": "Figures quoted from the Claude Impact Lab challenge brief: $1.47M median OC home price, ~4 years from land to keys, 34 cities with their own forms and fees, a family can pay 30-35% of income."
+  },
+  "gap": {
+    "note": "Illustrative per-home cost model for the 'Closes the gap' bar. Real numbers vary by site. None of these are appraisals or quotes.",
+    "designPerHome": {
+      "value": 25000,
+      "note": "Illustrative design and engineering cost per home."
+    },
+    "permitsPerHome": {
+      "value": 35000,
+      "note": "Illustrative city permits, impact fees and entitlement costs per home."
+    },
+    "buildPerHome": {
+      "value": 300000,
+      "note": "Illustrative hard construction cost for a Habitat townhome or flat (volunteer labour and donated materials reduce it)."
+    },
+    "carryingCostPerHomeMonth": {
+      "value": 900,
+      "note": "Illustrative interest, insurance and overhead per home per month while a project waits for approval."
+    },
+    "typicalMonthsLandToKeys": {
+      "value": 48,
+      "note": "From the challenge brief: about four years from land to keys on today's path."
+    },
+    "sb4MonthsLandToKeys": {
+      "value": 20,
+      "note": "Illustrative assumption for a by-right SB 4 project: no discretionary hearings and no CEQA review, so entitlement runs in months, not years."
+    },
+    "ocMedianHouseholdIncome": {
+      "value": 127800,
+      "note": "Illustrative area median income for an Orange County household (HUD 2024 AMI, 4-person). Habitat serves families in income tiers below this."
+    },
+    "habitatTiers": [
+      {
+        "label": "30% AMI",
+        "share": 0.3
+      },
+      {
+        "label": "50% AMI",
+        "share": 0.5
+      },
+      {
+        "label": "80% AMI",
+        "share": 0.8
+      }
+    ],
+    "defaultTierShare": {
+      "value": 0.5,
+      "note": "Default family tier used in the bar: 50% of AMI."
+    },
+    "taxesInsuranceShareOfPayment": {
+      "value": 0.35,
+      "note": "Share of the monthly payment that goes to taxes and insurance rather than principal (Habitat mortgages are 0% interest)."
+    },
+    "mortgageYears": {
+      "value": 30,
+      "note": "Habitat affordable mortgage term."
+    },
+    "otherSourcesPerHome": {
+      "value": 30000,
+      "note": "Illustrative grants, donations and subsidy per home."
+    },
+    "partnerLandPerHome": {
+      "value": 0,
+      "note": "Partner land via ground lease or donation: the congregation keeps ownership; Habitat does not buy at market."
+    }
   }
 }

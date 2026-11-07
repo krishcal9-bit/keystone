@@ -40,7 +40,7 @@ export function PitchKit({ parcel, initialKeepSpaces }: { parcel: Parcel; initia
   return (
     <PageShell
       title={t('pitch.title')}
-      subtitle={`${parcel.displayName} · ${parcel.city}`}
+      lane={t('lane.pitch')} subtitle={`${parcel.displayName} · ${parcel.city}`}
       backdrop={<DeskBackdrop night={theme === 'dark'} />}
     >
       <div className="mb-6 overflow-x-auto -mx-5 px-5 md:mx-0 md:px-0 pb-1">

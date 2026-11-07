@@ -143,7 +143,7 @@ export function PracticeTab({ parcel, keepSpaces }: { parcel: Parcel; keepSpaces
                 {session.feedback && (
                   <motion.li key="feedback" {...rise} layout className="mt-2 border-l-2 border-brass pl-4 py-1 flex flex-col gap-2">
                     <span className="text-small font-medium text-brass">{t('pitch.feedback')}</span>
-                    <p className="text-[16px] leading-6 whitespace-pre-wrap">{session.feedback}</p>
+                    <p className="text-[16px] leading-6 whitespace-pre-wrap" data-testid="practice-feedback">{session.feedback}</p>
                   </motion.li>
                 )}
               </AnimatePresence>

@@ -79,7 +79,7 @@ export function AskView() {
   const tr = reduced ? { duration: 0 } : spring.smooth;
 
   return (
-    <PageShell title={t('ask.title')} subtitle={t('ask.subtitle')} backdrop={<StudyBackdrop />} width="narrow" sample={false}>
+    <PageShell title={t('ask.title')} lane={t('lane.ask')} subtitle={t('ask.subtitle')} backdrop={<StudyBackdrop />} width="narrow" sample={false}>
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
         <div className="min-w-0">
           {/* Suggested questions */}

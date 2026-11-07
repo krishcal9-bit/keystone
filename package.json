@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "check": "tsc --noEmit && eslint . && vitest run && next build --turbopack",
-    "e2e": "MOCK_CLAUDE=1 playwright test",
+    "e2e": "playwright test",
     "screenshots": "MOCK_CLAUDE=1 playwright test --config playwright.screens.config.ts"
   },
   "dependencies": {

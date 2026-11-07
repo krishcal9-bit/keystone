@@ -17,6 +17,7 @@ import { Pill, SampleDataLabel } from '@/components/ui/Pill';
 import { toast } from '@/components/ui/Toast';
 import { read, write, storeKeys, type SavedPlan } from '@/lib/store';
 import { PlanDiagram2D } from './PlanDiagram2D';
+import { ClosesTheGap } from '@/components/gap/ClosesTheGap';
 import type { PlanView } from '@/components/three/PlanScene';
 
 const PlanScene = dynamic(() => import('@/components/three/PlanScene').then((m) => m.PlanScene), { ssr: false, loading: () => null });
@@ -104,6 +105,7 @@ export function PlanStudio({ parcel, initialKeep }: { parcel: Parcel; initialKee
           <div>
             <nav aria-label="Breadcrumb" className="text-[13px] text-ink-2 mb-1"><Link href="/sites" className="hover:text-ink">{t('sites.title')}</Link> <span className="mx-1">/</span> <Link href={`/sites/${parcel.id}`} className="hover:text-ink">{parcel.displayName}</Link></nav>
             <div className="flex items-center gap-3"><h1 className="headline-md">{t('plan.title')}</h1><SampleDataLabel /></div>
+            <p className="text-[14px] text-pine font-medium mt-1" data-testid="lane-line">{t('lane.plan')}</p>
           </div>
           <div className="flex items-center gap-2">
             <Button variant="secondary" size="sm" onClick={savePlan}>{t('plan.savePlan')}</Button>
@@ -173,6 +175,7 @@ export function PlanStudio({ parcel, initialKeep }: { parcel: Parcel; initialKee
             <p className="text-[12px] text-ink-2 mt-auto">{t('common.notLegal')}</p>
           </aside>
         </div>
+        <ClosesTheGap parcel={parcel} keepSpaces={opts.keepSpaces} homes={model.placed} compact />
       </div>
     </div>
   );

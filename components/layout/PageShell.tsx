@@ -9,8 +9,8 @@ import { SampleDataLabel } from '@/components/ui/Pill';
  * an optional illustrated backdrop behind the content at low intensity, title row with the
  * persistent "Sample data" label.
  */
-export function PageShell({ title, subtitle, children, backdrop, actions, sample = true, width = 'wide', titleId }: {
-  title: string; subtitle?: string; children: ReactNode; backdrop?: ReactNode; actions?: ReactNode; sample?: boolean; width?: 'wide' | 'narrow'; titleId?: string;
+export function PageShell({ title, subtitle, lane, children, backdrop, actions, sample = true, width = 'wide', titleId }: {
+  title: string; subtitle?: string; lane?: string; children: ReactNode; backdrop?: ReactNode; actions?: ReactNode; sample?: boolean; width?: 'wide' | 'narrow'; titleId?: string;
 }) {
   return (
     <div className="relative min-h-svh pt-16">
@@ -22,6 +22,7 @@ export function PageShell({ title, subtitle, children, backdrop, actions, sample
               <h1 id={titleId} className="headline-md">{title}</h1>
               {sample && <SampleDataLabel />}
             </div>
+            {lane && <p className="text-[14px] text-pine font-medium mb-1" data-testid="lane-line">{lane}</p>}
             {subtitle && <p className="text-ink-2 text-[18px] leading-7">{subtitle}</p>}
           </div>
           {actions && <div className="flex items-center gap-2">{actions}</div>}

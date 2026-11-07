@@ -60,7 +60,7 @@ export function OCMap({ sites, allSites, night, heat, hoveredId, onHover, onSele
 
   return (
     <div className={`relative ${className}`} data-testid="oc-map">
-      <svg ref={svgRef} viewBox={`0 0 ${MAP_SIZE} ${MAP_SIZE}`} className="w-full h-full block select-none" role="img" aria-label={t('sites.mapLabel')} style={{ background: water, transition: 'background 600ms var(--ease-out)' }}>
+      <svg ref={svgRef} viewBox={`0 0 ${MAP_SIZE} ${MAP_SIZE}`} className="w-full h-full block select-none" role="group" aria-label={t('sites.mapLabel')} style={{ background: water, transition: 'background 600ms var(--ease-out)' }}>
         <defs>
           <radialGradient id="heat-dot" cx="50%" cy="50%" r="50%">
             <stop offset="0" stopColor={P.pine} stopOpacity="0.45" />

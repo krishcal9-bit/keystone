@@ -18,6 +18,9 @@ import { streamPost } from '@/lib/streamClient';
 import { addToPipeline, isInPipeline } from '@/lib/pipeline';
 import { ownerLabel } from '@/lib/sb4';
 import { AerialBackdrop } from '@/components/scenes/AerialBackdrop';
+import { ClosesTheGap } from '@/components/gap/ClosesTheGap';
+import { CityRules } from '@/components/gap/CityRules';
+import { TimeToKeys } from '@/components/gap/TimeToKeys';
 
 export function SiteDetail({ parcel }: { parcel: Parcel }) {
   const { t } = useT();
@@ -63,6 +66,7 @@ export function SiteDetail({ parcel }: { parcel: Parcel }) {
         <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: dur.medium, ease: ease.out }} className="flex flex-wrap items-end justify-between gap-4 mb-6">
           <div className="max-w-[760px]">
             <div className="flex items-center gap-3 flex-wrap"><h1 className="headline-md">{parcel.displayName}</h1><SampleDataLabel /></div>
+            <p className="text-[14px] text-pine font-medium mt-1" data-testid="lane-line">{t('lane.site')}</p>
             <p className="text-ink-2 mt-1">{ownerLabel(parcel.ownerType)}{parcel.faith ? ` · ${parcel.faith}` : ''} · {parcel.city} · {parcel.lotAcres.toFixed(1)} {t('common.acres')} · {parcel.parkingSpaces} {t('common.spaces')}</p>
           </div>
           <div className="flex items-center gap-2">
@@ -106,6 +110,7 @@ export function SiteDetail({ parcel }: { parcel: Parcel }) {
               <div className="flex items-center justify-between text-[13px] text-ink-2 tabular-nums"><span>0</span><span>{parcel.parkingSpaces}</span></div>
             </div>
 
+            <ClosesTheGap parcel={parcel} keepSpaces={keep} homes={scenario.homes} />
             <div className="grid grid-cols-2 gap-3">
               <ButtonLink href={`/plan/${parcel.id}?keep=${keep}`} variant="primary">{t('site.openPlan')}</ButtonLink>
               <ButtonLink href={`/scan?parcel=${parcel.id}`} variant="secondary">{t('site.scan')}</ButtonLink>
@@ -130,9 +135,9 @@ export function SiteDetail({ parcel }: { parcel: Parcel }) {
               </p>
               <AnimatePresence>
                 {delta && (
-                  <motion.span key={delta.id} initial={{ opacity: 0, scale: 0.9, y: 4 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={spring.snappy}
+                  <motion.span key="delta" initial={{ opacity: 0, scale: 0.9, y: 4 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={spring.snappy}
                     onAnimationComplete={() => setTimeout(() => setDelta((d) => (d?.id === delta.id ? null : d)), 1400)}
-                    className="absolute top-3 right-3 inline-flex items-center h-7 px-2.5 rounded-full bg-pine text-[#F6F7F5] text-[13px] font-semibold tabular-nums" data-testid="delta-pill">
+                    className="absolute top-3 right-3 inline-flex items-center h-7 px-2.5 rounded-full bg-pine text-paper text-[13px] font-semibold tabular-nums" data-testid="delta-pill">
                     +{delta.n} {t('common.homes')}
                   </motion.span>
                 )}
@@ -153,6 +158,8 @@ export function SiteDetail({ parcel }: { parcel: Parcel }) {
             </div>
 
             <Brief parcelId={parcel.id} keepSpaces={keep} />
+            <TimeToKeys />
+            <CityRules city={parcel.city} />
           </div>
         </div>
       </div>

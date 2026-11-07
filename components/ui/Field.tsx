@@ -25,9 +25,9 @@ export function Input({ className = '', ...rest }: InputHTMLAttributes<HTMLInput
   return <input className={`w-full h-11 px-3 rounded-[8px] bg-surface border border-line text-[15px] text-ink placeholder:text-ink-2/70 hover:border-ink-2 transition-colors duration-[120ms] ${className}`} {...rest} />;
 }
 
-export function Checkbox({ label, checked, onChange }: { label: string; checked: boolean; onChange: (v: boolean) => void }) {
+export function Checkbox({ label, checked, onChange, testId }: { label: string; checked: boolean; onChange: (v: boolean) => void; testId?: string }) {
   return (
-    <label className="inline-flex items-center gap-2.5 min-h-11 cursor-pointer select-none text-[15px]">
+    <label className="inline-flex items-center gap-2.5 min-h-11 cursor-pointer select-none text-[15px]" data-testid={testId}>
       <input type="checkbox" className="sr-only" checked={checked} onChange={(e) => onChange(e.target.checked)} />
       <span className={`w-5 h-5 rounded-[5px] border inline-flex items-center justify-center transition-colors duration-[120ms] ${checked ? 'bg-pine border-pine' : 'bg-surface border-line'}`} aria-hidden>
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none">

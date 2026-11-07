@@ -82,6 +82,7 @@ export function SiteFinder() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <div className="flex items-center gap-3"><h1 className="headline-md">{t('sites.title')}</h1><SampleDataLabel /></div>
+            <p className="text-[14px] text-pine font-medium mt-1" data-testid="lane-line">{t('lane.sites')}</p>
             <p className="text-ink-2 mt-1 max-w-[620px]">{t('sites.subtitle')}</p>
           </div>
           <dl className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-2" data-testid="totals">
@@ -135,8 +136,8 @@ export function SiteFinder() {
                 </label>
               </div>
               <div className="col-span-2 flex flex-wrap gap-x-5">
-                <Checkbox label={t('sites.eligibleOnly')} checked={filters.eligibleOnly} onChange={(v) => set('eligibleOnly', v)} />
-                <Checkbox label={t('sites.nearTransit')} checked={filters.transit} onChange={(v) => set('transit', v)} />
+                <Checkbox label={t('sites.eligibleOnly')} checked={filters.eligibleOnly} onChange={(v) => set('eligibleOnly', v)} testId="filter-eligible" />
+                <Checkbox label={t('sites.nearTransit')} checked={filters.transit} onChange={(v) => set('transit', v)} testId="filter-transit" />
                 <Checkbox label={t('sites.nearSchools')} checked={filters.schools} onChange={(v) => set('schools', v)} />
               </div>
             </div>

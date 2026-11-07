@@ -49,7 +49,10 @@ export function Header() {
       className={`fixed top-0 inset-x-0 z-50 h-16 transition-[background-color,border-color,backdrop-filter] duration-200 ${solid ? 'bg-[color-mix(in_srgb,var(--surface)_88%,transparent)] backdrop-blur-md border-b border-line' : 'bg-transparent border-b border-transparent'}`}
     >
       <div className="h-full mx-auto max-w-[1440px] px-5 md:px-10 lg:px-20 flex items-center justify-between gap-4">
-        <Lockup size={22} tagline={false} />
+        <div className="flex items-center gap-3 min-w-0">
+          <Lockup size={22} tagline={false} />
+          <Link href="/judges" aria-label={t('lane.pillLabel')} data-testid="lane-pill" className="hidden sm:inline-flex items-center h-7 px-2.5 rounded-full border border-pine text-pine text-[13px] font-medium whitespace-nowrap hover:bg-pine-soft transition-colors duration-[120ms]">{t('lane.pill')}</Link>
+        </div>
         <nav aria-label="Primary" className="hidden md:flex items-center gap-1">
           {nav.map((n) => {
             const match = 'match' in n ? n.match : n.href;
@@ -98,10 +101,11 @@ export function Header() {
             className="md:hidden absolute top-16 inset-x-0 bg-surface border-b border-line px-5 py-3 flex flex-col"
           >
             {nav.map((n) => (
-              <Link key={n.href} href={n.href} className="h-12 flex items-center text-[17px] font-medium text-ink border-b border-line last:border-b-0">
+              <Link key={n.href} href={n.href} className="h-12 flex items-center text-[17px] font-medium text-ink border-b border-line">
                 {t(n.key)}
               </Link>
             ))}
+            <Link href="/judges" className="h-12 flex items-center gap-2 text-[17px] font-medium text-pine" data-testid="lane-pill-mobile">{t('lane.pill')}</Link>
             <div className="py-2 sm:hidden"><LangToggle /></div>
           </motion.nav>
         )}

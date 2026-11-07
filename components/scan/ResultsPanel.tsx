@@ -91,7 +91,7 @@ export function ResultsPanel({ phase, showNumbers, comp, keepSpaces, onKeep, run
           <dt className="text-[15px] leading-[22px] font-medium">{t('scan.buildable')}</dt>
           <dd className="tabular-nums text-right">
             {showNumbers
-              ? <span className="big-number !text-[40px] md:!text-[48px] text-pine"><AnimatedNumber value={comp.buildableAcres} locale={locale} immediate={false} format={{ minimumFractionDigits: 2, maximumFractionDigits: 2 }} /></span>
+              ? <span className="big-number !text-[40px] md:!text-[48px] text-pine" data-testid="scan-buildable" data-value={comp.buildableAcres.toFixed(3)}><AnimatedNumber value={comp.buildableAcres} locale={locale} immediate={false} format={{ minimumFractionDigits: 2, maximumFractionDigits: 2 }} /></span>
               : <span className="inline-block text-[24px] leading-[48px] text-ink-2">–</span>}
             <span className="ml-1.5 text-[15px] text-ink-2">{t('common.acres')}</span>
             <div className="text-[13px] leading-[18px] text-ink-2">
